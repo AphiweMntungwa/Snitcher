@@ -67,7 +67,7 @@ app.get("/index/new", (req, res) => {
 
 app.get("/index/:id", wrapAsync(async (req, res, next) => {
     const { id } = req.params;
-    const selectCamp = await Campground.findById(id);
+    const selectCamp = await Campground.findById(id).populate("reviews");
     selectCamp ? res.render("./campgrounds/details", { selectCamp })
         : next(new AppError("Camp Not Found", 400))
 }));
