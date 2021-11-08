@@ -1,0 +1,37 @@
+<% layout("layouts/boilerplate")%>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+<form action="/index/<%=selectCamp._id%>?_method=PATCH" class="cs-validate" id="select" method="post" novalidate>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Title:</label>
+      <input type="text" name="campground[title]" required class="form-control" id="exampleFormControlInput1" value="<%= selectCamp.title %>">
+    </div>
+    <div class="form-group mt-2">
+      <label for="locate">Location:</label>
+      <input type="text" name="campground[location]" required class="form-control" id="locate" value="<%=selectCamp.location%>">
+    </div>
+    <label for="price"class="mt-2">Price:</label>
+    <div class="input-group mb-3 ">             
+        <div class="input-group-prepend">
+          <span class="input-group-text">R</span>
+        </div>
+        <input type="number" name="campground[price]" required id="price" class="form-control" value="<%=selectCamp.price%>">
+        <div class="input-group-append">
+          <span class="input-group-text">.00</span>
+        </div>
+    </div>
+    <label for="url"class="mt-2">URL:</label>
+    <div class="input-group mb-3 ">             
+      <div class="input-group-prepend">
+        <span class="input-group-text">{url}</span>
+      </div>
+      <input type="text" name="campground[image]" required id="url" class="form-control" value="<%=selectCamp.image%>">
+   </div>          
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Description:</label>
+      <textarea class="form-control" required name="campground[description]" id="exampleFormControlTextarea1" rows="3"><%=selectCamp.description%></textarea>
+    </div>
+    <button class="btn btn-warning mt-2 px-3" type="submit">Edit Camp</button>
+    <a href="/index/<%=selectCamp._id%>" class="btn btn-success mt-2" >Cancel</a>
+  </form></div>

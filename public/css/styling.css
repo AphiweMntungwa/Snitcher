@@ -1,0 +1,36 @@
+li.card-header{
+    list-style-type: none;
+}
+img{
+    width: 100%;
+}
+.card{
+    position: relative;
+    /* max-height: 40vh; */
+}
+main{
+    height: 65vh;
+}
+.set-div-h{
+    height: 200px;
+}
+.bg-gradient{
+    background-color: rgb(241, 241, 241);
+}
+li.card-header:last-child{
+    border-bottom: none;
+    background-color: white;
+}
+.special{
+    margin-left: -15px;
+}
+.set-img-h{
+    height: 100%;
+}
+.set-card-h{
+    height: 225px;
+}
+.set-card-img-h{
+    height: 100%;
+    width: 100%;
+}
