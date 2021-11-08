@@ -8,7 +8,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const AppError = require("./Utils/apperror");
 const wrapAsync = require("./Utils/wrapasync");
-const { campgroundSchema } = require("./schemas.js")
+const { campgroundSchema, reviewSchema } = require("./schemas.js");
 
 mongoose.connect('mongodb://localhost:27017/YelpCamp',
     { useNewUrlParser: true, useUnifiedTopology: true })
@@ -38,6 +38,16 @@ validateSchema = (req, res, next) => {
         const msg = error.details.map(el => el.message).join(',');
         throw new AppError(msg, 400);
     } else {
+        next();
+    }
+}
+validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
+        throw new AppError(msg, 400);
+    }
+    else {
         next();
     }
 }
@@ -87,9 +97,10 @@ app.delete("/index/:id", wrapAsync(async (req, res) => {
     await Campground.findByIdAndRemove(id);
     res.redirect("/index");
 }));
-app.post("/index/:id/review", wrapAsync(async (req, res) => {
+app.post("/index/:id/review", validateReview, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const newReview = new Review(req.body.campreview);
+    // console.log(newReview);
     const selectCamp = await Campground.findById(id);
     selectCamp.reviews.push(newReview);
     await selectCamp.save();
@@ -97,6 +108,7 @@ app.post("/index/:id/review", wrapAsync(async (req, res) => {
         res.redirect(`/index/${selectCamp._id}`);
     });
 }))
+app.get("index/:id/review",)
 
 app.all("*", (req, res, next) => {
     next(new AppError("Page Not Found!", 404));

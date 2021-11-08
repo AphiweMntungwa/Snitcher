@@ -9,3 +9,10 @@ module.exports.campgroundSchema = Joi.object({
         description: Joi.string()
     }).required()
 });
+
+module.exports.reviewSchema = Joi.object({
+    campreview: Joi.object({
+        rating: Joi.number().required(),        
+        body: Joi.string().required()
+    }).required()
+})

@@ -14,13 +14,13 @@ document.querySelector("body").classList.add("bg-gradient");
             }, false)
         })
 })();
-const footer = document.querySelector(".footer");
+// const footer = document.querySelector(".footer");
 // const secondfooter = document.querySelector(".secondfooter");
-const setDivH = document.querySelectorAll(".set-div-h");
-if (setDivH.length <= 1) {
-    footer.classList.add("newfooter");
-}else{
-    footer.classList.remove("newfooter");
-}
+// const setDivH = document.querySelectorAll(".set-div-h");
+// if (setDivH.length <= 1) {
+//     footer.classList.add("newfooter");
+// }else{
+//     footer.classList.remove("newfooter");
+// }
 
 

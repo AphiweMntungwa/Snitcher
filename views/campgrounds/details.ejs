@@ -28,6 +28,7 @@
 
     h6 {
       margin-left: 1.2em;
+      font-size: 14px;
     }
 
     select {
@@ -130,7 +131,7 @@
         <i><%= id %> </i>
       <% } %> <br>  
       <b>Camp Review: </b>
-      <form action="/index/<%=selectCamp._id%>/review" novalidate name="campreview" class="form-control cs-validate" method="post">
+      <form action="/index/<%=selectCamp._id%>/review" novalidate class="form-control cs-validate" method="post">
         <input type="range" class="form-range" min="0" max="10" step="1" name="campreview[rating]" id="rating">
         <textarea name="campreview[body]" required placeholder="review..." class="form-control bg-light" cols="35" rows="2"></textarea>
         <button id="longbutton">submit review</button>
