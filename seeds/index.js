@@ -24,7 +24,7 @@ const seedData = async () => {
             location: `${cities[rand()].city}, ${cities[rand()].state}`,
             title: `${arr(descriptors)} ${arr(places)}`,
             price: 14,
-            image: "https://source.unsplash.com/random",
+            image: `http://lorempixel.com/200/200/food/${i}`,
             description: lorem
         })
         await camp.save()

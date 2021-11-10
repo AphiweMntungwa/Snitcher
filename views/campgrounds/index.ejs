@@ -1,18 +1,35 @@
 <% layout("layouts/boilerplate")%>
-    <h1 class="ms-5 mb-3">All the Campgrounds</h1>
-    <ul>
-        <% for(camp of list){ %>
-            <div id="overflow" class="card mb-3 flex-row set-div-h position-relative">    
-                <div class="col-md-4">
-                <img src="<%=camp.image%>" class="img-fluid set-img-h rounded-start"alt="image">
-                </div>
-                <div class="col-md-8">
-                  <h2 class="card-header"><%=camp.title%></h2>
-                  <li class="card-header"><%=camp.location%></li>
-                  <li class="card-header py-2"><a class="btn btn-info" href="/index/<%=camp._id%>">Show Details</a></li>
-                  <li class="card-header"> <%= camp.description.substring(0, 100) %> ...</li>
-                </div>
+<style>
+    li>b{
+        color: crimson;
+    }
+    li>i{
+        color: red;
+        font-weight: bolder;    
+}
+    .set-div-h{
+        height: 200px;
+        border-radius: 0;
+    }
+</style>
+<h1 class="ms-5 mb-3">All the Campgrounds</h1>
+<ul>
+    <% for(camp of list){ %>
+        <div id="overflow" class="card mb-3 flex-row set-div-h">
+            <div class="col-md-4">
+                <img src="<%=camp.image%>" class="img-fluid set-img-h" alt="image">
             </div>
+            <div class="col-md-8">
+                <h2 class="card-header">
+                    <%=camp.title%>
+                </h2>
+                <li class="card-header">
+                    <%=camp.location%>
+                </li>
+                <li class="card-header py-2"><a class="btn btn-info" href="/index/<%=camp._id%>">Show Details</a></li>
+                <li class="card-footer bg-white"><i>ZAR&nbsp;</i><b> R<%= camp.price %></b> </li>
             </div>
-            <%}%>
-    </ul>
+        </div>
+        </div>
+        <%}%>
+</ul>

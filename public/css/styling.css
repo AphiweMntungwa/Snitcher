@@ -1,3 +1,6 @@
+div{
+    font-family: monospace, serif;
+}
 li.card-header{
     list-style-type: none;
 }
@@ -10,9 +13,6 @@ img{
 }
 main{
     height: 65vh;
-}
-.set-div-h{
-    height: 200px;
 }
 .bg-gradient{
     background-color: rgb(241, 241, 241);

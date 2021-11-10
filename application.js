@@ -94,13 +94,12 @@ app.patch("/index/:id", validateSchema, wrapAsync(async (req, res, next) => {
 
 app.delete("/index/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
-    await Campground.findByIdAndRemove(id);
+    await Campground.findByIdAndDelete(id);
     res.redirect("/index");
 }));
 app.post("/index/:id/review", validateReview, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const newReview = new Review(req.body.campreview);
-    // console.log(newReview);
     const selectCamp = await Campground.findById(id);
     selectCamp.reviews.push(newReview);
     await selectCamp.save();
@@ -108,7 +107,13 @@ app.post("/index/:id/review", validateReview, wrapAsync(async (req, res) => {
         res.redirect(`/index/${selectCamp._id}`);
     });
 }))
-app.get("index/:id/review",)
+app.delete("/index/:id/review/:reviewId", wrapAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/index/${id}`);
+}))
+// app.get("index/:id/review",)
 
 app.all("*", (req, res, next) => {
     next(new AppError("Page Not Found!", 404));
