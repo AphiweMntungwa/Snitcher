@@ -9,6 +9,7 @@ const ejsMate = require("ejs-mate");
 const AppError = require("./Utils/apperror");
 const wrapAsync = require("./Utils/wrapasync");
 const { campgroundSchema, reviewSchema } = require("./schemas.js");
+const { findById } = require("./models/reviews");
 
 mongoose.connect('mongodb://localhost:27017/YelpCamp',
     { useNewUrlParser: true, useUnifiedTopology: true })
@@ -25,6 +26,7 @@ app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded());
+app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 // app.use((req, res, next)=>{
@@ -113,7 +115,29 @@ app.delete("/index/:id/review/:reviewId", wrapAsync(async (req, res) => {
     await Review.findByIdAndDelete(reviewId);
     res.redirect(`/index/${id}`);
 }))
-// app.get("index/:id/review",)
+// app.get("/index/:id/review/:reviewid/edit", wrapAsync(async (req, res) => {
+//     const { id: campgroundId, reviewId } = req.params;
+//     const selectCamp = await Campground.findById(campgroundId);
+//     // const review = await Campground.findById(reviewId);
+//     res.render("./campgrounds/details", { selectCamp});
+// }));
+
+app.put("/index/:id/review/:reviewId", wrapAsync(async (req, res) => {
+    const { id: campgroundId, reviewId } = req.params;
+    const { rating, body } = req.body.reviews;
+
+    if (rating && body.trim()) {
+        await Review.findByIdAndUpdate(reviewId, req.body.reviews);
+        // res.redirect(`/index/${campgroundId}`);
+        res.json({rating, body});
+    } else {
+        // res.redirect(`/index/${campgroundId}`);
+        res.json({customMessage:"I couldn't find anything"});
+    }
+}))
+app.get("/test", (req, res) => {
+    res.json({ message: "it works" });
+});
 
 app.all("*", (req, res, next) => {
     next(new AppError("Page Not Found!", 404));

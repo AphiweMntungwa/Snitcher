@@ -127,6 +127,22 @@
     .dropdown{
       width: 80px;
       display: none;
+      border: none;
+    }
+    .dropdown>button, .dropdown>form>button{
+      border: none;      
+    }
+    .dropdown>button{
+      border-radius: 4px 4px 0 0;
+    }
+    .dropdown>form>button{
+      border-radius: 0 0 4px 4px;
+    }
+    .toggleform{
+      display: none;
+    }
+    #spanid, #secondspanid{
+      display: none;
     }
     @media (max-width: 931px) {
       div[class=buttons] {
@@ -155,12 +171,13 @@
         <form class="d-inline" action="/index/<%=selectCamp._id%>?_method=DELETE" method="post">
           <button id="reset" class=" btn btn-danger">Delete</button>
         </form>
+        <span id="secondspanid"><%= selectCamp._id %> </span>
       </div><br>
 
     </section>
     <section>
       <div class="mt-3 reviewPadding">
-        <b>Camp Review: </b>
+        <b>Leave a Review: </b>
         <form action="/index/<%=selectCamp._id%>/review" novalidate class="form-control cs-validate" method="post">
           <input type="range" class="form-range" min="0" max="5" step="1" name="campreview[rating]">
           <textarea name="campreview[body]" required placeholder="review..." class="form-control bg-light" cols="35"
@@ -176,16 +193,23 @@
                   </span></span>
               </div>
               <div class="input-group-prepend mb-1 d-inline" id="options">
-                <span id="optionspan" class="input-group-text d-inline py-1 px-2"><i class="fas fa-bars"></i></span>
+                <span id="optionspan" class="input-group-text bg-secondary d-inline py-1 px-2"><i class="fas fa-bars"></i></span>
               </div>
               <div class="card dropdown">
-                <button>edit</button>
+                <button class="editReview">edit</button>
                 <form action="/index/<%=selectCamp._id%>/review/<%=review._id%>?_method=DELETE" method="post">
                 <button>delete</button>
                 </form>
-              </div>              
+              </div> 
+              <span id="spanid"> <%= review._id %> </span>
+              <form class="form-control toggleform">
+              <!-- action="/index/<%=selectCamp._id%>/review/<%=review._id%>?_method=PATCH" method="post"--> 
+                <input type="range" class="form-range" min=0 max=5 name="reviews[rating]" id="range">
+                <textarea class="form-control textareas" name="reviews[body]" id="body" cols="30" rows="3"><%=review.body.trim()%></textarea>
+                <button class="submitreview">edit</button>
+              </form>
 
-              <div style="margin-left: 0;"><i style="color:blue;">
+              <div class="updatediv" style="margin-left: 0;"><i style="color:blue;">
                   <%= review.body %>
                 </i></div>
             </div>
