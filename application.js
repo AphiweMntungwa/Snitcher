@@ -99,22 +99,30 @@ app.delete("/index/:id", wrapAsync(async (req, res) => {
     await Campground.findByIdAndDelete(id);
     res.redirect("/index");
 }));
+
 app.post("/index/:id/review", validateReview, wrapAsync(async (req, res) => {
+    console.log("it works this far");
     const { id } = req.params;
     const newReview = new Review(req.body.campreview);
     const selectCamp = await Campground.findById(id);
     selectCamp.reviews.push(newReview);
     await selectCamp.save();
     await newReview.save().then(() => {
-        res.redirect(`/index/${selectCamp._id}`);
-    });
+        res.json({ newReview });
+    }).catch((e) => {
+        res.json({ error: e, customMessage: "Could not Create Review" });
+    })
 }))
 app.delete("/index/:id/review/:reviewId", wrapAsync(async (req, res) => {
     const { id, reviewId } = req.params;
     await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/index/${id}`);
+    await Review.findByIdAndDelete(reviewId).then(() => {
+        res.json({ deleted: "SUCCESS" });
+    }).catch((e) => {
+        res.json({ error: e, customMessage: "could not delete" })
+    })
 }))
+
 // app.get("/index/:id/review/:reviewid/edit", wrapAsync(async (req, res) => {
 //     const { id: campgroundId, reviewId } = req.params;
 //     const selectCamp = await Campground.findById(campgroundId);
@@ -129,10 +137,10 @@ app.put("/index/:id/review/:reviewId", wrapAsync(async (req, res) => {
     if (rating && body.trim()) {
         await Review.findByIdAndUpdate(reviewId, req.body.reviews);
         // res.redirect(`/index/${campgroundId}`);
-        res.json({rating, body});
+        res.json({ rating, body });
     } else {
         // res.redirect(`/index/${campgroundId}`);
-        res.json({customMessage:"I couldn't find anything"});
+        res.json({ customMessage: "could not find review" });
     }
 }))
 app.get("/test", (req, res) => {
