@@ -144,6 +144,9 @@
     #spanid, #secondspanid{
       display: none;
     }
+    .display-none-card{
+      display: none;
+    }
     @media (max-width: 931px) {
       div[class=buttons] {
         flex-direction: column;
@@ -184,6 +187,34 @@
             rows="2"></textarea>
           <button id="longbutton">submit review</button>
         </form>
+
+        <div class="card mt-2 me-4 reviewdiv display-none-card">
+          <div class="card-body">
+            <div class="input-group-prepend mb-1 d-inline">
+              <span class="input-group-text d-inline py-1 px-2 rating"><span id="rating">
+                  
+                </span></span>
+            </div>
+            <div class="input-group-prepend mb-1 d-inline" id="options">
+              <span id="optionspan" class="input-group-text bg-secondary d-inline py-1 px-2"><i class="fas fa-bars"></i></span>
+            </div>
+            <div class="card dropdown">
+              <button class="editReview">edit</button>
+              <button class="deletereviewbutton">delete</button>
+            </div> 
+            <span id="spanid">  </span>
+            <form class="form-control toggleform">
+              <input type="range" class="form-range range" min=0 max=5 name="reviews[rating]" id="range">
+              <textarea class="form-control textareas" name="reviews[body]" id="body" cols="30" rows="3"></textarea>
+              <button class="submitreview">edit</button>
+            </form>
+
+            <div class="updatediv" style="margin-left: 0;"><i style="color:blue;">
+                
+              </i></div>
+          </div>
+        </div>
+
         <% for(review of selectCamp.reviews){ %>
           <div class="card mt-2 me-4 reviewdiv">
             <div class="card-body">
@@ -212,9 +243,11 @@
             </div>
           </div>
           <% } %>
-          <!-- <span class="injectreview"></span> -->
       </div><br>
 
     </section>
 
   </div>
+
+
+  <script src="/js/reviewsJs.js"></script>

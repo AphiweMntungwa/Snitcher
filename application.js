@@ -6,6 +6,9 @@ const ejsMate = require("ejs-mate");
 const AppError = require("./Utils/apperror");
 const campgroundRoutes = require("./routes/camproutes");
 const reviewRoutes = require("./routes/reviewroutes");
+const session = require("express-session");
+const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
 
 mongoose.connect('mongodb://localhost:27017/YelpCamp',
     { useNewUrlParser: true, useUnifiedTopology: true })
@@ -22,18 +25,36 @@ app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use("/index", campgroundRoutes);
-app.use("/index/:id/review", reviewRoutes);
 
-app.use(express.urlencoded({extended:true}));
+
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+sessionConfig = {
+    secret: "iamintrouble",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+app.use(session(sessionConfig));
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+});
 
+app.use("/index", campgroundRoutes);
+app.use("/index/:id/review", reviewRoutes);
 
 app.get("/", (req, res) => {
     res.render("./campgrounds/home");
 });
-
 
 app.get("/test", (req, res) => {
     res.json({ message: "it works" });

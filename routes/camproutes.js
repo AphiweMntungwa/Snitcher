@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../Utils/wrapasync");
 const AppError = require("../Utils/apperror");
-const { campgroundSchema} = require("../schemas.js");
+const { campgroundSchema } = require("../schemas.js");
 const Campground = require("../models/campgrounds");
 const methodOverride = require("method-override");
 
-router.use(express.urlencoded({extended:true}));
+router.use(express.urlencoded({ extended: true }));
 router.use(methodOverride("_method"));
 router.use(express.json());
 
@@ -34,8 +34,12 @@ router.get("/new", (req, res) => {
 router.get("/:id", wrapAsync(async (req, res, next) => {
     const { id } = req.params;
     const selectCamp = await Campground.findById(id).populate("reviews");
-    selectCamp ? res.render("./campgrounds/details", { selectCamp })
-        : next(new AppError("Camp Not Found", 400))
+    if (!selectCamp) {
+        req.flash("error", "Could not find Campground")
+        res.redirect("/index");
+    } else {
+        res.render("./campgrounds/details", { selectCamp })
+    }
 }));
 
 router.post("/", validateSchema, wrapAsync(async (req, res, next) => {
@@ -48,9 +52,14 @@ router.post("/", validateSchema, wrapAsync(async (req, res, next) => {
 router.get("/:id/edit", wrapAsync(async (req, res, next) => {
     const { id } = req.params;
     const selectCamp = await Campground.findById(id);
-    selectCamp ? res.render("./campgrounds/editcamp", { selectCamp })
-        : next(new AppError("Camp Not Found", 400))
+    if (!selectCamp) {
+        req.flash("error", "Could not find Campground")
+        res.redirect("/index");
+    } else {
+        res.render("./campgrounds/editcamp", { selectCamp })
+    }
 }));
+
 
 router.patch("/:id", validateSchema, wrapAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -61,6 +70,7 @@ router.patch("/:id", validateSchema, wrapAsync(async (req, res, next) => {
 router.delete("/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
+    req.flash("success", "Deleted Campground");
     res.redirect("/index");
 }));
 
