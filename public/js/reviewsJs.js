@@ -1,7 +1,9 @@
 document.querySelector("body").classList.add("bg-gradient");
-let editButton,updateDiv,rating, ranges,spanId,secondSpanId,
-textarea,deleteReviewButton,reviewDiv,reviewBody,reviewRange,reviewPadding= [];
+let editButton, updateDiv, rating, ranges, spanId, secondSpanId,
+    textarea, deleteReviewButton, reviewDiv,
+    reviewBody, reviewRange, reviewPadding = [];
 const submitReviewButton = document.querySelector("#longbutton");
+const logger = document.querySelector(".logger");
 
 const casts = function () {
     editButton = document.querySelectorAll(".submitreview");
@@ -93,8 +95,12 @@ async function createReview() {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success New Review:', data);
-                    if (data.newReview.rating && data.newReview.body) {
+                    console.log('Message New Review:', data);
+                    if (data.errorMessage) {
+                        logger.style.display = "block";
+                        logger.innerText = data.errorMessage;
+                    }
+                    else if (data.newReview.rating !== undefined && data.newReview.body) {
                         function lastCardReview() {
                             if (spit().length > 1) {
                                 const lastCard = spit()[spit().length - 1];
@@ -119,6 +125,7 @@ async function createReview() {
                         newElement.firstElementChild.firstElementChild.nextElementSibling.
                             nextElementSibling.nextElementSibling.nextElementSibling.
                             firstElementChild.nextElementSibling.value = data.newReview.body;
+                        newElement.firstElementChild.nextElementSibling.innerText = '-' + data.author.username;
                         casts();
                         toggleFunction();
                         editReview();
@@ -158,8 +165,12 @@ async function editReview() {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success:', data);
-                    if (data.rating && data.body) {
+                    console.log('Message Update:', data);
+                    if (data.errorMessage) {
+                        logger.style.display = "block";
+                        logger.innerText = data.errorMessage;
+                    }
+                    else if (data.rating && data.body) {
                         updateDiv[i].innerText = data.body;
                         rating[i].innerText = data.rating;
                     }
@@ -189,8 +200,12 @@ async function deleteReview() {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success Delete:', data);
-                    if (data.deleted) {
+                    console.log('Message Delete:', data);
+                    if (data.errorMessage) {
+                        logger.style.display = "block";
+                        logger.innerText = data.errorMessage;
+                    }
+                    else if (data.deleted) {
                         reviewDiv[j].remove();
                         toggleFunction();
                     }

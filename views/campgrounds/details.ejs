@@ -10,7 +10,7 @@
       display: flex;
       flex-direction: column;
       align-items: baseline;
-      border: 1px solid green;
+      /* border: 1px solid green; */
     }
 
     img {
@@ -154,9 +154,7 @@
     }
   </style>
 
-
   <div class="d-flex">
-
     <section>
       <img src="<%=selectCamp.image%>" alt="image not found">
       <div><b>
@@ -168,14 +166,20 @@
       <div>
         <%=selectCamp.description%>
       </div><br>
+      <div class="author">
+      posted by - <%=  selectCamp.author.username   %> 
+      </div>
+      <% if (currentUser && selectCamp.author._id.equals(currentUser._id)){%> 
       <div class="buttons">
         <a href="/index/<%=selectCamp._id%>/edit" class=" btn btn-success">Edit</a>
         <a href="/index" class="btn btn-info">Campgrounds</a>
         <form class="d-inline" action="/index/<%=selectCamp._id%>?_method=DELETE" method="post">
           <button id="reset" class=" btn btn-danger">Delete</button>
         </form>
-        <span id="secondspanid"><%= selectCamp._id %> </span>
-      </div><br>
+      </div>
+      <% } %> 
+      <span id="secondspanid"><%= selectCamp._id %> </span>
+      <br>
 
     </section>
     <section>
@@ -213,6 +217,7 @@
                 
               </i></div>
           </div>
+          <h7 class="card-subtitle text-muted" style="margin-left :210px;"> </h7>
         </div>
 
         <% for(review of selectCamp.reviews){ %>
@@ -241,6 +246,7 @@
                   <%= review.body %>
                 </i></div>
             </div>
+            <h7 class="card-subtitle text-muted" style="margin-left :210px;">-<%= review.author.username %> </h7>
           </div>
           <% } %>
       </div><br>
