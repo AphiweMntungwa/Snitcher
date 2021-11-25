@@ -51,7 +51,6 @@ module.exports.validateReview = (req, res, next) => {
 module.exports.isReviewOwner = async (req, res, next) => {
     const { reviewId: id } = req.params;
     const foundReview = await Review.findById(id);
-    console.log(req.user._id, foundReview.author);
     if (!foundReview.author.equals(req.user._id)) {
         return res.json({ errorMessage: "You are not allowed" });
     }

@@ -1,11 +1,13 @@
 document.querySelector("body").classList.add("bg-gradient");
 let editButton, updateDiv, rating, ranges, spanId, secondSpanId,
     textarea, deleteReviewButton, reviewDiv,
-    reviewBody, reviewRange, reviewPadding = [];
+    reviewBody, reviewRange, reviewPadding, icons = [];
 const submitReviewButton = document.querySelector("#longbutton");
-const logger = document.querySelector(".logger");
+const logger = document.querySelector('div[logger="logger"]');
+const cite = document.querySelectorAll("cite");
 
-const casts = function () {
+
+const casts = function() {
     editButton = document.querySelectorAll(".submitreview");
     updateDiv = document.querySelectorAll(".updatediv");
     rating = document.querySelectorAll(".rating");
@@ -18,8 +20,26 @@ const casts = function () {
     reviewBody = document.querySelector(".submit-body");
     reviewRange = document.querySelector(".submit-range");
     reviewPadding = document.querySelector(".reviewpadding");
+    icons = document.querySelectorAll(".icon")
+    auth();
 }
 casts();
+
+function auth() {
+    for (let i = 0; i < icons.length; i++) {
+        icons[i].style.display = "inline";
+        const checker = reviewDiv[i].firstElementChild.nextElementSibling;
+        if (!checker || checker.innerText !== "Authorised") {
+            console.log(checker);
+            icons[i].style.display = "none";
+        }
+    }
+}
+
+function addCite(elmnt) {
+    elmnt.firstElementChild
+        .insertAdjacentHTML("afterend", '<cite class="d-none">Authorised</cite>');
+}
 
 function toggleFunction() {
     const dropdown = document.querySelectorAll(".dropdown");
@@ -37,8 +57,7 @@ function toggleFunction() {
             checkNum += 1;
             if (checkNum % 2 !== 0) {
                 dropdown[i].style.display = 'block';
-            }
-            else {
+            } else {
                 dropdown[i].style.display = 'none';
                 checkNumSecond = 0;
                 toggleForm[i].style.display = "none";
@@ -53,8 +72,7 @@ function toggleFunction() {
             checkNumSecond += 1;
             if (checkNumSecond % 2 !== 0) {
                 toggleForm[j].style.display = "block";
-            }
-            else {
+            } else {
                 toggleForm[j].style.display = "none";
                 checkNumSecond = 0;
             }
@@ -66,14 +84,15 @@ toggleFunction();
 
 
 let data = {};
-const spit = function () {
+const spit = function() {
     return document.querySelectorAll(".reviewdiv");
 }
 
 async function createReview() {
-    submitReviewButton.addEventListener("click", async (e) => {
+    submitReviewButton.addEventListener("click", async(e) => {
         e.preventDefault();
         const CampgroundId = secondSpanId.innerText.trim();
+
         function makeData() {
             if (reviewBody.value.trim() !== '') {
                 data = {
@@ -87,27 +106,25 @@ async function createReview() {
         }
         if (makeData()) {
             fetch(`http://localhost:3000/index/${CampgroundId}/review`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
                 .then(response => response.json())
                 .then(data => {
                     console.log('Message New Review:', data);
                     if (data.errorMessage) {
                         logger.style.display = "block";
                         logger.innerText = data.errorMessage;
-                    }
-                    else if (data.newReview.rating !== undefined && data.newReview.body) {
+                    } else if (data.newReview.rating !== undefined && data.newReview.body) {
                         function lastCardReview() {
                             if (spit().length > 1) {
                                 const lastCard = spit()[spit().length - 1];
                                 const newElement = lastCard.cloneNode(true);
                                 return newElement;
-                            }
-                            else {
+                            } else {
                                 const lastCard = spit()[spit().length - 1];
                                 const newElement = lastCard.cloneNode(true);
                                 newElement.style.display = 'block';
@@ -118,21 +135,31 @@ async function createReview() {
                         const newElement = lastCardReview();
                         reviewPadding.appendChild(newElement);
                         newElement.firstElementChild.firstElementChild.nextElementSibling.
-                            nextElementSibling.nextElementSibling.innerText = data.newReview._id;
+                        nextElementSibling.nextElementSibling.innerText = data.newReview._id;
+
                         newElement.firstElementChild.firstElementChild.
-                            firstElementChild.innerText = data.newReview.rating;
+                        firstElementChild.innerText = data.newReview.rating;
+
                         newElement.firstElementChild.lastElementChild.innerText = data.newReview.body;
+
                         newElement.firstElementChild.firstElementChild.nextElementSibling.
-                            nextElementSibling.nextElementSibling.nextElementSibling.
-                            firstElementChild.nextElementSibling.value = data.newReview.body;
-                        newElement.firstElementChild.nextElementSibling.innerText = '-' + data.author.username;
+                        nextElementSibling.nextElementSibling.nextElementSibling.
+                        firstElementChild.nextElementSibling.value = data.newReview.body;
+
+                        newElement.firstElementChild.firstElementChild.nextElementSibling
+                            .nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                            .nextElementSibling.innerText = `- ${data.author.username}`;
+
+                        const starRating = document.querySelectorAll(".star-rating")
+                        starRating[starRating.length - 1].setAttribute('data-rating', data.newReview.rating)
+                        addCite(newElement);
+
                         casts();
                         toggleFunction();
                         editReview();
                         deleteReview();
                         reviewBody.value = '';
-                    }
-                    else if (data.customMessage) {
+                    } else if (data.customMessage) {
                         alert(data.customMessage);
                     }
                 })
@@ -146,7 +173,7 @@ createReview();
 
 async function editReview() {
     for (let i = 0; i < editButton.length; i++) {
-        editButton[i].addEventListener("click", async (e) => {
+        editButton[i].addEventListener("click", async(e) => {
             e.preventDefault();
             const reviewId = spanId[i].innerText.trim();
             const CampgroundId = secondSpanId.innerText.trim();
@@ -157,24 +184,22 @@ async function editReview() {
                 }
             }
             fetch(`http://localhost:3000/index/${CampgroundId}/review/${reviewId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
                 .then(response => response.json())
                 .then(data => {
                     console.log('Message Update:', data);
                     if (data.errorMessage) {
                         logger.style.display = "block";
                         logger.innerText = data.errorMessage;
-                    }
-                    else if (data.rating && data.body) {
+                    } else if (data.rating && data.body) {
                         updateDiv[i].innerText = data.body;
                         rating[i].innerText = data.rating;
-                    }
-                    else if (data.customMessage) {
+                    } else if (data.customMessage) {
                         alert(data.customMessage);
                     }
                 })
@@ -188,28 +213,26 @@ editReview();
 
 async function deleteReview() {
     for (let j = 0; j < editButton.length; j++) {
-        deleteReviewButton[j].addEventListener("click", async (e) => {
+        deleteReviewButton[j].addEventListener("click", async(e) => {
             e.preventDefault();
             const reviewId = spanId[j].innerText.trim();
             const CampgroundId = secondSpanId.innerText.trim();
             fetch(`http://localhost:3000/index/${CampgroundId}/review/${reviewId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
                 .then(response => response.json())
                 .then(data => {
                     console.log('Message Delete:', data);
                     if (data.errorMessage) {
                         logger.style.display = "block";
                         logger.innerText = data.errorMessage;
-                    }
-                    else if (data.deleted) {
+                    } else if (data.deleted) {
                         reviewDiv[j].remove();
                         toggleFunction();
-                    }
-                    else if (data.customMessage) {
+                    } else if (data.customMessage) {
                         alert(data.customMessage);
                     }
                 })

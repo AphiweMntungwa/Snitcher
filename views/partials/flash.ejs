@@ -1,23 +1,26 @@
 <style>
-    button.close{
+    button.close {
         background-color: transparent;
         border: 0;
     }
-    .close{
+    
+    .close {
         position: absolute;
         top: 10%;
-        right: 0;;
+        right: 0;
+        ;
         font-size: 35px;
-        text-shadow: 2px 2px #FF0000;    
+        text-shadow: 2px 2px #FF0000;
         color: #FF0090;
-        }
-    .close:hover{
+    }
+    
+    .close:hover {
         color: #FFaa90;
     }
-    .logger{
-      display: none;
+    
+    div[logger="logger"] {
+        display: none;
     }
-
 </style>
 
 <% if(success && success.length){ %>
@@ -27,17 +30,17 @@
                 <span aria-hidden="true">&times;</span>
             </button>
     </div>
-<% } %>
-<% if(error && error.length){ %>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <%= error%>
-            <span type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <% } %>
+        <% if(error && error.length){ %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error%>
+                    <span type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-            </span>
-    </div>
-<% } %>
-<div class="alert alert-danger alert-dismissible fade show logger" role="alert">!
-    <a type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-    </a>
-</div>
+                    </span>
+            </div>
+            <% } %>
+                <div class="alert alert-warning alert-dismissible fade show" logger="logger" role="alert">!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>

@@ -1,0 +1,167 @@
+body {
+    justify-content: center;
+}
+
+section {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    /* border: 1px solid green; */
+}
+
+img {
+    width: 100%;
+    height: 40vh;
+}
+
+div {
+    margin-left: 1em;
+    font-family: monospace, serif;
+}
+
+h6 {
+    margin-left: 1.2em;
+    font-size: 14px;
+}
+
+select {
+    border-radius: 5px;
+}
+
+div[class=buttons] {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-left: 0%;
+}
+
+div[class=buttons]>a,
+#reset {
+    min-width: 122px;
+}
+
+button:hover {
+    color: rgb(126, 63, 160);
+}
+
+button:nth-of-type(1) {
+    /* background-color: rgb(67, 27, 128); */
+    width: 100%;
+}
+
+button:nth-of-type(2) {
+    background-color: rgb(72, 128, 207);
+    width: 100%;
+}
+
+button:nth-of-type(3) {
+    background-color: rgb(203, 62, 96);
+    width: 100%;
+}
+
+span.editClass {
+    color: green;
+}
+
+span.secondEditClass {
+    color: red;
+}
+
+#rating {
+    width: 100%;
+}
+
+.reviewPadding {
+    overflow: auto;
+}
+
+.form-control {
+    border-left: none;
+    border-right: none;
+    background-color: inherit;
+    border-bottom: none;
+}
+
+#longbutton:active {
+    background-color: #646464;
+    color: white;
+}
+
+#longbutton {
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+    transition: color 0.5s;
+}
+
+.d-flex {
+    justify-content: space-around;
+}
+
+#rating {
+    color: orangered;
+}
+
+.input-group-prepend {
+    width: 40px;
+    margin-left: -5px;
+    margin-top: -5px;
+}
+
+#display {
+    border-radius: 3px;
+    width: 100px;
+    height: 80px;
+}
+
+#options>span:active {
+    background-color: rgb(104, 89, 89);
+}
+
+#options>span:hover {
+    background-color: rgb(235, 215, 215);
+}
+
+.dropdown {
+    width: 80px;
+    display: none;
+    border: none;
+}
+
+.dropdown>button,
+.dropdown>form>button {
+    border: none;
+}
+
+.dropdown>button {
+    border-radius: 4px 4px 0 0;
+}
+
+.dropdown>form>button {
+    border-radius: 0 0 4px 4px;
+}
+
+.toggleform {
+    display: none;
+}
+
+#spanid,
+#secondspanid {
+    display: none;
+}
+
+.display-none-card {
+    display: none;
+}
+
+h5 {
+    font-size: 17px;
+}
+
+@media (max-width: 931px) {
+    div[class=buttons] {
+        flex-direction: column;
+    }
+}
