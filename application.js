@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -16,9 +19,7 @@ const User = require("./models/user");
 const passport = require("passport");
 const Strategy = require("passport-local");
 
-
-mongoose.connect('mongodb://localhost:27017/YelpCamp',
-    { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/YelpCamp', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("connection successful");
     }).catch((err) => {

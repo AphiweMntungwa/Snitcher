@@ -1,54 +1,49 @@
 <% layout("layouts/boilerplate")%>
-<style>
-  html{
-    background-color: grey;
-  }
-  .col-6{
-    border-radius: 0 0 0px 0;
-    background-color: rgb(32,143,168);
-    box-shadow: 7px 7px rgb(201,239,38);  }
-</style>
+    <style>
+        html {
+            background-color: grey;
+        }
+        
+        .col-6 {
+            border-radius: 0 0 0px 0;
+            background-color: rgb(32, 143, 168);
+            box-shadow: 7px 7px rgb(201, 239, 38);
+        }
+    </style>
 
-<div class="row">
-  <div class="col-3"></div>
-  <div class="col-6 bg-gradient py-3">
-    <form action="/index" id="select" method="post" novalidate class="cs-validate">
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Title:</label>
-        <input type="text" name="campground[title]" class="form-control" id="exampleFormControlInput1"
-          placeholder="e.g. Storm's End" required>
-      </div>
-      <div class="form-group mt-2">
-        <label for="locate">Location:</label>
-        <input type="text" name="campground[location]" class="form-control" id="locate"
-          placeholder="e.g. House Baratheon, Westeros" required>
-      </div>
-      <label for="price" class="mt-2">Price:</label>
-      <div class="input-group mb-3 ">
-        <div class="input-group-prepend">
-          <span class="input-group-text">R</span>
-        </div>
-        <input type="number" name="campground[price]" id="price" class="form-control" placeholder="e.g. 5"
-          aria-label="Amount (to the nearest dollar)" required>
-        <div class="input-group-append">
-          <span class="input-group-text">.00</span>
-        </div>
-      </div>
-      <label for="url" class="mt-2">Image:</label>
-      <div class="input-group mb-3 ">
-        <div class="input-group-prepend">
-          <span class="input-group-text">{url}</span>
-        </div>
-        <input type="text" name="campground[image]" id="url" class="form-control" required>
-      </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 bg-gradient py-3">
+            <form action="/index" id="select" method="post" novalidate enctype="multipart/form-data" class="cs-validate">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Title:</label>
+                    <input type="text" name="campground[title]" class="form-control" id="exampleFormControlInput1" placeholder="e.g. Storm's End" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="locate">Location:</label>
+                    <input type="text" name="campground[location]" class="form-control" id="locate" placeholder="e.g. House Baratheon, Westeros" required>
+                </div>
+                <label for="price" class="mt-2">Price:</label>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">R</span>
+                    </div>
+                    <input type="number" name="campground[price]" id="price" class="form-control" placeholder="e.g. 5" aria-label="Amount (to the nearest dollar)" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                    </div>
+                </div>
+                <label for="url" class="mt-2">Image:</label>
+                <div class="input-group mb-3 ">
+                    <input type="file" name="images" id="url" class="form-control" multiple>
+                </div>
 
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Description:</label>
-        <textarea class="form-control" required name="campground[description]" id="exampleFormControlTextarea1" rows="3"
-          placeholder="e.g. description"></textarea>
-      </div>
-      <button class="btn btn-info mt-2 px-3" type="submit">Create New</button>
-      <a href="/index" class="btn btn-warning mt-2">Cancel</a>
-    </form>
-</div>  <div class="col-3"></div>
-
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Description:</label>
+                    <textarea class="form-control" required name="campground[description]" id="exampleFormControlTextarea1" rows="3" placeholder="e.g. description"></textarea>
+                </div>
+                <button class="btn btn-info mt-2 px-3" type="submit">Create New</button>
+                <a href="/index" class="btn btn-warning mt-2">Cancel</a>
+            </form>
+        </div>
+        <div class="col-3"></div>

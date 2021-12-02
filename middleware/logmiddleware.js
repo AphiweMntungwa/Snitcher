@@ -6,6 +6,7 @@ const { campgroundSchema, reviewSchema } = require("../schemas.js");
 
 
 module.exports.validateSchema = (req, res, next) => {
+    // delete req.body.images;
     const { error } = campgroundSchema.validate(req.body);
     if (error) {
         const msg = error.details.map(el => el.message).join(',');
@@ -27,7 +28,7 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
-module.exports.isOwner = async (req, res, next) => {
+module.exports.isOwner = async(req, res, next) => {
     const { id } = req.params;
     const item = await Campground.findById(id);
     if (!item.author.equals(req.user._id)) {
@@ -42,13 +43,12 @@ module.exports.validateReview = (req, res, next) => {
     if (error) {
         const msg = error.details.map(el => el.message).join(',');
         throw new AppError(msg, 400);
-    }
-    else {
+    } else {
         next();
     }
 }
 
-module.exports.isReviewOwner = async (req, res, next) => {
+module.exports.isReviewOwner = async(req, res, next) => {
     const { reviewId: id } = req.params;
     const foundReview = await Review.findById(id);
     if (!foundReview.author.equals(req.user._id)) {

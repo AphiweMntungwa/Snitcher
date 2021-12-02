@@ -18,7 +18,7 @@ const casts = function() {
     deleteReviewButton = document.querySelectorAll(".deletereviewbutton");
     reviewDiv = document.querySelectorAll(".reviewdiv");
     reviewBody = document.querySelector(".submit-body");
-    reviewRange = document.querySelector(".submit-range");
+    reviewRange = document.querySelectorAll('input[name="rating"]');
     reviewPadding = document.querySelector(".reviewpadding");
     icons = document.querySelectorAll(".icon")
     auth();
@@ -93,11 +93,20 @@ async function createReview() {
         e.preventDefault();
         const CampgroundId = secondSpanId.innerText.trim();
 
+
         function makeData() {
+
+            let starValue = [];
+            for (star of reviewRange) {
+                if (star.checked) {
+                    starValue = star.value;
+                }
+            }
+
             if (reviewBody.value.trim() !== '') {
                 data = {
                     campreview: {
-                        rating: reviewRange.value,
+                        rating: starValue,
                         body: reviewBody.value
                     }
                 }
@@ -132,20 +141,26 @@ async function createReview() {
                             }
 
                         }
+
                         const newElement = lastCardReview();
                         reviewPadding.appendChild(newElement);
+                        //the display:none id we use to make ajax requests - "/:id" variable 
                         newElement.firstElementChild.firstElementChild.nextElementSibling.
                         nextElementSibling.nextElementSibling.innerText = data.newReview._id;
 
+                        //the block with rating in orange
                         newElement.firstElementChild.firstElementChild.
                         firstElementChild.innerText = data.newReview.rating;
 
+                        //the area of the review
                         newElement.firstElementChild.lastElementChild.innerText = data.newReview.body;
 
+                        //
                         newElement.firstElementChild.firstElementChild.nextElementSibling.
                         nextElementSibling.nextElementSibling.nextElementSibling.
                         firstElementChild.nextElementSibling.value = data.newReview.body;
 
+                        //the area with the author's name
                         newElement.firstElementChild.firstElementChild.nextElementSibling
                             .nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
                             .nextElementSibling.innerText = `- ${data.author.username}`;
@@ -153,6 +168,8 @@ async function createReview() {
                         const starRating = document.querySelectorAll(".star-rating")
                         starRating[starRating.length - 1].setAttribute('data-rating', data.newReview.rating)
                         addCite(newElement);
+
+
 
                         casts();
                         toggleFunction();

@@ -47,7 +47,4 @@ consectetur adipisicing elit.
 Quae ratione, officia aliquid debitis, quidem illum nesciunt 
 sit voluptatibus nam beatae voluptates numquam? 
 Asperiores dolorem quasi, quisquam molestiae ullam nemo totam.
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum 
-quos sunt unde, quas distinctio praesentium nam accusantium 
-delectus sequi recusandae temporibus earum 
-molestiae iste similique. Animi labore qui iste facere.`;
+Lorem ipsum dolor sit amet consectetur, adipisicing elit.`;
