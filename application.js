@@ -32,7 +32,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     });
 
 const port = process.env.PORT || 3000
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
 app.engine("ejs", ejsMate);
