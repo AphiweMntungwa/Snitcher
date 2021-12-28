@@ -1,10 +1,11 @@
 {
-    "name": "Snitcher",
+    "name": "snitcher",
     "version": "1.0.0",
     "description": "",
     "main": "back.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node application.js"
     },
     "keywords": [],
     "author": "Aphiwe Mntungwa",

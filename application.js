@@ -31,8 +31,9 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log("Oh nooo error!", err);
     });
 
+const port = process.env.PORT || 3000
 app.listen(3000, () => {
-    console.log("the app is conscious");
+    console.log("the app is conscious on port", port);
 })
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views"));
