@@ -4,16 +4,22 @@ module.exports.registerForm = (req, res) => {
     res.render("./user/register");
 }
 
-module.exports.registerUser = async (req, res, next) => {
+module.exports.registerUser = async(req, res, next) => {
     try {
         const { username, email, password } = req.body;
-        const newUser = new User({ username, email });
-        const registeredUser = await User.register(newUser, password);
-        req.login(registeredUser, err => {
-            if (err) return next();
-            req.flash("success", `Successfully Registered ${username}`);
-            res.redirect("/index");
-        });
+        if (username.length <= 2 || password.length <= 6) {
+            req.flash("error", "password or username is too short");
+            res.redirect("/register");
+        } else {
+            const newUser = new User({ username, email });
+            const registeredUser = await User.register(newUser, password);
+            req.login(registeredUser, err => {
+                if (err) return next();
+                req.flash("success", `Successfully Registered ${username}`);
+                res.redirect("/index");
+            });
+        }
+
     } catch (e) {
         req.flash("error", e.message);
         res.redirect("/register")

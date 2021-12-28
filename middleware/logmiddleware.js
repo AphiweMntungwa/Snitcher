@@ -1,4 +1,4 @@
-const Campground = require("../models/campgrounds");
+const Thought = require("../models/thoughts");
 const Review = require("../models/reviews");
 const AppError = require("../Utils/apperror");
 const { campgroundSchema, reviewSchema } = require("../schemas.js");
@@ -30,7 +30,7 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 module.exports.isOwner = async(req, res, next) => {
     const { id } = req.params;
-    const item = await Campground.findById(id);
+    const item = await Thought.findById(id);
     if (!item.author.equals(req.user._id)) {
         req.flash("error", "You are not allowed");
         return res.redirect(`/index/${item._id}`);

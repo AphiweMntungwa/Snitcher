@@ -1,6 +1,69 @@
 <% layout("layouts/boilerplate")%>
-<h1>Hello Admin</h1>
-<span class="navbar-brand">Bootstrap Navbar Brand. </span>
-<div class="bg-gradient py-5 ps-5 bg-black">
-   <span class="text-muted">I'm just waiting for my gradient background color.</span> 
-</div>
+    <style>
+        body {
+            background-color: rgba(177, 177, 177);
+            margin-top: -5%;
+            overflow: hidden;
+        }
+        
+        .div-img {
+            height: 130vh;
+            margin-top: -6%;
+        }
+        
+        img {
+            margin: 0;
+            height: 100%;
+        }
+        
+        .navbar {
+            display: none;
+        }
+        
+        .paragraph,
+        a {
+            position: absolute;
+            display: none;
+        }
+        
+        .paragraph {
+            top: 250px;
+            width: 40%;
+            left: 75px;
+        }
+        
+        .div-img a {
+            top: 401px;
+            left: 295px;
+            display: none;
+        }
+        
+        .div-img a:nth-of-type(1) {
+            left: 395px;
+        }
+        
+        .div-img a:nth-of-type(3) {
+            left: 485px;
+        }
+    </style>
+    <div class="div-img">
+        <img src="/photo_files/snitcher.gif" alt="">
+        <p class="paragraph">Welcome to Snitcher, a platform where you can make thoughts with the support of youtube resources to better illustrate your points. <i>Try it now!</i></p>
+        <% if(!currentUser){ %>
+            <a href="/login" class="btn btn-success">Log In</a>
+            <a href="/register" class="btn btn-info">Sign Up</a>
+            <% } %>
+                <a href="/index" class="btn btn-primary">Browse Thoughts</a>
+    </div>
+
+    <script>
+        const paragraph = document.querySelector('p');
+        const links = document.querySelectorAll('.div-img > a')
+
+        setTimeout(() => {
+            paragraph.style.display = 'block'
+            links.forEach((el) => {
+                el.style.display = 'block'
+            })
+        }, 3000)
+    </script>

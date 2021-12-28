@@ -1,159 +1,562 @@
 <% layout("layouts/boilerplate")%>
     <link rel="stylesheet" href="/css/showstyles.css">
     <link rel="stylesheet" href="/css/starability.css">
-    <div class="d-flex">
-        <section>
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <% selectCamp.images.forEach((img, i) => {%>
-                        <div class="carousel-item <%= i === 0 ? 'active' : '' %> ">
-                            <img class="" src="<%=img.url%>" alt="">
-                        </div>
-                        <%})%>
-                </div>
-                <% if(selectCamp.images.length >1) {%>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                    <% } %>
+    <style>
+        .search-edit-div {
+            /* border: 1px solid white; */
+            height: 60vh;
+            display: none;
+        }
+        
+        #edit-searchbutton {
+            width: fit-content;
+        }
+        
+        #form-control {
+            width: 60%;
+            margin-left: 0;
+            background-color: rgba(28, 34, 2, 0.4);
+        }
+        
+        .edit-secondrow {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: inherit;
+        }
+        
+        .edit-secondrow>div:nth-of-type(1) {
+            height: 10%;
+        }
+        
+        .edit-secondrow>div:nth-of-type(2) {
+            height: 30%;
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            overflow: auto;
+        }
+        
+        .edit-secondrow>div:nth-of-type(3) {
+            height: 40%;
+        }
+        
+        .edit-firstrow {
+            /* background-color: rgba(255, 0, 0, 0.535); */
+            overflow: auto;
+            height: inherit;
+        }
+        
+        .span-button {
+            display: inline-block;
+            margin-left: 3px;
+            display: none;
+        }
+        
+        .searchlist:hover .span-button {
+            display: inline-block;
+        }
+        
+        .newEdit {
+            overflow: auto;
+            height: 170px;
+        }
+        
+        .position-div {
+            position: absolute;
+            background-color: white;
+            top: 41vh;
+            left: 31vh;
+            width: 76%;
+        }
+        
+        .opaque {
+            display: none;
+        }
+        
+        .crosspan {
+            padding: 12px 0 12px 0;
+            background-color: cadetblue;
+        }
+        
+        .crosspan:hover {
+            background-color: rgb(84, 72, 72);
+        }
+        
+        .imgspan {
+            max-width: 47%;
+            margin-top: 5px;
+        }
+        
+        .sidebar-image {
+            width: 72px;
+            height: 58px;
+        }
+    </style>
+
+    <div class="row display-popup mt-3">
+        <div class="col-1"></div>
+        <div class="col-10 bg-gradient search-edit-div row">
+            <div class="col-4">
+                <form action="/index/<%=selectCamp._id%>/?_method=PATCH" id="select" method="post" novalidate class="cs-validate">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Title:</label>
+                        <input type="text" name="thought[title]" class="form-control edit-title" id="exampleFormControlInput1" placeholder="e.g. How to learn faster" required>
+                    </div>
+                    <div class="form-group edit-imgappend">
+                        <label for="exampleFormControlTextarea1">thought:</label>
+                        <textarea class="form-control edit-post" required name="thought[description]" rows="4" placeholder="what have you been thinking..."></textarea>
+                    </div>
+                    <button class="btn btn-info mt-2 px-3" type="submit">Edit</button>
+                </form>
             </div>
 
-            <div><b>
+            <div class="col-4 edit-firstrow">
+                <div class="edit-component-div"></div>
+            </div>
+            <div class="col-3 edit-secondrow">
+                <div class="d-flex mt-2">
+                    <input type="search" id="form-control" name='edit-youtubeVid' class="form-control">
+                    <button id="edit-searchbutton" class="btn btn-secondary">Search</button>
+                </div>
+                <div class="edited"></div>
+                <div class="newEdit"></div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="d-flex">
+            <div class="d-none">
+                <% let a = [] %>
+                    <% if (selectCamp.media && selectCamp.media.length){ %>
+                        <%  selectCamp.media.forEach((el, i)=>{ %>
+                            <%  if(i%2 === 0){ %>
+                                <%=a.push(selectCamp.media[i].slice(23, 34))%>
+                                    <% }%>
+                                        <%})%>
+                                            <%}%>
+            </div>
+            <section>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=a[0]%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+                <div><b id="post-title">
           <%=selectCamp.title%>
         </b></div>
-            <h6>
-                <%=selectCamp.location%>
-            </h6>
-            <div>
-                <%=selectCamp.description%>
-            </div><br>
-            <div class="author">
-                posted -
-                <%=  selectCamp.author.username   %>
-            </div>
-            <% if (currentUser && selectCamp.author._id.equals(currentUser._id)){%>
-                <div class="buttons">
-                    <a href="/index/<%=selectCamp._id%>/edit" class=" btn btn-success">Edit</a>
-                    <a href="/index" class="btn btn-info">Campgrounds</a>
-                    <form class="d-inline" action="/index/<%=selectCamp._id%>?_method=DELETE" method="post">
-                        <button id="reset" class=" btn btn-danger">Delete</button>
-                    </form>
+                <h6>
+                    <%=selectCamp.location%>
+                </h6>
+                <div id="post">
+                    <%=selectCamp.description%>
+                </div><br>
+                <div class="author">
+                    posted -
+                    <%=  selectCamp.author.username   %>
                 </div>
-                <% } %>
-                    <span id="secondspanid"><%= selectCamp._id %> </span>
-                    <br>
-
-        </section>
-        <section>
-            <div class="mt-3 reviewpadding">
-                <b>Leave a Review: </b>
-                <form class="form-control">
-                    <!-- <input type="range" class="form-range submit-range" min="0" max="5" step="1" name="rating"> -->
-                    <fieldset class="starability-basic">
-                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
-                        <input type="radio" id="first-rate1" name="rating" value="1" />
-                        <label for="first-rate1" title="Terrible">1 star</label>
-                        <input type="radio" id="first-rate2" name="rating" value="2" />
-                        <label for="first-rate2" title="Not good">2 stars</label>
-                        <input type="radio" id="first-rate3" name="rating" value="3" />
-                        <label for="first-rate3" title="Average">3 stars</label>
-                        <input type="radio" id="first-rate4" name="rating" value="4" />
-                        <label for="first-rate4" title="Very good">4 stars</label>
-                        <input type="radio" id="first-rate5" name="rating" value="5" />
-                        <label for="first-rate5" title="Amazing">5 stars</label>
-                    </fieldset>
-                    <textarea name="body" required placeholder="review..." class="form-control bg-light submit-body" cols="35" rows="2"></textarea>
-                    <button id="longbutton">submit review</button>
-                </form>
-
-                <div class="card mt-2 me-4 reviewdiv display-none-card">
-                    <div class="card-body">
-                        <div class="input-group-prepend mb-1 d-inline">
-                            <span class="input-group-text d-inline py-1 px-2 rating"><span id="rating">
-                  
-                </span></span>
-                        </div>
-
-                        <div class="input-group-prepend mb-1 d-inline icon" id="options">
-                            <span id="optionspan" class="input-group-text bg-secondary d-inline py-1 px-2"><i class="fas fa-bars"></i></span>
-                        </div>
-
-                        <div class="card dropdown">
-                            <button class="editReview">edit</button>
-                            <button class="deletereviewbutton">delete</button>
-                        </div>
-                        <span id="spanid">  </span>
-                        <form class="form-control toggleform">
-                            <input type="range" class="form-range range" min=0 max=5 name="reviews[rating]" id="range">
-                            <textarea class="form-control textareas" name="reviews[body]" id="body" cols="30" rows="3"></textarea>
-                            <button class="submitreview">edit</button>
+                <% if (currentUser && selectCamp.author._id.equals(currentUser._id)){%>
+                    <div class="buttons">
+                        <a href="#" class="btn btn-success editthought">Edit</a>
+                        <a href="/index" class="btn btn-info">Campgrounds</a>
+                        <form class="d-inline" action="/index/<%=selectCamp._id%>?_method=DELETE" method="post">
+                            <button id="reset" class=" btn btn-danger">Delete</button>
                         </form>
-
-                        <div class="updatediv" style="margin-left: 0;"><i style="color:blue;">
-                
-              </i></div>
                     </div>
-                    <!-- <h7 class="card-subtitle text-muted" style="margin-left :210px;"> </h7> -->
-                </div>
+                    <% } %>
+                        <div class="mt-3">
+                            <% if (selectCamp.media && selectCamp.media.length){ %>
+                                <%  selectCamp.media.forEach((el, i)=>{ %>
+                                    <%  if(i%2 === 0){ %>
+                                        <span class="d-inline">
+                                <img src="<%=selectCamp.media[i]%>" class="inline-image-details" alt="">
+                                    </span>
+                                        <% }%>
+                                            <%})%>
+                                                <%}%>
+                        </div>
+                        <span id="secondspanid"><%= selectCamp._id %> </span>
+                        <br>
+            </section>
+            <section>
+                <div class="mt-3 reviewpadding">
+                    <b>Leave a Review: </b>
+                    <form class="form-control">
+                        <fieldset class="starability-basic">
+                            <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="rating" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="rating" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="rating" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="rating" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="rating" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                        <textarea name="body" required placeholder="review..." class="form-control bg-light submit-body" cols="35" rows="2"></textarea>
+                        <button id="longbutton">submit review</button>
+                    </form>
 
-                <% for(review of selectCamp.reviews){ %>
-                    <div class="card mt-2 me-4 reviewdiv">
+                    <!-- this is the model card -->
+                    <div class="card mt-2 me-4 reviewdiv display-none-card">
                         <div class="card-body">
                             <div class="input-group-prepend mb-1 d-inline">
                                 <span class="input-group-text d-inline py-1 px-2 rating"><span id="rating">
-                    <%= review.rating %>
-                  </span></span>
+                  
+                </span></span>
                             </div>
 
-                            <!-- <% if (currentUser && review.author._id.equals(currentUser._id)){%> 
-                   <cite class="d-none">Authorised</cite>
-              <% } %> -->
-                            <div class="input-group-prepend mb-1 icon" id="options">
-                                <span id="optionspan" class="input-group-text bg-secondary d-inline py-1 px-2"><i class="fas fa-bars"></i></span>
+                            <div class="input-group-prepend mb-1 d-inline icon options" id="">
+                                <span class="optionspan input-group-text bg-secondary d-inline py-1 px-2"><i class="fas fa-bars"></i></span>
                             </div>
 
                             <div class="card dropdown">
                                 <button class="editReview">edit</button>
                                 <button class="deletereviewbutton">delete</button>
                             </div>
-                            <span id="spanid"> <%= review._id %> </span>
+
+                            <span class="spanid">  </span>
                             <form class="form-control toggleform">
-                                <input type="range" class="form-range range" min=1 max=5 name="reviews[rating]" id="range">
-                                <textarea class="form-control textareas" name="reviews[body]" id="body" cols="30" rows="3"><%=review.body.trim()%></textarea>
+                                <input type="range" class="form-range range" min=0 max=5 name="reviews[rating]" id="range">
+                                <textarea class="form-control textareas" name="reviews[body]" id="body" cols="30" rows="3"></textarea>
                                 <button class="submitreview">edit</button>
                             </form>
 
-
-                            <p class="starability-result star-rating mt-2" data-rating="<%= review.rating %>">
+                            <p class="starability-result star-rating mt-2" data-rating="">
                                 Rated:
-                                <%= review.rating %> stars
-                                    <h5>-
-                                        <%= review.author.username %>
-                                    </h5>
+                                <h5>-
+
+                                </h5>
                             </p>
 
-
                             <div class="updatediv" style="margin-left: 0;"><i style="color:blue;">
+              </i></div>
+                        </div>
+                    </div>
+
+                    <!-- this is the card -->
+                    <% for(review of selectCamp.reviews){ %>
+                        <div class="card mt-2 me-4 reviewdiv">
+                            <div class="card-body">
+                                <div class="input-group-prepend mb-1 d-inline">
+                                    <span class="input-group-text d-inline py-1 px-2 rating"><span id="rating">
+                    <%= review.rating %>
+                  </span></span>
+                                </div>
+
+                                <div class="input-group-prepend mb-1 icon options" id="">
+                                    <span class="optionspan input-group-text bg-secondary d-inline py-1 px-2"><i class="fas fa-bars"></i></span>
+                                </div>
+
+                                <div class="card dropdown">
+                                    <button class="editReview">edit</button>
+                                    <button class="deletereviewbutton">delete</button>
+                                </div>
+                                <span class="spanid"> <%= review._id %> </span>
+                                <form class="form-control toggleform">
+                                    <input type="range" class="form-range range" min=1 max=5 name="reviews[rating]" id="range">
+                                    <textarea class="form-control textareas" name="reviews[body]" id="body" cols="30" rows="3"><%=review.body.trim()%></textarea>
+                                    <button class="submitreview">edit</button>
+                                </form>
+
+
+                                <p class="starability-result star-rating mt-2" data-rating="<%= review.rating %>">
+                                    Rated:
+                                    <%= review.rating %> stars
+                                        <h5>-
+                                            <%= review.author.username %>
+                                        </h5>
+                                </p>
+
+                                <div class="updatediv" style="margin-left: 0;"><i style="color:blue;">
                   <%= review.body %>
                 </i></div>
+                            </div>
+                            <% if (currentUser && review.author._id.equals(currentUser._id)){%>
+                                <cite class="d-none">Authorised</cite>
+                                <% } %>
+
                         </div>
-                        <!-- <h7 class="card-subtitle text-muted" style="margin-left :210px;">-<%= review.author.username %> </h7> -->
-                        <% if (currentUser && review.author._id.equals(currentUser._id)){%>
-                            <cite class="d-none">Authorised</cite>
-                            <% } %>
+                        <% } %>
+                </div><br>
 
-                    </div>
-                    <% } %>
-            </div><br>
+            </section>
+            <% if(selectCamp.media && selectCamp.media.length){ %>
+                <%  selectCamp.media.forEach((el, i)=>{ %>
+                    <span class="d-none mediaclass">
+                    <%= selectCamp.media[i] %> 
+                     </span>
+                    <% }) %>
+                        <% } %>
 
-        </section>
-
-    </div>
+        </div>
 
 
-    <script src="/js/reviewsJs.js"></script>
+        <script src="/js/reviewsJs.js"></script>
+        <script>
+            const iframe = document.querySelector('iframe')
+
+            function inlineImageDetails() {
+                return document.querySelectorAll('.inline-image-details')
+            }
+            const a = []
+
+            inlineImageDetails().forEach((el, i) => {
+                a.push(el.src)
+                el.addEventListener('click', function addVideoChanger() {
+                    iframe.src = `https://www.youtube.com/embed/${a[i].slice(23, 34)}`
+                })
+            })
+        </script>
+        <script>
+            const newThought = document.querySelector('.newthought')
+            const editThought = document.querySelector('.editthought')
+            const editSearchbutton = document.querySelector('#edit-searchbutton')
+            const editYoutubeVid = document.querySelector('input[name="edit-youtubeVid"]')
+            const editFirstRow = document.querySelector('.edit-firstrow')
+            const mediaClass = document.querySelectorAll('.mediaclass')
+            media = []
+
+            for (m of mediaClass) {
+                media.push(m.innerText.trim())
+            }
+
+
+            editSearchbutton.addEventListener('click', () => {
+                if (editYoutubeVid.value) {
+                    showPageFunctions.callYoutube()
+                }
+
+            })
+
+            showPageFunctions = {
+                    populateEdit() {
+                        const post = document.querySelector('#post')
+                        const postTitle = document.querySelector('#post-title')
+                        const editTitle = document.querySelector('.edit-title')
+                        const editPost = document.querySelector('.edit-post')
+                        const inlineImages = document.querySelectorAll('.inline-image-details')
+                        const edited = document.querySelector('.edited')
+                        const editThought = document.querySelector('.editthought')
+
+
+                        inlineImages.forEach((el, i) => {
+                            const img = document.createElement('img')
+                            const imgspan = document.createElement('span')
+                            const crosspan = document.createElement('a')
+
+                            img.src = el.src;
+                            img.classList.add('sidebar-image')
+                            crosspan.classList.add('crosspan')
+                            imgspan.classList.add('imgspan')
+
+                            crosspan.innerHTML = '&times;'
+                            imgspan.append(crosspan)
+                            imgspan.append(img)
+                            edited.append(imgspan)
+                        })
+                        editTitle.value = postTitle.innerText;
+                        editPost.value = post.innerText;
+
+                    },
+                    callYoutube() {
+                        const data = {
+                            term: editYoutubeVid.value
+                        };
+
+                        fetch(`http://localhost:3000/search`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(data)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                this.populateFirstRow(data)
+                            })
+                            .catch(e => console.log('Something went wrong', e))
+                    },
+                    populateFirstRow(data) {
+                        data.items.forEach((el, i) => {
+                            const searchList = document.createElement('li');
+                            const img = document.createElement('img');
+                            const button = document.createElement('button');
+                            const span = document.createElement('span');
+
+
+                            span.classList.add('span-button');
+                            button.classList.add('add-button');
+                            button.innerText = 'A-T-R'
+                            img.classList.add('thumbnail-image');
+                            searchList.classList.add('searchlist');
+
+                            img.src = data.items[i].snippet.thumbnails.default.url;
+                            searchList.append(img);
+                            searchList.append(data.items[i].snippet.title);
+                            searchList.append(span)
+                            span.append(button)
+
+
+                            editFirstRow.append(searchList)
+                        })
+                        showPageFunctions.sidebarSelection()
+
+                    },
+                    addMedia() {
+                        const editImgAppend = document.querySelector('.edit-imgappend')
+
+                        if (media.length) {
+                            media.forEach((el, i) => {
+                                if (i % 2 === 0) {
+                                    const titleInput = document.createElement('input')
+                                    const urlInput = document.createElement('input')
+
+                                    urlInput.classList.add('url-input')
+                                    titleInput.classList.add('title-input')
+
+
+                                    urlInput.value = media[i]
+                                    titleInput.value = media[i + 1]
+
+                                    titleInput.name = 'thought[media]'
+                                    urlInput.name = 'thought[media]'
+                                    titleInput.hidden = true
+                                    urlInput.hidden = true
+
+                                    editImgAppend.append(urlInput)
+                                    editImgAppend.append(titleInput)
+                                }
+                            })
+                        }
+                    },
+
+                    sidebarSelection() {
+                        const spanButton = document.querySelectorAll('.span-button')
+                        const newEdit = document.querySelector('.newEdit')
+                        const editImgAppend = document.querySelector('.edit-imgappend')
+                        const searchList = document.querySelectorAll('.searchlist')
+
+                        console.log(spanButton)
+                        if (spanButton.length) {
+
+                            //detail arrays
+                            imageArray = []
+                            titleArray = []
+                            searchList.forEach((el, i) => {
+                                imageArray.push(el.firstChild.src)
+                                titleArray.push(el.firstChild.nextSibling.textContent)
+                            })
+
+                            spanButton.forEach((element, i) => {
+                                element.addEventListener('click', function addSelection() {
+
+                                    //creating the elements
+                                    const li = document.createElement('li');
+                                    const img = document.createElement('img');
+                                    const span = document.createElement('span');
+                                    const titleInput = document.createElement('input');
+                                    const urlInput = document.createElement('input');
+
+                                    //adding classes to style elements
+                                    img.classList.add('sidebar-image')
+                                    li.classList.add('sidebar-list-item')
+                                    urlInput.classList.add('url-input')
+                                    titleInput.classList.add('title-input')
+
+                                    //image, title and dynamic input 
+                                    img.src = imageArray[i];
+                                    li.innerText = titleArray[i];
+                                    titleInput.value = titleArray[i];
+                                    urlInput.value = img.src;
+                                    titleInput.name = 'thought[media]';
+                                    urlInput.name = 'thought[media]';
+                                    titleInput.hidden = true;
+                                    urlInput.hidden = true;
+
+                                    //appending the elements
+                                    span.append(img);
+                                    span.append(li);
+                                    newEdit.append(span);
+                                    editImgAppend.append(urlInput);
+                                    editImgAppend.append(titleInput);
+                                    spanButton[i].removeEventListener('click', addSelection);
+                                })
+                            })
+                        }
+                    }
+
+                }
+                //for now
+            showPageFunctions.populateEdit()
+            showPageFunctions.addMedia()
+            let toggler = 0
+            editThought.addEventListener('click', () => {
+                const searchPrompt = document.querySelector('.search-edit-div')
+                const cardOpaque = document.querySelectorAll('.card')
+
+                toggler += 1;
+                if (toggler === 1) {
+                    searchPrompt.style.display = 'flex'
+                    searchPrompt.classList.add('position-div')
+                    cardOpaque.forEach((el) => {
+                        el.classList.toggle('opaque')
+                    })
+                } else {
+                    searchPrompt.style.display = 'none'
+                    toggler = 0;
+                    cardOpaque.forEach((el) => {
+                        el.classList.toggle('opaque')
+                    })
+                }
+            })
+
+            newThought.style.display = 'none';
+        </script>
+
+        <script>
+            const sidebarImg = document.querySelectorAll('.sidebar-image')
+            const crosspan = document.querySelectorAll('.crosspan')
+            const thoughtId = document.querySelector('#secondspanid')
+            const noSync = inlineImageDetails()
+            let checker = 0
+
+
+            for (let i = 0; i < crosspan.length; i++) {
+                crosspan[i].addEventListener('click', () => {
+                    checker += 1
+                    const data = {
+                        imgSource: sidebarImg[i].src
+                    };
+                    deletePhoto(data)
+                })
+                srcArray = []
+
+
+                function deletePhoto(data) {
+                    const id = thoughtId.innerText.trim()
+
+                    fetch(`http://localhost:3000/search/${id}/delete`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            crosspan[i].remove()
+                            noSync[i].remove()
+                            sidebarImg[i].remove()
+
+                            src = []
+                            inlineImageDetails().forEach((el) => {
+                                src.push(el.src)
+                            })
+                            if (src.length) {
+                                iframe.src = `https://www.youtube.com/embed/${src[0].slice(23, 34)}`
+                            }
+                        })
+                        .catch(e => console.log('Could not delete photo', e))
+                }
+
+            }
+        </script>

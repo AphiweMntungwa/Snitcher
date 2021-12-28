@@ -46,5 +46,4 @@ module.exports.lorem = `Lorem ipsum dolor sit amet
 consectetur adipisicing elit. 
 Quae ratione, officia aliquid debitis, quidem illum nesciunt 
 sit voluptatibus nam beatae voluptates numquam? 
-Asperiores dolorem quasi, quisquam molestiae ullam nemo totam.
-Lorem ipsum dolor sit amet consectetur, adipisicing elit.`;
+Asperiores dolorem quasi.`;

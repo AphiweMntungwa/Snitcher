@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Campground = require("../models/campgrounds");
+const Thought = require("../models/thoughts");
 const cities = require("./cities");
 const { descriptors, places, lorem } = require("./seedhelpers");
 
@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost:27017/YelpCamp', { useNewUrlParser: true, 
     });
 
 const seedData = async() => {
-    await Campground.deleteMany({});
+    await Thought.deleteMany({});
     const rand = () => {
         return Math.floor(Math.random() * 1000)
     };
@@ -19,18 +19,15 @@ const seedData = async() => {
         return array[Math.floor(Math.random() * array.length)];
     };
     for (let i = 0; i < 10; i++) {
-        const camp = new Campground({
-            location: `${cities[rand()].city}, ${cities[rand()].state}`,
+        const camp = new Thought({
+            // location: `${cities[rand()].city}, ${cities[rand()].state}`,
             title: `${arr(descriptors)} ${arr(places)}`,
-            price: 14,
-            images: [{
-                    url: 'https://res.cloudinary.com/snitcher/image/upload/v1638445630/YelpCamp/mhnupy7sqjmcvgotcybe.png',
-                    filename: 'YelpCamp/mhnupy7sqjmcvgotcybe'
-                },
-                {
-                    url: 'https://res.cloudinary.com/snitcher/image/upload/v1638445630/YelpCamp/actvkvdinscunhur58ax.png',
-                    filename: 'YelpCamp/actvkvdinscunhur58ax'
-                }
+            // price: 14,
+            media: [
+                'https://i.ytimg.com/vi/lKkQdxC0-yI/default.jpg',
+                'Hollywood action and 18+ movie 2007/// shoot em up/// saving a child',
+                'https://i.ytimg.com/vi/FOP5ATqgbzo/default.jpg',
+                'Shoot &#39;Em Up - &quot;Eat Your Vegetables&quot;'
             ],
             description: lorem,
             author: { _id: "619abf59ccd20e2dbc8fb466" }

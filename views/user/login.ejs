@@ -1,14 +1,33 @@
 <% layout("layouts/boilerplate")%>
-<h1>Log In</h1>
-<form action="/login" class="cs-validate" method="post" novalidate>
-    <div class="mb-3">
-        <label for="username" class="form-label">Enter username:</label>
-        <input type="text" class="form-control" name="username" placeholder="Jakobe..." id="username" required>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Enter password:</label>
-        <input type="password" class="form-control" name="password" placeholder="password" id="password" required>
-    </div>
+    <style>
+        .logger {
+            background-color: white;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            border-radius: 10px;
+        }
+        
+        body {
+            background-color: rgba(177, 177, 177, 0.22);
+            height: 100vh;
+        }
+    </style>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="logger col-3">
+            <h1>Log In</h1>
+            <form action="/login" class="cs-validate" method="post" novalidate>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Enter username:</label>
+                    <input type="text" class="form-control" name="username" placeholder="Jakobe..." id="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Enter password:</label>
+                    <input type="password" class="form-control" name="password" placeholder="password" id="password" required>
+                </div>
 
-    <button class="btn btn-success">Log In</button>
-</form>
+                <button class="btn btn-success">Log In</button>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>

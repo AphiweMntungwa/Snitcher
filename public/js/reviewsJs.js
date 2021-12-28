@@ -12,7 +12,7 @@ const casts = function() {
     updateDiv = document.querySelectorAll(".updatediv");
     rating = document.querySelectorAll(".rating");
     ranges = document.querySelectorAll(".range");
-    spanId = document.querySelectorAll("#spanid");
+    spanId = document.querySelectorAll(".spanid");
     secondSpanId = document.querySelector("#secondspanid");
     textarea = document.querySelectorAll(".textareas");
     deleteReviewButton = document.querySelectorAll(".deletereviewbutton");
@@ -43,10 +43,9 @@ function addCite(elmnt) {
 
 function toggleFunction() {
     const dropdown = document.querySelectorAll(".dropdown");
-    const spans = document.querySelectorAll("#optionspan");
+    const spans = document.querySelectorAll(".optionspan");
     const editReviewButton = document.querySelectorAll(".editReview");
     const toggleForm = document.querySelectorAll(".toggleform");
-
 
 
     let checkNum = 0;

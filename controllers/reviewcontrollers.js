@@ -1,16 +1,16 @@
-const Campground = require("../models/campgrounds");
+const Thought = require("../models/thoughts");
 const Review = require("../models/reviews");
 const User = require("../models/user");
 
-module.exports.makeReview = async (req, res) => {
+module.exports.makeReview = async(req, res) => {
     const { id } = req.params;
     const creatReview = req.body.campreview;
-    const selectCamp = await Campground.findById(id);
+    const selectCamp = await Thought.findById(id);
     creatReview.author = req.user._id;
     newReview = new Review(creatReview);
     selectCamp.reviews.push(newReview);
     await selectCamp.save();
-    await newReview.save().then(async () => {
+    await newReview.save().then(async() => {
         const author = await User.findById(creatReview.author);
         return res.json({ newReview, author });
     }).catch((e) => {
@@ -18,7 +18,7 @@ module.exports.makeReview = async (req, res) => {
     })
 }
 
-module.exports.editReview = async (req, res) => {
+module.exports.editReview = async(req, res) => {
     const { id: campgroundId, reviewId } = req.params;
     const { rating, body } = req.body.reviews;
 
@@ -30,9 +30,9 @@ module.exports.editReview = async (req, res) => {
     }
 }
 
-module.exports.deleteReview = async (req, res) => {
+module.exports.deleteReview = async(req, res) => {
     const { id, reviewId } = req.params;
-    await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Thought.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId).then(() => {
         res.json({ deleted: "SUCCESS" });
     }).catch((e) => {

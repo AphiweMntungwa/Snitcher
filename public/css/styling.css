@@ -1,36 +1,41 @@
-div{
+body {
+    overflow-x: hidden;
+}
+
+div {
     font-family: monospace, serif;
 }
-li.card-header{
+
+li.card-header {
     list-style-type: none;
 }
-img{
+
+img {
     width: 100%;
 }
-.card{
+
+.card {
     position: relative;
-    /* max-height: 40vh; */
 }
-main{
-    height: 65vh;
-}
-.bg-gradient{
+
+.bg-gradient {
     background-color: rgb(241, 241, 241);
 }
-li.card-header:last-child{
+
+li.card-header:last-child {
     border-bottom: none;
     background-color: white;
 }
-.special{
+
+.special {
     margin-left: -15px;
 }
-.set-img-h{
-    height: 100%;
-}
-.set-card-h{
+
+.set-card-h {
     height: 225px;
 }
-.set-card-img-h{
-    height: 100%;
-    width: 100%;
+
+.alert {
+    width: 50%;
+    margin-left: 20%;
 }

@@ -1,25 +1,25 @@
-const Campground = require("../models/campgrounds");
+const Thought = require("../models/thoughts");
 
 
 module.exports.listItems = async(req, res) => {
-    const list = await Campground.find({});
+    const list = await Thought.find({});
     res.render("./campgrounds/index", { list });
 }
 
-module.exports.createForm = (req, res) => {
-    res.render("./campgrounds/newcamp");
-}
+// module.exports.createForm = (req, res) => {
+//     res.json({ isLoggedIn: true });
+// }
 
 module.exports.showItem = async(req, res, next) => {
     const { id } = req.params;
-    const selectCamp = await Campground.findById(id).populate({
+    const selectCamp = await Thought.findById(id).populate({
         path: "reviews",
         populate: {
             path: "author"
         }
     }).populate("author");
     if (!selectCamp) {
-        req.flash("error", "Could not find Campground")
+        req.flash("error", "Could not find thought")
         res.redirect("/index");
     } else {
         res.render("./campgrounds/details", { selectCamp })
@@ -27,34 +27,39 @@ module.exports.showItem = async(req, res, next) => {
 }
 
 module.exports.createItem = async(req, res, next) => {
-    const newCamp = new Campground(req.body.campground);
-    newCamp.images = req.files.map(fl => ({ url: fl.path, filename: fl.filename }));
-    newCamp.author = req.user._id;
-    await newCamp.save().then(() => {
-        res.redirect(`/index/${newCamp._id}`)
+    console.log(req.body)
+    const newThought = new Thought(req.body.thought);
+    // newCamp.images = req.files.map(fl => ({ url: fl.path, filename: fl.filename }));
+    newThought.author = req.user._id;
+    await newThought.save().then(() => {
+        res.redirect(`/index/${newThought._id}`)
     });
 }
 
-module.exports.editForm = async(req, res, next) => {
-    const { id } = req.params;
-    const selectCamp = await Campground.findById(id);
-    if (!selectCamp) {
-        req.flash("error", "Could not find Campground")
-        res.redirect("/index");
-    } else {
-        res.render("./campgrounds/editcamp", { selectCamp })
-    }
-}
+// module.exports.editForm = async(req, res, next) => {
+//     const { id } = req.params;
+//     const selectCamp = await Thought.findById(id);
+//     if (!selectCamp) {
+//         req.flash("error", "Could not find thought")
+//         res.redirect("/index");
+//     } else {
+//         res.render("./campgrounds/editcamp", { selectCamp })
+//     }
+// }
 
 module.exports.editItem = async(req, res, next) => {
     const { id } = req.params;
-    await Campground.findByIdAndUpdate(id, req.body.campground);
+    const selectCamp = await Thought.findById(id);
+    // const photoEdit = req.files.map(fl => ({ url: fl.path, filename: fl.filename }));
+    // selectCamp.images.push(...photoEdit);
+    // await selectCamp.save()
+    await Thought.findByIdAndUpdate(id, req.body.thought);
     res.redirect(`/index/${id}`);
 }
 
 module.exports.deleteItem = async(req, res) => {
     const { id } = req.params;
-    await Campground.findByIdAndDelete(id);
+    await Thought.findByIdAndDelete(id);
     req.flash("success", "Deleted Campground");
     res.redirect("/index");
 }

@@ -9,31 +9,53 @@
             font-weight: bolder;
         }
         
+        .ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
         .set-div-h {
-            height: 200px;
+            height: fit-content;
             border-radius: 0;
+            max-width: 30%;
+        }
+        
+        .inline-image {
+            width: 40px;
+            height: 38px;
+            border-radius: 3px;
+        }
+        
+        .description {
+            max-height: 60vh;
+            overflow: hidden;
         }
     </style>
-    <h1 class="ms-5 mb-3">All the Campgrounds</h1>
-    <ul>
-        <% for(camp of list){ %>
+
+    <h1 class="ms-5 mb-3">Thoughts</h1>
+    <ul class="ul">
+        <% for(thought of list){ %>
             <div id="overflow" class="card mb-3 flex-row set-div-h">
-                <% if ((camp.images)[0]){ %>
-                    <div class="col-md-4">
-                        <img src="<%=camp.images[0].url%>" class="img-fluid set-img-h" alt="">
-                    </div>
-                    <% }%>
-                        <div class="col-md-8">
-                            <h2 class="card-header">
-                                <%=camp.title%>
-                            </h2>
-                            <li class="card-header">
-                                <%=camp.location%>
-                            </li>
-                            <li class="card-header py-2"><a class="btn btn-info" href="/index/<%=camp._id%>">Show Details</a></li>
-                            <li class="card-footer bg-white"><i>ZAR&nbsp;</i><b> R<%= camp.price %></b> </li>
-                        </div>
+                <div class="">
+                    <h2 class="card-header">
+                        <%=thought.title%>
+                    </h2>
+                    <li class="card-header description">
+                        <%=thought.description%>
+                    </li>
+                    <li class="card-header py-2"><a class="btn btn-info" href="/index/<%=thought._id%>">Show Details</a>
+                        <% if (thought.media && thought.media.length){ %>
+                            <%  thought.media.forEach((el, i)=>{ %>
+                                <%  if(i%2 === 0){ %>
+                                    <span class="d-inline">
+                                        <img src="<%=thought.media[i]%>" class="inline-image" alt="">
+                                    </span>
+                                    <% }%>
+                                        <%})%>
+                                            <%}%>
+                    </li>
+                </div>
             </div>
-            </div>
-            <%}%>
+            <% } %>
     </ul>
