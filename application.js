@@ -49,7 +49,7 @@ app.use(mongoSanitize());
 
 const store = new MongoStore({
     url: dbUrl,
-    secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
+    secret: process.env.SECRET || 'iamintrouble',
     touchAfter: 24 * 3600
 })
 
