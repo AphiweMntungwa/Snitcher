@@ -111,9 +111,19 @@
         
         .searchdiv>div {}
         
-        .main {
-            /* max-width: 30%; */
+        @media (max-width:960px) {
+            .searchdiv {
+                height: 55vh;
+            }
+            .firstrow {
+                position: absolute;
+            }
+            input[type=search] {
+                margin-left: 0px;
+            }
         }
+        
+        @media (max-width:400px) {}
     </style>
 
 

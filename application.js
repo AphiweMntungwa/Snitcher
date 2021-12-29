@@ -22,7 +22,7 @@ const passport = require("passport");
 const Strategy = require("passport-local");
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp';
 
-const MongoStore = require("connect-mongo")(session);
+// const MongoStore = require("connect-mongo")(session);
 
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -38,8 +38,6 @@ app.listen(port, () => {
 app.engine("ejs", ejsMate);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
-
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
