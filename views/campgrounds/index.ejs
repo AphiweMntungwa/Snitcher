@@ -43,14 +43,51 @@
                 max-width: 100%;
             }
         }
-        
-        @media (max-width:960px) {
+        /* @media (max-width:960px) {
             .col-4 {
                 width: 50%;
             }
+        } */
+        
+        @media (max-width:850px) {
+            .firstrow {
+                position: absolute;
+                width: 80% !important;
+                height: 106px;
+                top: 436px;
+                background-color: tomato;
+            }
+            .secondrow {
+                height: 95%;
+                overflow: auto;
+            }
+            .formrow {
+                flex-grow: 2;
+            }
+            h1 {
+                display: none;
+            }
+            .ul {
+                margin-top: 64px;
+            }
+            .searchdiv {
+                height: 55vh;
+            }
         }
         
-        @media (max-width:400px) {}
+        @media (max-width:440px) {
+            .searchdiv {
+                width: 100%;
+                margin-left: -9px;
+            }
+            .firstrow {
+                width: 90% !important;
+            }
+            a[href="/index"]:nth-of-type(1),
+            button[type="submit"] {
+                font-size: 10px;
+            }
+        }
     </style>
 
     <h1 class="ms-5 mb-3">Thoughts</h1>

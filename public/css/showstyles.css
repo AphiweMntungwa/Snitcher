@@ -46,13 +46,18 @@ div[class=buttons]>a,
     min-width: 122px;
 }
 
+#reset {
+    width: 100%;
+}
+
 button:hover {
     color: rgb(126, 63, 160);
 }
 
-button:nth-of-type(1) {
+
+/* button:nth-of-type(1) {
     width: 100%;
-}
+} */
 
 button:nth-of-type(2) {
     background-color: rgb(72, 128, 207);

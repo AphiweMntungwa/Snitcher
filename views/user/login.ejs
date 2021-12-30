@@ -11,6 +11,22 @@
             background-color: rgba(177, 177, 177, 0.22);
             height: 100vh;
         }
+        
+        @media (max-width:960px) {
+            .col-3 {
+                /* width: 100%; */
+                flex-grow: 2;
+            }
+            .col-4 {
+                width: 20%;
+            }
+        }
+        
+        @media (max-width:302px) {
+            .col-4 {
+                width: 10%;
+            }
+        }
     </style>
     <div class="row">
         <div class="col-4"></div>
