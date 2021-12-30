@@ -589,7 +589,7 @@
                 function deletePhoto(data) {
                     const id = thoughtId.innerText.trim()
 
-                    fetch(`https://localhost:3000/search/${id}/delete`, {
+                    fetch(`https://${link}/search/${id}/delete`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json',

@@ -86,7 +86,6 @@ let data = {};
 const spit = function() {
     return document.querySelectorAll(".reviewdiv");
 }
-const link = 'whispering-hamlet-11552.herokuapp.com' || 'localhost:3000'
 
 async function createReview() {
     submitReviewButton.addEventListener("click", async(e) => {
