@@ -114,7 +114,7 @@ async function createReview() {
             }
         }
         if (makeData()) {
-            fetch(`http://${link}/index/${CampgroundId}/review`, {
+            fetch(`https://${link}/index/${CampgroundId}/review`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ async function editReview() {
                     body: textarea[i].value
                 }
             }
-            fetch(`http://${link}/index/${CampgroundId}/review/${reviewId}`, {
+            fetch(`https://${link}/index/${CampgroundId}/review/${reviewId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -234,13 +234,13 @@ async function deleteReview() {
             e.preventDefault();
             const reviewId = spanId[j].innerText.trim();
             const CampgroundId = secondSpanId.innerText.trim();
-            fetch(`http://${link}/index/${CampgroundId}/review/${reviewId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then(response => response.json())
+            (`https://${link}/index/${CampgroundId}/review/${reviewId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
                 .then(data => {
                     console.log('Message Delete:', data);
                     if (data.errorMessage) {
