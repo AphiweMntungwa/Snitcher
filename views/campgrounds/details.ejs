@@ -420,7 +420,7 @@
                             term: editYoutubeVid.value
                         };
 
-                        fetch(`http://localhost:3000/search`, {
+                        fetch(`http://${link}/search`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -439,7 +439,6 @@
                             const img = document.createElement('img');
                             const button = document.createElement('button');
                             const span = document.createElement('span');
-
 
                             span.classList.add('span-button');
                             button.classList.add('add-button');

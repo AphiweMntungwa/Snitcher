@@ -86,6 +86,7 @@ let data = {};
 const spit = function() {
     return document.querySelectorAll(".reviewdiv");
 }
+const link = 'whispering-hamlet-11552.herokuapp.com' || 'localhost:3000'
 
 async function createReview() {
     submitReviewButton.addEventListener("click", async(e) => {
@@ -113,7 +114,7 @@ async function createReview() {
             }
         }
         if (makeData()) {
-            fetch(`http://localhost:3000/index/${CampgroundId}/review`, {
+            fetch(`http://${link}/index/${CampgroundId}/review`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -199,7 +200,7 @@ async function editReview() {
                     body: textarea[i].value
                 }
             }
-            fetch(`http://localhost:3000/index/${CampgroundId}/review/${reviewId}`, {
+            fetch(`http://${link}/index/${CampgroundId}/review/${reviewId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -233,7 +234,7 @@ async function deleteReview() {
             e.preventDefault();
             const reviewId = spanId[j].innerText.trim();
             const CampgroundId = secondSpanId.innerText.trim();
-            fetch(`http://localhost:3000/index/${CampgroundId}/review/${reviewId}`, {
+            fetch(`http://${link}/index/${CampgroundId}/review/${reviewId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
