@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="/css/showstyles.css">
     <link rel="stylesheet" href="/css/starability.css">
     <style>
-    .search-edit-div {
+        .search-edit-div {
             /* border: 1px solid white; */
             height: 60vh;
             display: none;
@@ -135,7 +135,6 @@
             section:nth-of-type(2) {
                 display: none;
                 position: absolute;
-                top: 129%;
                 left: -49px;
                 width: 97%;
             }
@@ -148,7 +147,6 @@
         .showreviews {
             display: block;
         }
-    }
     </style>
 
     <div class="row display-popup mt-3">
@@ -625,10 +623,12 @@
             const secondSection = document.querySelector('section:nth-of-type(2')
             let toggleCheck = 0;
 
+
             showReviews.addEventListener('click', () => {
                 toggleCheck += 1;
                 if (toggleCheck === 1) {
                     secondSection.style.display = 'block'
+                    secondSection.style.top = `${document.body.scrollHeight}px`
                 } else {
                     secondSection.style.display = 'none'
                     toggleCheck = 0;
