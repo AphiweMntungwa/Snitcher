@@ -233,13 +233,13 @@ async function deleteReview() {
             e.preventDefault();
             const reviewId = spanId[j].innerText.trim();
             const CampgroundId = secondSpanId.innerText.trim();
-            (`https://${link}/index/${CampgroundId}/review/${reviewId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => response.json())
+            fetch(`https://${link}/index/${CampgroundId}/review/${reviewId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
                 .then(data => {
                     console.log('Message Delete:', data);
                     if (data.errorMessage) {
