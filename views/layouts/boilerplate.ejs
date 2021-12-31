@@ -121,6 +121,7 @@
             .searchbutton {
                 width: 15px;
                 color: transparent;
+                text-overflow: clip;
             }
             input[type=search] {
                 margin-left: 0px;
@@ -132,6 +133,7 @@
 </head>
 <script>
     const link = 'whispering-hamlet-11552.herokuapp.com' || 'localhost:3000'
+    const protocol = 'https' || 'http'
 </script>
 
 <body class="d-flex flex-column">
@@ -239,7 +241,7 @@
                 const data = {
                     term: searchField.value
                 };
-                fetch(`https://${link}/search`, {
+                fetch(`${protocol}://${link}/search`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

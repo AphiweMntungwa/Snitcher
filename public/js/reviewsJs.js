@@ -113,7 +113,7 @@ async function createReview() {
             }
         }
         if (makeData()) {
-            fetch(`https://${link}/index/${CampgroundId}/review`, {
+            fetch(`${protocol}://${link}/index/${CampgroundId}/review`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ async function editReview() {
                     body: textarea[i].value
                 }
             }
-            fetch(`https://${link}/index/${CampgroundId}/review/${reviewId}`, {
+            fetch(`${protocol}://${link}/index/${CampgroundId}/review/${reviewId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -233,7 +233,7 @@ async function deleteReview() {
             e.preventDefault();
             const reviewId = spanId[j].innerText.trim();
             const CampgroundId = secondSpanId.innerText.trim();
-            fetch(`https://${link}/index/${CampgroundId}/review/${reviewId}`, {
+            fetch(`${protocol}://${link}/index/${CampgroundId}/review/${reviewId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
