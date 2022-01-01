@@ -8,7 +8,7 @@ const app = express();
 const ejsMate = require("ejs-mate");
 const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
-import 'formdata-polyfill'
+const formdataPollyfill = require('formdata-polyfill');
 
 const campgroundRoutes = require("./routes/camproutes");
 const reviewRoutes = require("./routes/reviewroutes");
