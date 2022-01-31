@@ -22,6 +22,12 @@ const passport = require("passport");
 const Strategy = require("passport-local");
 const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL;
 
+const cors = require('cors');
+app.use(cors({
+    origin: '*',
+    methods: ['GET']
+}))
+
 const MongoStore = require("connect-mongo")(session);
 
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -31,7 +37,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log("Oh nooo error!", err);
     });
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })

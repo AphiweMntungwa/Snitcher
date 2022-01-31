@@ -3,7 +3,8 @@ const Thought = require("../models/thoughts");
 
 module.exports.listItems = async(req, res) => {
     const list = await Thought.find({});
-    res.render("./campgrounds/index", { list });
+    // const list = [posts]
+    res.json({ list });
 }
 
 // module.exports.createForm = (req, res) => {
