@@ -25,7 +25,7 @@ const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL;
 const cors = require('cors');
 app.use(cors({
     origin: '*',
-    methods: ['GET']
+    methods: ['GET', 'POST']
 }))
 
 const MongoStore = require("connect-mongo")(session);

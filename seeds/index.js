@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 const Thought = require("../models/thoughts");
-const cities = require("./cities");
-const { descriptors, places, lorem } = require("./seedhelpers");
 
 mongoose.connect('mongodb://localhost:27017/YelpCamp', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -12,24 +10,13 @@ mongoose.connect('mongodb://localhost:27017/YelpCamp', { useNewUrlParser: true, 
 
 const seedData = async() => {
     await Thought.deleteMany({});
-    const rand = () => {
-        return Math.floor(Math.random() * 1000)
-    };
-    const arr = (array) => {
-        return array[Math.floor(Math.random() * array.length)];
-    };
     for (let i = 0; i < 10; i++) {
         const camp = new Thought({
-            // location: `${cities[rand()].city}, ${cities[rand()].state}`,
-            title: `${arr(descriptors)} ${arr(places)}`,
-            // price: 14,
+            post: 'This is my post',
             media: [
                 'https://i.ytimg.com/vi/lKkQdxC0-yI/default.jpg',
-                'Hollywood action and 18+ movie 2007/// shoot em up/// saving a child',
                 'https://i.ytimg.com/vi/FOP5ATqgbzo/default.jpg',
-                'Shoot &#39;Em Up - &quot;Eat Your Vegetables&quot;'
             ],
-            description: lorem,
             author: { _id: "619abf59ccd20e2dbc8fb466" }
         })
         await camp.save()

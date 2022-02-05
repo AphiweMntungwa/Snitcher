@@ -28,12 +28,11 @@ module.exports.showItem = async(req, res, next) => {
 }
 
 module.exports.createItem = async(req, res, next) => {
-    console.log(req.body)
-    const newThought = new Thought(req.body.thought);
-    // newCamp.images = req.files.map(fl => ({ url: fl.path, filename: fl.filename }));
-    newThought.author = req.user._id;
-    await newThought.save().then(() => {
-        res.redirect(`/index/${newThought._id}`)
+    const { text, arr } = req.body;
+    const newPost = new Thought({ post: text, media: arr });
+    newPost.author = '619abf59ccd20e2dbc8fb466' //req.user._id;
+    await newPost.save().then(() => {
+        res.json({ message: 'Post created' })
     });
 }
 

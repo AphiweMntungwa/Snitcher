@@ -14,7 +14,7 @@ router.use(methodOverride("_method"));
 router.use(express.json());
 
 router.route("/").get(wrapAsync(listItems))
-    .post(isLoggedIn, wrapAsync(createItem));
+    .post(wrapAsync(createItem)); //isLoggedIn - middleware func, 
 
 // router.get("/new", isLoggedIn, createForm);
 

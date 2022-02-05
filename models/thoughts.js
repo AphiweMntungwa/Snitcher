@@ -4,20 +4,18 @@ const Schema = mongoose.Schema;
 
 
 const thoughtSchema = new Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    // price: Number,
-    description: String,
-    media: Object,
+    post: String,
+    media: Array,
+    created: { type: Date, default: () => new Date() },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    reviews: [{
+    upvotes: Number,
+    downvotes: Number,
+    comments: [{
         type: Schema.Types.ObjectId,
-        ref: 'Review'
+        ref: 'Comment'
     }]
 });
 
