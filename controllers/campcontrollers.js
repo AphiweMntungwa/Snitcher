@@ -2,14 +2,9 @@ const Thought = require("../models/thoughts");
 
 
 module.exports.listItems = async(req, res) => {
-    const list = await Thought.find({});
-    // const list = [posts]
+    const list = await Thought.find({}).populate({ path: 'author' });
     res.json({ list });
 }
-
-// module.exports.createForm = (req, res) => {
-//     res.json({ isLoggedIn: true });
-// }
 
 module.exports.showItem = async(req, res, next) => {
     const { id } = req.params;
@@ -30,7 +25,7 @@ module.exports.showItem = async(req, res, next) => {
 module.exports.createItem = async(req, res, next) => {
     const { text, arr } = req.body;
     const newPost = new Thought({ post: text, media: arr });
-    newPost.author = '619abf59ccd20e2dbc8fb466' //req.user._id;
+    newPost.author = req.user._id;
     await newPost.save().then(() => {
         res.json({ message: 'Post created' })
     });

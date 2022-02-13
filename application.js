@@ -17,6 +17,8 @@ const videoroutes = require("./routes/videoroutes")
 const session = require("express-session");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser');
+
 const User = require("./models/user");
 const passport = require("passport");
 const Strategy = require("passport-local");
@@ -25,7 +27,8 @@ const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL;
 const cors = require('cors');
 app.use(cors({
     origin: '*',
-    methods: ['GET', 'POST']
+    methods: ['GET', 'POST'],
+    credentials: true
 }))
 
 const MongoStore = require("connect-mongo")(session);
@@ -46,6 +49,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -62,7 +66,7 @@ store.on("error", function(e) {
 })
 
 sessionConfig = {
-    store,
+    // store,
     name: 'inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
     resave: false,
@@ -82,11 +86,12 @@ passport.use(new Strategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    next();
+app.get('/login', (req, res) => {
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user })
+    } else {
+        res.send({ loggedIn: false })
+    }
 });
 
 app.use("/", userRoutes);
@@ -96,10 +101,6 @@ app.use("/search", videoroutes);
 
 app.get("/", (req, res) => {
     res.render("./campgrounds/home");
-});
-
-app.get("/test", (req, res) => {
-    res.json({ message: "it works" });
 });
 
 app.all("*", (req, res, next) => {

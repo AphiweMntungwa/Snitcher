@@ -10,7 +10,7 @@ cloudinary.config({
 const cloudStore = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: 'YelpCamp',
+        folder: 'Snitcher',
         allowedFormats: ['jpeg', 'png', 'jpg']
     }
 })
