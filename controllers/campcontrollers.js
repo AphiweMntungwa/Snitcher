@@ -26,9 +26,10 @@ module.exports.createItem = async(req, res, next) => {
     const { text, arr } = req.body;
     const newPost = new Thought({ post: text, media: arr });
     newPost.author = req.user._id;
+    console.log(newPost)
     await newPost.save().then(() => {
-        res.json({ message: 'Post created' })
-    });
+        res.send({ createdPost: true })
+    }).catch(() => res.send({ createdPost: false }))
 }
 
 // module.exports.editForm = async(req, res, next) => {

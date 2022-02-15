@@ -8,7 +8,7 @@ const { makeReview, editReview, deleteReview } = require("../controllers/reviewc
 
 
 
-router.post("/", isLoggedIn, validateReview, wrapAsync(makeReview));
+router.post("/", wrapAsync(makeReview)); //, isLoggedIn, validateReview
 
 router.route("/:reviewId").put(isLoggedIn, isReviewOwner, wrapAsync(editReview))
     .delete(isLoggedIn, isReviewOwner, wrapAsync(deleteReview));

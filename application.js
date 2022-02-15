@@ -5,12 +5,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
-const ejsMate = require("ejs-mate");
 const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
 
 const campgroundRoutes = require("./routes/camproutes");
-const reviewRoutes = require("./routes/reviewroutes");
+const commentRoutes = require("./routes/reviewroutes");
 const userRoutes = require("./routes/useroutes");
 const videoroutes = require("./routes/videoroutes")
 
@@ -44,9 +43,6 @@ const port = process.env.PORT || 8080
 app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
-app.engine("ejs", ejsMate);
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -96,7 +92,7 @@ app.get('/login', (req, res) => {
 
 app.use("/", userRoutes);
 app.use("/index", campgroundRoutes);
-app.use("/index/:id/review", reviewRoutes);
+app.use("/index/:id/comment", commentRoutes);
 app.use("/search", videoroutes);
 
 app.get("/", (req, res) => {
