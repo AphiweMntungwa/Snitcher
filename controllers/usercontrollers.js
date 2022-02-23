@@ -2,12 +2,13 @@ const User = require("../models/user");
 
 module.exports.registerUser = async(req, res, next) => {
     try {
-        const { username, email, password, photo = '' } = req.body;
+        const { username, email, password } = req.body;
         if (username.length <= 2 || password.length <= 5) {
-            req.flash("error", "password must be at least 5 characters long");
-            res.redirect("/register");
+            res.redirect("/register", { message: "password must be at least 5 characters long" });
         } else {
-            const newUser = new User({ username, email, photo });
+            const { path = '', filename = '' } = req.file;
+            const newUser = new User({ username, email });
+            newUser.photo = { url: path, filename }
             const registeredUser = await User.register(newUser, password);
             req.login(registeredUser, async(err) => {
                 if (err) { return next() } else {

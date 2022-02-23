@@ -9,7 +9,7 @@ const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
 
 const campgroundRoutes = require("./routes/camproutes");
-const commentRoutes = require("./routes/reviewroutes");
+const commentRoutes = require("./routes/commentRoutes");
 const userRoutes = require("./routes/useroutes");
 const videoroutes = require("./routes/videoroutes")
 
@@ -25,8 +25,8 @@ const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL;
 
 const cors = require('cors');
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST'],
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PATCH'],
     credentials: true
 }))
 
@@ -48,7 +48,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize());
 
 const store = new MongoStore({
@@ -92,7 +92,7 @@ app.get('/login', (req, res) => {
 
 app.use("/", userRoutes);
 app.use("/index", campgroundRoutes);
-app.use("/index/:id/comment", commentRoutes);
+app.use("/index/:id", commentRoutes);
 app.use("/search", videoroutes);
 
 app.get("/", (req, res) => {

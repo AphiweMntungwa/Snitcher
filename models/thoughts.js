@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Review = require("./reviews");
+const Comment = require("./comments");
 const Schema = mongoose.Schema;
 
 
@@ -11,8 +11,8 @@ const thoughtSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    upvotes: Number,
-    downvotes: Number,
+    likes: { user: [String], count: Number },
+    dislikes: { user: [String], count: Number },
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'
@@ -21,8 +21,8 @@ const thoughtSchema = new Schema({
 
 thoughtSchema.post("findOneAndDelete", async function(document) {
     if (document) {
-        await Review.deleteMany({
-            _id: { $in: document.reviews }
+        await Comment.deleteMany({
+            _id: { $in: document.comments }
         })
     }
 })

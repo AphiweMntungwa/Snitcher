@@ -1,20 +1,20 @@
 const Thought = require("../models/thoughts");
-const Review = require("../models/reviews");
+const Comment = require("../models/comments");
 const AppError = require("../Utils/apperror");
 const { campgroundSchema, reviewSchema } = require("../schemas.js");
 
 
 
-module.exports.validateSchema = (req, res, next) => {
-    // delete req.body.images;
-    const { error } = campgroundSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new AppError(msg, 400);
-    } else {
-        next();
-    }
-}
+// module.exports.validateSchema = (req, res, next) => {
+//     // delete req.body.images;
+//     const { error } = campgroundSchema.validate(req.body);
+//     if (error) {
+//         const msg = error.details.map(el => el.message).join(',');
+//         throw new AppError(msg, 400);
+//     } else {
+//         next();
+//     }
+// }
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -32,8 +32,7 @@ module.exports.isOwner = async(req, res, next) => {
     const { id } = req.params;
     const item = await Thought.findById(id);
     if (!item.author.equals(req.user._id)) {
-        req.flash("error", "You are not allowed");
-        return res.redirect(`/index/${item._id}`);
+        return res.send({ isOwner: false });
     }
     next();
 }
@@ -48,9 +47,9 @@ module.exports.validateReview = (req, res, next) => {
     }
 }
 
-module.exports.isReviewOwner = async(req, res, next) => {
-    const { reviewId: id } = req.params;
-    const foundReview = await Review.findById(id);
+module.exports.isCommentOwner = async(req, res, next) => {
+    const { commentId: id } = req.params;
+    const foundReview = await Comment.findById(id);
     if (!foundReview.author.equals(req.user._id)) {
         return res.json({ errorMessage: "You are not allowed" });
     }
