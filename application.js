@@ -20,16 +20,24 @@ const cookieParser = require("cookie-parser");
 const User = require("./models/user");
 const passport = require("passport");
 const Strategy = require("passport-local");
+
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp';
 
 const MongoStore = require("connect-mongo")(session);
-
+const cors = require('cors');
+app.use(cors({
+    origin: 'https://snitcherapp.herokuapp.com:3000',
+    methods: '*',
+    credentials: true
+}))
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("connection successful");
     }).catch((err) => {
         console.log("Oh nooo error!", err);
     });
+
+
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
