@@ -11,8 +11,8 @@ const thoughtSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    likes: { user: [String], count: Number },
-    dislikes: { user: [String], count: Number },
+    likes: { user: [String] },
+    dislikes: { user: [String] },
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'

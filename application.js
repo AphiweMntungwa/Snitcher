@@ -21,6 +21,7 @@ const bodyParser = require('body-parser');
 const User = require("./models/user");
 const passport = require("passport");
 const Strategy = require("passport-local");
+
 const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL;
 
 const cors = require('cors');
@@ -29,6 +30,11 @@ app.use(cors({
     methods: ['GET', 'POST', 'PATCH'],
     credentials: true
 }))
+const io = require('socket.io')(3001);
+
+io.on('connection', socket => {
+    console.log('hello from socket')
+})
 
 const MongoStore = require("connect-mongo")(session);
 

@@ -11,9 +11,6 @@ module.exports.vote = async(req, res) => {
     const { like = false, dislike = false } = req.body;
     const post = await Thought.findById(id);
     const { likes, dislikes } = post;
-    console.log(likes, dislikes)
-    console.log(dislikes.user[0], req.user._id, 'woah', dislikes.user[0] == req.user._id)
-    console.log(likes.user[0], req.user._id, 'woah', likes.user[0] == req.user._id)
     if (like) {
         !(likes.user.includes(req.user._id)) && likes.user.push(req.user._id)
         dislikes.user = dislikes.user.filter(el => el != req.user._id);

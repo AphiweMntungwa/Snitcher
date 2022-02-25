@@ -32,6 +32,11 @@ module.exports.loggedIn = async(req, res) => {
     res.redirect(redirectUrl === '/index' ? '/' : redirectUrl);
 }
 
+module.exports.users = async(req, res) => {
+    const users = await User.find({});
+    res.send(users);
+}
+
 module.exports.logOut = (req, res) => {
     console.log('yay you made it this far')
     try {
