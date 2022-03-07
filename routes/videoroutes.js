@@ -10,7 +10,7 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.post("/", wrapAsync(async(req, res) => {
-    let { term: youtubeVid } = req.body;
+    let { searchParam: youtubeVid } = req.body;
     youtubeVid = youtubeVid.trim();
     await axios.get(`https://www.googleapis.com/youtube/v3/search`, {
             params: {
@@ -21,7 +21,6 @@ router.post("/", wrapAsync(async(req, res) => {
             }
         })
         .then(response => {
-            // console.log(response.data.items[0].snippet.thumbnails.default.url)
             res.json(response.data)
         })
         .catch(e => res.send(`request error ${e}`));
