@@ -1,6 +1,5 @@
 const Thought = require("../models/thoughts");
 
-
 module.exports.listItems = async(req, res) => {
     const list = await Thought.find({}).populate({ path: 'author' });
     res.json({ list });
@@ -47,24 +46,10 @@ module.exports.createItem = async(req, res, next) => {
     }).catch(() => res.send({ createdPost: false }))
 }
 
-// module.exports.editForm = async(req, res, next) => {
-//     const { id } = req.params;
-//     const selectCamp = await Thought.findById(id);
-//     if (!selectCamp) {
-//         req.flash("error", "Could not find thought")
-//         res.redirect("/index");
-//     } else {
-//         res.render("./campgrounds/editcamp", { selectCamp })
-//     }
-// }
-
 module.exports.editItem = async(req, res, next) => {
     const { id } = req.params;
     const { arr, body } = req.body;
     const post = await Thought.findById(id).populate('author');
-    // const photoEdit = req.files.map(fl => ({ url: fl.path, filename: fl.filename }));
-    // selectCamp.images.push(...photoEdit);
-    // await selectCamp.save()
     post.post = body;
     arr.length && arr.forEach(el => post.media.push(el));
     await post.save().then(() => {

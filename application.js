@@ -3,7 +3,6 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path");
 const app = express();
 const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
@@ -12,6 +11,7 @@ const campgroundRoutes = require("./routes/camproutes");
 const commentRoutes = require("./routes/commentRoutes");
 const userRoutes = require("./routes/useroutes");
 const videoroutes = require("./routes/videoroutes")
+const messageRoutes = require("./routes/messageroutes")
 
 const session = require("express-session");
 const flash = require("connect-flash");
@@ -29,12 +29,8 @@ app.use(cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PATCH'],
     credentials: true
-}))
-const io = require('socket.io')(3001);
+}));
 
-io.on('connection', socket => {
-    console.log('hello from socket')
-})
 
 const MongoStore = require("connect-mongo")(session);
 
@@ -50,11 +46,11 @@ app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
 
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize());
 
 const store = new MongoStore({
@@ -100,6 +96,7 @@ app.use("/", userRoutes);
 app.use("/index", campgroundRoutes);
 app.use("/index/:id", commentRoutes);
 app.use("/search", videoroutes);
+app.use("/messages", messageRoutes);
 
 app.get("/", (req, res) => {
     res.render("./campgrounds/home");

@@ -12,7 +12,11 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    photo: photoSchema
+    photo: photoSchema,
+    messages: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Message'
+    }]
 });
 userSchema.plugin(passportLocalMongoose);
 
