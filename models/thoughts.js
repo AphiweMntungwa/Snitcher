@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 
 const thoughtSchema = new Schema({
-    post: String,
+    post: { type: String, required: true },
     media: Array,
     created: { type: Date, default: () => new Date() },
     author: {

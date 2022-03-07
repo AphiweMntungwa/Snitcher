@@ -64,7 +64,7 @@ store.on("error", function(e) {
 })
 
 sessionConfig = {
-    // store,
+    store,
     name: 'inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
     resave: false,

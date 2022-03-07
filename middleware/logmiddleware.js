@@ -1,20 +1,10 @@
 const Thought = require("../models/thoughts");
 const Comment = require("../models/comments");
 const AppError = require("../Utils/apperror");
-const { campgroundSchema, reviewSchema } = require("../schemas.js");
+const { reviewSchema } = require("../schemas.js");
 
 
 
-// module.exports.validateSchema = (req, res, next) => {
-//     // delete req.body.images;
-//     const { error } = campgroundSchema.validate(req.body);
-//     if (error) {
-//         const msg = error.details.map(el => el.message).join(',');
-//         throw new AppError(msg, 400);
-//     } else {
-//         next();
-//     }
-// }
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
