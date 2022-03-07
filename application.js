@@ -27,19 +27,13 @@ const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL;
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://snitcherapp.herokuapp.com',
     methods: ['GET', 'POST', 'PATCH'],
     credentials: true
 }));
 
 
 const MongoStore = require("connect-mongo")(session);
-const cors = require('cors');
-app.use(cors({
-    origin: 'https://snitcherapp.herokuapp.com:3000',
-    methods: '*',
-    credentials: true
-}))
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("connection successful");
