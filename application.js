@@ -22,9 +22,7 @@ const User = require("./models/user");
 const passport = require("passport");
 const Strategy = require("passport-local");
 
-<<<<<<< HEAD
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp';
-=======
 const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL;
 
 const cors = require('cors');
@@ -34,7 +32,6 @@ app.use(cors({
     credentials: true
 }));
 
->>>>>>> snitcher2
 
 const MongoStore = require("connect-mongo")(session);
 const cors = require('cors');
@@ -50,13 +47,10 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log("Oh nooo error!", err);
     });
 
-<<<<<<< HEAD
 
 
 const port = process.env.PORT || 3000
-=======
 const port = process.env.PORT || 8080
->>>>>>> snitcher2
 app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
