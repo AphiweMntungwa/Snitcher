@@ -23,7 +23,6 @@ const passport = require("passport");
 const Strategy = require("passport-local");
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp';
-const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL;
 
 const cors = require('cors');
 app.use(cors({
@@ -31,7 +30,6 @@ app.use(cors({
     methods: ['GET', 'POST', 'PATCH'],
     credentials: true
 }));
-
 
 const MongoStore = require("connect-mongo")(session);
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
