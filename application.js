@@ -23,11 +23,15 @@ const passport = require("passport");
 const Strategy = require("passport-local");
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp';
+const port = process.env.PORT || 8080
+app.listen(port, () => {
+    console.log("the app is conscious on port", port);
+})
 
 const cors = require('cors');
 app.use(cors({
     origin: 'https://snitcherapp.herokuapp.com',
-    methods: ['GET', 'POST', 'PATCH'],
+    methods: '*',
     credentials: true
 }));
 
@@ -38,14 +42,6 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     }).catch((err) => {
         console.log("Oh nooo error!", err);
     });
-
-
-
-const port = process.env.PORT || 8080
-app.listen(port, () => {
-    console.log("the app is conscious on port", port);
-})
-
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
