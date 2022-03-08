@@ -41,7 +41,6 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 
-const port = process.env.PORT || 3000
 const port = process.env.PORT || 8080
 app.listen(port, () => {
     console.log("the app is conscious on port", port);
