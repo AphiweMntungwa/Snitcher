@@ -11,7 +11,7 @@ const cloudStore = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: 'Snitcher',
-        allowedFormats: ['jpeg', 'png', 'jpg']
+        allowedFormats: ['jpeg', 'png', 'jpg', 'webp']
     }
 })
 

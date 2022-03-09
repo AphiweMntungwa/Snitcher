@@ -9,7 +9,6 @@ const multer = require("multer");
 const upload = multer({ storage: cloudStore });
 
 router.route("/register").post(((req, res, next) => {
-    console.log(upload)
     console.log(req.body);
     next();
 }), upload.single('profileImage'), wrapAsync(registerUser));
