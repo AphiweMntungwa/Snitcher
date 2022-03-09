@@ -14,7 +14,10 @@ router.route("/register").post(((req, res, next) => {
 }), upload.single('profileImage'), wrapAsync(registerUser));
 router.get("/users", wrapAsync(users))
 router.route("/login")
-    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: "/login" }), loggedIn);
+    .post(((req, res, next) => {
+        console.log(req.body);
+        next();
+    }), passport.authenticate('local', { failureFlash: true, failureRedirect: "/login" }), loggedIn);
 
 router.get("/logout", logOut)
 
