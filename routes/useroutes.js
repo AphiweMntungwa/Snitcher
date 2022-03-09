@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const wrapAsync = require("../Utils/wrapasync");
-const AppError = require("../Utils/apperror");
+// const AppError = require("../Utils/apperror");
 const passport = require("passport");
 const { registerUser, loggedIn, logOut, users } = require("../controllers/usercontrollers");
 const { cloudStore } = require("../cloudstorage/main");
@@ -9,15 +9,13 @@ const multer = require("multer");
 const upload = multer({ storage: cloudStore });
 
 router.route("/register").post(((req, res, next) => {
+    console.log(upload)
     console.log(req.body);
     next();
 }), upload.single('profileImage'), wrapAsync(registerUser));
 router.get("/users", wrapAsync(users))
 router.route("/login")
-    .post(((req, res, next) => {
-        console.log(req.body);
-        next();
-    }), passport.authenticate('local', { failureFlash: true, failureRedirect: "/login" }), loggedIn);
+    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: "/login" }), loggedIn);
 
 router.get("/logout", logOut)
 
