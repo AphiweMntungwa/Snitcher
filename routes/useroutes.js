@@ -8,7 +8,10 @@ const { cloudStore } = require("../cloudstorage/main");
 const multer = require("multer");
 const upload = multer({ storage: cloudStore });
 
-router.route("/register").post(upload.single('profileImage'), wrapAsync(registerUser));
+router.route("/register").post(((req, res, next) => {
+    console.log(req.body);
+    next();
+}), upload.single('profileImage'), wrapAsync(registerUser));
 router.get("/users", wrapAsync(users))
 router.route("/login")
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: "/login" }), loggedIn);
