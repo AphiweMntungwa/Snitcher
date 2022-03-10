@@ -66,11 +66,11 @@ sessionConfig = {
     store,
     name: 'inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
-    resave: false,
+    // resave: false,
     saveUninitialized: true,
     cookie: {
-        httpOnly: false,
-        // expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+        httpOnly: true,
+        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24,
         secure: false
     }

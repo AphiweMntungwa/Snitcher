@@ -9,7 +9,6 @@ module.exports.profilePhoto = async(req, res) => {
 }
 
 module.exports.registerUser = async(req, res, next) => {
-    console.log(req.body)
     try {
         const { username, email, password } = req.body;
         if (username.length <= 2 || password.length <= 5) {
