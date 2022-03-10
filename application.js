@@ -84,6 +84,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.get('/login', (req, res) => {
+    console.log(req.session)
     if (req.session.user) {
         res.send({ loggedIn: true, user: req.session.user })
     } else {
