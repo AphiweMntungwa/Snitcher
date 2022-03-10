@@ -9,7 +9,7 @@ const multer = require("multer");
 const upload = multer({ storage: cloudStore });
 
 router.route("/register").post(upload.single('profileImage'), ((req, res, next) => {
-    console.log(req.body);
+    console.log('aphiwe here', req.body);
     console.log(req.file);
     next();
 }), wrapAsync(registerUser));
