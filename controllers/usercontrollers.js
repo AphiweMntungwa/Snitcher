@@ -43,7 +43,7 @@ module.exports.loggedIn = async(req, res) => {
     })
 }
 module.exports.isLogged = async(req, res) => {
-    console.log(req.session)
+    console.log(req.session.Session)
     if (req.session.user) {
         res.send({ loggedIn: true, user: req.session.user })
     } else {
