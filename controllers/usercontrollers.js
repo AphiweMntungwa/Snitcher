@@ -4,6 +4,7 @@ module.exports.registerUser = async(req, res, next) => {
     try {
         const { username, email, password } = req.body;
         if (username.length <= 2 || password.length <= 5) {
+            res.send('hello fuckstick')
             res.redirect("/register", { message: "password must be at least 5 characters long" });
         } else {
             const { path = 'https://res.cloudinary.com/snitcher/image/upload/v1646391331/Snitcher/profile-placeholder_nynr1c.png', filename = 'Snitcher/profile-placeholder_nynr1c.png' } = req.file;
