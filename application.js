@@ -15,6 +15,7 @@ const messageRoutes = require("./routes/messageroutes")
 
 const session = require("express-session");
 const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser');
 const busboyBodyParser = require('busboy-body-parser');
 
@@ -44,6 +45,7 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log("Oh nooo error!", err);
     });
 
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -67,8 +69,8 @@ sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        httpOnly: false,
-        expires: 3600000 * 14 * 24,
+        httpOnly: true,
+        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24
     }
 }
@@ -80,7 +82,6 @@ app.use(passport.session());
 passport.use(new Strategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 
 app.use("/", userRoutes);
 app.use("/index", campgroundRoutes);
