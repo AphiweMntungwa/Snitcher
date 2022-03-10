@@ -68,7 +68,7 @@ sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: false,
-        expires: 1000 * 60 * 60 * 24 * 7,
+        expires: 3600000 * 14 * 24,
         maxAge: 1000 * 60 * 60 * 24
     }
 }
