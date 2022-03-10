@@ -7,13 +7,8 @@ const { cloudStore } = require("../cloudstorage/main");
 const multer = require("multer");
 const upload = multer({ storage: cloudStore });
 
-router.route("/register").post(upload.single(`profileImage`), ((req, res, next) => {
-    console.log('aphiwe here', req.body);
-    console.log(req.files);
-    console.log(cloudStore)
-    console.log(req.files.filename)
-    next();
-}), wrapAsync(registerUser));
+router.post("/register/:id/profilephoto", upload.single(`profileImage`))
+router.route("/register").post(wrapAsync(registerUser));
 router.get("/users", wrapAsync(users))
 router.route("/login")
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: "/login" }), loggedIn);
