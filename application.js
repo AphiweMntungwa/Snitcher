@@ -83,14 +83,6 @@ passport.use(new Strategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get('/login', (req, res) => {
-    console.log(req.session)
-    if (req.session.user) {
-        res.send({ loggedIn: true, user: req.session.user })
-    } else {
-        res.send({ loggedIn: false })
-    }
-});
 
 app.use("/", userRoutes);
 app.use("/index", campgroundRoutes);
