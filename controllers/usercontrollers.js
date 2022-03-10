@@ -36,6 +36,7 @@ module.exports.loggedIn = async(req, res) => {
     const user = await User.find({ username: req.body.username });
     req.session.user = user;
     console.log('here is our session', req.session.user)
+    console.log(req.session)
     res.redirect('https://snitcherapp.herokuapp.com');
 }
 
