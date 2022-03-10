@@ -35,15 +35,20 @@ module.exports.registerUser = async(req, res, next) => {
 module.exports.loggedIn = async(req, res) => {
     const user = await User.find({ username: req.body.username });
     req.session.user = user;
-    console.log('here is our session', req.session.user)
-    console.log(req.session)
-        // console.log(session)
     req.session.save((err) => {
         if (!err) {
             console.log(req.session);
             res.redirect('https://snitcherapp.herokuapp.com');
         }
     })
+}
+module.exports.isLogged = async(req, res) => {
+    console.log(req.session)
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user })
+    } else {
+        res.send({ loggedIn: false })
+    }
 }
 
 module.exports.users = async(req, res) => {
