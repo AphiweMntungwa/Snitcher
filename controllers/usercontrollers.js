@@ -9,14 +9,16 @@ module.exports.profilePhoto = async(req, res) => {
 }
 
 module.exports.registerUser = async(req, res, next) => {
+    console.log(req.body)
     try {
         const { username, email, password } = req.body;
         if (username.length <= 2 || password.length <= 5) {
             res.redirect("/register", { message: "password must be at least 5 characters long" });
         } else {
             const newUser = new User({ username, email });
-            newUser.photo = { url: 'https://res.cloudinary.com/snitcher/image/upload/v1646391331/Snitcher/profile-placeholder_nynr1c.png', filename: 'Snitcher/profile-placeholder_nynr1c.png' }
+
             const registeredUser = await User.register(newUser, password);
+            registeredUser.photo = { url: 'https://res.cloudinary.com/snitcher/image/upload/v1646391331/Snitcher/profile-placeholder_nynr1c.png', filename: 'Snitcher/profile-placeholder_nynr1c.png' }
             req.login(registeredUser, async(err) => {
                 if (err) { return next() } else {
                     const user = await User.find({ username: req.body.username });
