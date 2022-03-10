@@ -1,6 +1,9 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
+
+module.exports.session = {}
+
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -66,7 +69,7 @@ sessionConfig = {
     store,
     name: 'inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
-    // resave: false,
+    resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
