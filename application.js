@@ -17,7 +17,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const bodyParser = require('body-parser');
-const busboyBodyParser = require('busboy-body-parser');
+// const busboyBodyParser = require('busboy-body-parser');
 
 
 const User = require("./models/user");
@@ -49,7 +49,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(busboyBodyParser());
+// app.use(busboyBodyParser());
 app.use(mongoSanitize());
 
 const store = new MongoStore({
