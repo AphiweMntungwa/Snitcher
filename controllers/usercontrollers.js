@@ -16,7 +16,6 @@ module.exports.registerUser = async(req, res, next) => {
             res.redirect("/register", { message: "password must be at least 5 characters long" });
         } else {
             const newUser = new User({ username, email });
-
             const registeredUser = await User.register(newUser, password);
             registeredUser.photo = { url: 'https://res.cloudinary.com/snitcher/image/upload/v1646391331/Snitcher/profile-placeholder_nynr1c.png', filename: 'Snitcher/profile-placeholder_nynr1c.png' }
             req.login(registeredUser, async(err) => {
@@ -36,6 +35,8 @@ module.exports.registerUser = async(req, res, next) => {
 module.exports.loggedIn = async(req, res) => {
     const user = await User.find({ username: req.body.username });
     req.session.user = user;
+    console.log('here is our session', req.session.user)
+    console.log('here is our user', user)
     res.redirect('https://snitcherapp.herokuapp.com');
 }
 
