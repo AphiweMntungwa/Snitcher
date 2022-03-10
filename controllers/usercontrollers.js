@@ -19,7 +19,7 @@ module.exports.registerUser = async(req, res, next) => {
             });
         }
     } catch (e) {
-        res.send('fuckstick biatch')
+        res.send({ meaasge: 'fuckstick biatch' })
         res.redirect("/register")
     }
 }
