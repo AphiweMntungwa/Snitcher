@@ -8,7 +8,7 @@ const { cloudStore } = require("../cloudstorage/main");
 const multer = require("multer");
 const upload = multer({ storage: cloudStore });
 
-router.route("/register").post(upload.single(`profileImage`), ((req, res, next) => {
+router.route("/register").post(upload.array(`profileImage`), ((req, res, next) => {
     console.log('aphiwe here', req.body);
     console.log(req.file, req.files);
     next();
