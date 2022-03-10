@@ -37,7 +37,7 @@ module.exports.loggedIn = async(req, res) => {
     req.session.user = user;
     console.log('here is our session', req.session.user)
     console.log(req.session)
-    res.redirect('https://snitcherapp.herokuapp.com');
+    req.session.save().then(res.redirect('https://snitcherapp.herokuapp.com'));
 }
 
 module.exports.users = async(req, res) => {
