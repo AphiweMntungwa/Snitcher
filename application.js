@@ -73,7 +73,7 @@ sessionConfig = {
         httpOnly: true,
         expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24,
-        sameSite: None
+        sameSite: 'None'
     }
 }
 app.use(session(sessionConfig));
