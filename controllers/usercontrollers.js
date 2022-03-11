@@ -40,12 +40,14 @@ module.exports.loggedIn = async(req, res) => {
             if (err) {
                 reject(err);
             }
+            console.log(req.session.user)
             resolve(res.redirect('https://snitcherapp.herokuapp.com'));
         })
     });
 }
 
 module.exports.isLogged = async(req, res) => {
+    console.log(req.session.user)
     if (req.session.user) {
         res.send({ loggedIn: true, user: req.session.user })
     } else {
