@@ -13,7 +13,7 @@ module.exports.registerUser = async(req, res, next) => {
     try {
         const { username, email, password } = req.body;
         if (username.length <= 2 || password.length <= 5) {
-            res.redirect("/register", { message: "password must be at least 5 characters long" });
+            res.redirect("https://snitcherapp.herokuapp.com/register", { message: "password must be at least 5 characters long" });
         } else {
             const newUser = new User({ username, email });
             const registeredUser = await User.register(newUser, password);
@@ -28,7 +28,7 @@ module.exports.registerUser = async(req, res, next) => {
         }
     } catch (e) {
         console.log(e)
-        res.redirect("/register")
+        res.redirect("https://snitcherapp.herokuapp.com/register")
     }
 }
 
@@ -39,6 +39,7 @@ module.exports.loggedIn = async(req, res) => {
         if (err) {
             console.log(err);
         } else {
+            console.log(req.session.user)
             res.redirect('https://snitcherapp.herokuapp.com')
         }
     })

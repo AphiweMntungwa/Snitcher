@@ -34,7 +34,7 @@ app.listen(port, () => {
 const cors = require('cors');
 app.use(cors({
     origin: 'https://snitcherapp.herokuapp.com',
-    methods: '*',
+    methods: ['POST', 'GET', 'PATCH'],
     credentials: true
 }));
 
@@ -73,8 +73,6 @@ sessionConfig = {
         httpOnly: true,
         _expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24,
-        sameSite: 'None',
-        secure: false
     }
 }
 app.use(session(sessionConfig));
