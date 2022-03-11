@@ -41,7 +41,7 @@ module.exports.loggedIn = async(req, res) => {
                 reject(err);
             }
             console.log(req.session.user)
-            resolve(res.json({ user: req.user.session }));
+            resolve(res.json({ user: req.session.user }));
         })
     });
 }
