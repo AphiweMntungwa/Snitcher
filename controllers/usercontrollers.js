@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const session = require('../application')
 
 module.exports.profilePhoto = async(req, res) => {
     const { id } = req.params;
@@ -10,6 +9,7 @@ module.exports.profilePhoto = async(req, res) => {
 }
 
 module.exports.registerUser = async(req, res, next) => {
+    console.log(req.body)
     try {
         const { username, email, password } = req.body;
         if (username.length <= 2 || password.length <= 5) {
@@ -22,7 +22,6 @@ module.exports.registerUser = async(req, res, next) => {
                 if (err) { return next() } else {
                     const user = await User.find({ username: req.body.username });
                     req.session.user = user;
-
                     res.redirect('https://snitcherapp.herokuapp.com');
                 }
             });
@@ -39,14 +38,13 @@ module.exports.loggedIn = async(req, res) => {
     req.session.save((err) => {
         if (!err) {
             console.log(req.session);
-            session = req.session.user
             res.redirect('https://snitcherapp.herokuapp.com');
         }
     })
 }
 module.exports.isLogged = async(req, res) => {
-    if (session) {
-        res.send({ loggedIn: true, user: session })
+    if (req.session.user) {
+        res.send({ loggedIn: true, user: req.session.user })
     } else {
         res.send({ loggedIn: false })
     }
