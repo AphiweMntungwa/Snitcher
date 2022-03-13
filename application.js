@@ -33,9 +33,9 @@ app.listen(port, () => {
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://snitcherapp.herokuapp.com',
+    origin: ['http://snitcherapp.herokuapp.com', 'https://snitcherapp.herokuapp.com'],
     methods: ['POST', 'GET', 'PATCH'],
-    credentials: true
+    credentials: false
 }));
 
 const MongoStore = require("connect-mongo")(session);
