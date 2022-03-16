@@ -60,21 +60,21 @@ const store = new MongoStore({
 })
 
 store.on("error", function(e) {
-        console.log('ERROR ON SESSION', e)
-    })
-    /*        httpOnly: true,
-            expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
-            maxAge: 1000 * 60 * 60 * 24,
-            sameSite: 'none',
-            secure: true,
-     */
+    console.log('ERROR ON SESSION', e)
+})
+
 sessionConfig = {
-    store,
     name: 'inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
     resave: false,
     saveUninitialized: true,
-    cookie: {}
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24,
+        sameSite: 'none',
+        secure: true,
+    }
 }
 app.use(session(sessionConfig));
 app.use(flash());
