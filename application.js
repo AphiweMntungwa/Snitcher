@@ -74,7 +74,8 @@ sessionConfig = {
         expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24,
         sameSite: 'none',
-        secure: true
+        secure: true,
+        domain: 'https://snitcherapp.herokuapp.com'
     }
 }
 app.use(session(sessionConfig));
