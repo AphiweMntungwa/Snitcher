@@ -22,7 +22,14 @@ module.exports.registerUser = async(req, res, next) => {
                 if (err) { return next() } else {
                     const user = await User.find({ username: req.body.username });
                     req.session.user = user;
-                    res.redirect('https://snitcherapp.herokuapp.com');
+                    req.session.save(err => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log(req.session.user)
+                            res.redirect('https://snitcherapp.herokuapp.com')
+                        }
+                    });
                 }
             });
         }
