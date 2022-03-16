@@ -26,10 +26,7 @@ module.exports.registerUser = async(req, res, next) => {
                         if (err) {
                             console.log(err);
                         } else {
-                            console.log(req.session.user)
-                            setTimeout(() => {
-                                res.redirect('https://snitcherapp.herokuapp.com')
-                            }, 6000)
+                            res.redirect('https://snitcherapp.herokuapp.com')
                         }
                     });
                 }
@@ -48,16 +45,13 @@ module.exports.loggedIn = async(req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(req.session.user)
-            setTimeout(() => {
-                res.redirect('https://snitcherapp.herokuapp.com')
-            }, 6000)
+            res.redirect('https://snitcherapp.herokuapp.com')
         }
     })
 }
 
 module.exports.isLogged = async(req, res) => {
-    console.log(req.session.user)
+    console.log(req.session)
     if (req.session.user) {
         res.send({ loggedIn: true, user: req.session.user })
     } else {
