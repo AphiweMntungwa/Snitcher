@@ -27,7 +27,9 @@ module.exports.registerUser = async(req, res, next) => {
                             console.log(err);
                         } else {
                             console.log(req.session.user)
-                            res.redirect('https://snitcherapp.herokuapp.com')
+                            setTimeout(() => {
+                                res.redirect('https://snitcherapp.herokuapp.com')
+                            }, 6000)
                         }
                     });
                 }

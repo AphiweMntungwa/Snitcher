@@ -34,7 +34,7 @@ app.listen(port, () => {
 const cors = require('cors');
 app.use(cors({
     origin: ['http://snitcherapp.herokuapp.com', 'https://snitcherapp.herokuapp.com'],
-    methods: ['POST', 'GET', 'PATCH'],
+    methods: ['POST', 'GET', 'PATCH', 'PUT', 'OPTIONS'],
     credentials: true
 }));
 
