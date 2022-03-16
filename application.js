@@ -71,8 +71,9 @@ sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        _expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24,
+        path: 'https://snitcherapp.herokuapp.com'
     }
 }
 app.use(session(sessionConfig));
