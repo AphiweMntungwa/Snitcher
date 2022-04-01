@@ -32,12 +32,11 @@ app.listen(port, () => {
 })
 
 const cors = require('cors');
-app.use(cors())
-    // app.use(cors({
-    //     origin: ['http://snitcherapp.herokuapp.com', 'https://snitcherapp.herokuapp.com', 'http://localhost:3000'],
-    //     methods: ['POST', 'GET', 'PATCH', 'PUT', 'OPTIONS'],
-    //     credentials: true
-    // }));
+app.use(cors({
+    origin: ['http://snitcherapp.herokuapp.com', 'https://snitcherapp.herokuapp.com', 'http://localhost:3000'],
+    methods: ['POST', 'GET', 'PATCH', 'PUT', 'OPTIONS'],
+    credentials: true
+}));
 
 const MongoStore = require("connect-mongo")(session);
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -71,7 +70,8 @@ sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        sameSite: 'none',
+        sameSite: 'strict',
+        secure: true,
         expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24,
     }
