@@ -60,11 +60,11 @@ const store = new MongoStore({
 })
 
 store.on("error", function(e) {
-        console.log('ERROR ON SESSION', e)
-    })
-    // store,
-sessionConfig = {
+    console.log('ERROR ON SESSION', e)
+})
 
+sessionConfig = {
+    store,
     name: 'inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
     resave: false,
