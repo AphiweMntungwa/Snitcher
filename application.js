@@ -32,11 +32,12 @@ app.listen(port, () => {
 })
 
 const cors = require('cors');
-app.use(cors({
-    origin: ['http://snitcherapp.herokuapp.com', 'https://snitcherapp.herokuapp.com', 'http://localhost:3000'],
-    methods: ['POST', 'GET', 'PATCH', 'PUT', 'OPTIONS'],
-    credentials: true
-}));
+app.use(cors())
+    // app.use(cors({
+    //     origin: ['http://snitcherapp.herokuapp.com', 'https://snitcherapp.herokuapp.com', 'http://localhost:3000'],
+    //     methods: ['POST', 'GET', 'PATCH', 'PUT', 'OPTIONS'],
+    //     credentials: true
+    // }));
 
 const MongoStore = require("connect-mongo")(session);
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -60,11 +61,11 @@ const store = new MongoStore({
 })
 
 store.on("error", function(e) {
-    console.log('ERROR ON SESSION', e)
-})
-
+        console.log('ERROR ON SESSION', e)
+    })
+    // store,
 sessionConfig = {
-    store,
+
     name: 'inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
     resave: false,
@@ -76,6 +77,8 @@ sessionConfig = {
     }
 }
 app.use(session(sessionConfig));
+
+
 app.use(flash());
 
 app.use(passport.initialize())
