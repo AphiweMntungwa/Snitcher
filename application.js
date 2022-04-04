@@ -34,6 +34,21 @@ app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
 
+sessionConfig = {
+    store,
+    name: 'inspector',
+    secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        sameSite: 'none',
+        secure: true,
+        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24,
+    }
+}
+app.use(session(sessionConfig));
+
 const MongoStore = require("connect-mongo")(session);
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -56,20 +71,6 @@ store.on("error", function(e) {
     console.log('ERROR ON SESSION', e)
 })
 
-sessionConfig = {
-    store,
-    name: 'inspector',
-    secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        sameSite: 'none',
-        secure: true,
-        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24,
-    }
-}
-app.use(session(sessionConfig));
 
 app.use(passport.initialize())
 app.use(passport.session());
