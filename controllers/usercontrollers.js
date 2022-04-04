@@ -40,6 +40,7 @@ module.exports.registerUser = async(req, res, next) => {
 
 module.exports.loggedIn = async(req, res) => {
     const user = await User.find({ username: req.body.username });
+    console.log(user)
     req.session.user = user;
     req.session.save(err => {
         if (err) {
