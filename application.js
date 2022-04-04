@@ -51,7 +51,7 @@ const store = new MongoStore({
 store.on("error", function(e) {
     console.log('ERROR ON SESSION', e)
 })
-app.use(session({ store, secret: 'try again', cookie: {} }))
+app.use(session({ store, secret: 'try again', cookie: { sameSite: 'none', secure: true } }))
 
 
 app.use(express.urlencoded({ extended: true }));
