@@ -14,14 +14,14 @@ const userRoutes = require("./routes/useroutes");
 const videoroutes = require("./routes/videoroutes")
 const messageRoutes = require("./routes/messageroutes")
 
-const session = require("express-session");
-
 
 const User = require("./models/user");
 const passport = require("passport");
 const Strategy = require("passport-local");
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
+const session = require('express-session')
+
 
 const cors = require('cors');
 app.use(cors({
@@ -35,7 +35,6 @@ app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
 
-
 const MongoStore = require("connect-mongo")(session);
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -44,34 +43,20 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log("Oh nooo error!", err);
     });
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(mongoSanitize());
-
 const store = new MongoStore({
     url: dbUrl,
     secret: process.env.SECRET || 'iamintrouble',
     touchAfter: 24 * 3600
 })
-sessionConfig = {
-    store,
-    name: 'inspector',
-    secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        sameSite: 'none',
-        secure: true,
-        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24,
-    }
-}
-app.use(session(sessionConfig));
-
 store.on("error", function(e) {
     console.log('ERROR ON SESSION', e)
 })
+app.use(session({ store, secret: 'try again', cookie: {} }))
 
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(mongoSanitize());
 
 app.use(passport.initialize())
 app.use(passport.session());
