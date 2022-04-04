@@ -26,10 +26,6 @@ const passport = require("passport");
 const Strategy = require("passport-local");
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp';
-const port = process.env.PORT || 8080
-app.listen(port, () => {
-    console.log("the app is conscious on port", port);
-})
 
 const cors = require('cors');
 app.use(cors({
@@ -37,6 +33,10 @@ app.use(cors({
     methods: ['POST', 'GET', 'PATCH', 'PUT', 'OPTIONS'],
     credentials: true
 }));
+const port = process.env.PORT || 8080
+app.listen(port, () => {
+    console.log("the app is conscious on port", port);
+})
 
 const MongoStore = require("connect-mongo")(session);
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -67,7 +67,7 @@ sessionConfig = {
     store,
     name: 'inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: {
         sameSite: 'none',
