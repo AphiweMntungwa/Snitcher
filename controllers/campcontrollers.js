@@ -30,7 +30,6 @@ module.exports.showItem = async(req, res, next) => {
         }
     }).populate("author");
     if (!selectCamp) {
-        req.flash("error", "Could not find thought")
         res.redirect("/index");
     } else {
         res.render("./campgrounds/details", { selectCamp })

@@ -12,7 +12,6 @@ module.exports.isLoggedIn = (req, res, next) => {
             return res.json({ errorMessage: "You must be signed in" });
         }
         req.session.continueTo = req.originalUrl;
-        req.flash("error", "you must be signed in");
         return res.redirect("/login");
     }
     next();

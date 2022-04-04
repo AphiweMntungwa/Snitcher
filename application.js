@@ -15,10 +15,6 @@ const videoroutes = require("./routes/videoroutes")
 const messageRoutes = require("./routes/messageroutes")
 
 const session = require("express-session");
-const flash = require("connect-flash");
-const cookieParser = require("cookie-parser");
-const bodyParser = require('body-parser');
-const busboyBodyParser = require('busboy-body-parser');
 
 
 const User = require("./models/user");
@@ -46,11 +42,8 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log("Oh nooo error!", err);
     });
 
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(busboyBodyParser());
 app.use(mongoSanitize());
 
 const store = new MongoStore({
@@ -78,9 +71,6 @@ sessionConfig = {
 }
 app.use(session(sessionConfig));
 
-
-app.use(flash());
-
 app.use(passport.initialize())
 app.use(passport.session());
 passport.use(new Strategy(User.authenticate()));
@@ -93,15 +83,11 @@ app.use("/index/:id", commentRoutes);
 app.use("/search", videoroutes);
 app.use("/messages", messageRoutes);
 
-app.get("/", (req, res) => {
-    res.render("./campgrounds/home");
-});
-
 app.all("*", (req, res, next) => {
     next(new AppError("Page Not Found!", 404));
 });
 
 app.use((err, req, res, next) => {
     const { message = "something went wrong", status = 500 } = err;
-    res.status(status).render("error", { err });
+    res.status(status).render("error", { message });
 });
