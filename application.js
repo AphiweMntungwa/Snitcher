@@ -24,31 +24,17 @@ const Strategy = require("passport-local");
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp';
 
 const cors = require('cors');
-// app.use(cors({
-//     origin: ['http://snitcherapp.herokuapp.com', 'https://snitcherapp.herokuapp.com', 'http://localhost:3000'],
-//     methods: ['POST', 'GET', 'PATCH', 'PUT', 'OPTIONS'],
-//     credentials: true
-// }));
-app.use(cors())
+app.use(cors({
+    origin: ['http://snitcherapp.herokuapp.com', 'https://snitcherapp.herokuapp.com', 'http://localhost:3000'],
+    methods: ['POST', 'GET', 'PATCH', 'PUT', 'OPTIONS'],
+    credentials: true
+}));
+
 const port = process.env.PORT || 8080
 app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
 
-sessionConfig = {
-    store,
-    name: 'inspector',
-    secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        sameSite: 'none',
-        secure: true,
-        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24,
-    }
-}
-app.use(session(sessionConfig));
 
 const MongoStore = require("connect-mongo")(session);
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -67,6 +53,20 @@ const store = new MongoStore({
     secret: process.env.SECRET || 'iamintrouble',
     touchAfter: 24 * 3600
 })
+sessionConfig = {
+    store,
+    name: 'inspector',
+    secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        sameSite: 'none',
+        secure: true,
+        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24,
+    }
+}
+app.use(session(sessionConfig));
 
 store.on("error", function(e) {
     console.log('ERROR ON SESSION', e)
