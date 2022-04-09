@@ -1,0 +1,82 @@
+.listUl {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding-left: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+.listItem {
+    width: 20vw;
+    height: 54vh;
+    overflow: hidden;
+    background-color: #281902e7;
+}
+
+@media (max-width:991px) {
+    .listItem {
+        width: 30vw;
+        height: 71vh;
+    }
+}
+
+@media (max-width:760px) {
+    .listItem {
+        width: 55vw;
+    }
+}
+
+@media (max-width:500px) {
+    .listItem {
+        width: 94%;
+    }
+}
+
+@media (max-width:314px) {
+    .listItem {
+        width: 85vw;
+    }
+}
+
+.imgSpanIdex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: auto;
+    max-height: 7em;
+}
+
+.imgSpanIdex img {
+    width: 49px;
+    height: 39px;
+    border-radius: 0.3em;
+    padding-bottom: 2px;
+}
+
+.postList {
+    width: 80%;
+    flex-grow: 1;
+}
+
+.card {
+    border: 1px solid white;
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card p {
+    width: 100%;
+}
+
+@media (max-width: 430px) {
+    .listUl {
+        flex-direction: column;
+    }
+}

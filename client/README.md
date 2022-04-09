@@ -1,0 +1,1 @@
+This is the front end for snitcherApp, a social network where you can attach youtube resources as playlists on your post, this version also has new features like profile images, some chat messaging, upvoting and downvoting systems for both posts and comments; features which were not on the old version of snitcher.

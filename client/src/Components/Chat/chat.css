@@ -1,0 +1,111 @@
+.chatbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-list {
+    list-style-type: none;
+    width: 100%;
+}
+
+.user-list li {
+    display: flex;
+    justify-content: stretch;
+    width: 80vw;
+    align-items: center;
+    border: 1px solid green;
+    border-radius: 15px;
+    margin-bottom: 0.8%;
+    color: blue;
+    font-weight: 600;
+    text-shadow: 1px 1px 5px;
+}
+
+.user-list li:hover {
+    background-color: rgba(0, 128, 0, 0.37);
+}
+
+.user-list li>img {
+    width: 50px;
+    height: 50px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-right: 5px;
+}
+
+.userSpan {
+    margin-top: 0.2em;
+    height: 2em;
+    border: 1px solid green;
+}
+
+.userSpan img {
+    height: 100%;
+}
+
+.chatSpace {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40ch;
+    width: 50vw;
+    position: relative;
+    left: 20%;
+    top: 1em;
+    border: 1px solid grey;
+    border-radius: 8px;
+    box-shadow: 5px 5px 15px black;
+}
+
+.message-form {}
+
+.messages {
+    list-style-type: none;
+    padding-left: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: .5em;
+}
+
+.messages li {
+    border: 1px solid gold;
+    border-radius: 15px;
+    padding: 1em;
+    margin-inline: .4em;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.messages li span:last-child {
+    color: orangered;
+    font-size: smaller;
+    font-style: italic;
+}
+
+.send-button {
+    background-color: teal;
+}
+
+.messages li {
+    width: 70%;
+    align-self: end
+}
+
+.mine {
+    border-color: blue !important;
+    width: 70%;
+    align-self: unset !important;
+}
+
+@media (max-width:600px) {
+    .chatSpace {
+        left: unset;
+        border: none;
+        box-shadow: none;
+        padding-inline: .5em;
+        width: 100%;
+    }
+}

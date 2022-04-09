@@ -1,0 +1,25 @@
+.reg-form {
+    padding-inline: 6em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div-profile {
+    background-image: url('../../../Assets/profile-placeholder.png');
+    background-size: cover;
+    background-position: center;
+    width: 12%;
+    padding: 3.3em;
+    margin-bottom: 16px;
+    border-radius: 25%;
+}
+
+.div-profile>input {
+    width: 5em;
+    height: 5em;
+    position: absolute;
+    top: 12.5em;
+    left: 39.5pc;
+    opacity: 0;
+}

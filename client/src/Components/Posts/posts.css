@@ -1,0 +1,42 @@
+.comment-icons {
+    width: 100%;
+}
+
+.comment-icons+h6 {
+    width: 100%;
+}
+
+.description+span {
+    width: 100%;
+}
+
+.description {
+    font-family: monospace;
+    max-height: 50%;
+    overflow: auto;
+}
+
+.votes {
+    display: inline-block;
+    width: fit-content;
+    border: 1px solid rgb(24, 17, 17);
+    box-shadow: 5px 5px 6px black;
+}
+
+.cast svg {
+    fill: wheat;
+}
+
+.likeSpan {
+    color: blue;
+    text-shadow: 2px 2px 4px blue;
+    border: 1px solid #556b2f1c;
+}
+
+box-icon[name='message-rounded-add'] {
+    fill: yellow;
+}
+
+box-icon[name='message-rounded-add']:hover {
+    fill: blueviolet;
+}
