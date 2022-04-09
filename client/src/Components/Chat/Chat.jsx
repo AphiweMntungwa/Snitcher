@@ -40,13 +40,13 @@ function Chat() {
         <h3>Chatbox </h3>
         <span className="userSpan" style={{ color: "orange" }}>
           {session.user[0].username}
-          <img
+          {session.user[0].photo && <img
             src={session.user[0].photo.url.replace(
               "/upload",
               "/upload/w_100/h_100"
             )}
             alt=""
-          />
+          />}
         </span>
       </span>
 
