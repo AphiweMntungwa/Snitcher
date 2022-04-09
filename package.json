@@ -2,10 +2,11 @@
     "name": "snitcher",
     "version": "2.0.0",
     "description": "Snitcher is a social site where users can attach youtube videos to post",
-    "main": "back.js",
+    "main": "application.js",
     "scripts": {
         "test": "jest",
-        "start": "node application.js"
+        "start": "node application",
+        "dev": "nodemon application"
     },
     "keywords": [],
     "author": "Aphiwe Mntungwa",

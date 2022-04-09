@@ -1,7 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
-
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -14,7 +13,6 @@ const commentRoutes = require("./routes/commentRoutes");
 const userRoutes = require("./routes/useroutes");
 const videoroutes = require("./routes/videoroutes")
 const messageRoutes = require("./routes/messageroutes")
-
 
 const User = require("./models/user");
 const passport = require("passport");
