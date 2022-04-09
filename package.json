@@ -4,6 +4,7 @@
     "description": "Snitcher is a social site where users can attach youtube videos to post",
     "main": "application.js",
     "scripts": {
+        "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
         "test": "jest",
         "start": "node application",
         "dev": "nodemon application"
