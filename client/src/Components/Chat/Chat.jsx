@@ -11,7 +11,7 @@ function Chat() {
   const [users, callUsers] = useState([]);
   const session = useContext(SessionContext);
   useEffect(() => {
-    axios.get('https://snitcher-server.herokuapp.com/users').then((res) => {
+    axios.get("https://snitcher-server.herokuapp.com/users").then((res) => {
       const otherUsers = res.data.filter((el) => el._id != session.user[0]._id);
       callUsers(otherUsers);
     });
@@ -55,10 +55,12 @@ function Chat() {
           users.map((el) => (
             <Link to="/chatbox" key={el._id} id={el._id}>
               <li id={el._id} onClick={setId}>
-                <img
-                  src={el.photo.url.replace("/upload", "/upload/w_100/h_100")}
-                  alt=""
-                />
+                {el.photo && (
+                  <img
+                    src={el.photo.url.replace("/upload", "/upload/w_100/h_100")}
+                    alt=""
+                  />
+                )}
                 {el.username}
               </li>
             </Link>
