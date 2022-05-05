@@ -1,4 +1,10 @@
-.list-item {
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@600&display=swap");
+.listUl {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.listUl .list-item {
   color: #4d8484;
 }
 /*# sourceMappingURL=Posts.css.map */

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import styles from "./posts.module.css";
-import "./posts.css";
+// import styles from "./posts.module.css";
+// import "./posts.css";
 import '../../styles/Posts/Posts.css'
 import { SessionContext } from "../../App";
 import { useContext, useEffect, useState, useRef } from "react";
@@ -87,27 +87,27 @@ function Post(props) {
   };
 
   return (
-    <div className={("card", styles.card)} style={{ borderRadius: "0" }}>
+    <div>
       {ed ? (
         <>
           <textarea
             name=""
             defaultValue={element.post}
-            className="card-body form-control"
+            className="form-control"
           ></textarea>
           <button className="btn" onClick={() => editor(element._id)}>
             edit <span style={{ color: "red" }}>{count}</span>
           </button>
         </>
       ) : (
-        <p className="card-body description">{element.post}</p>
+        <p className=" description">{element.post}</p>
       )}
-      <span className={styles.imgSpanIdex}>
+      <span>
         {element.media.map((el) => (
           <img key={el} src={el} onClick={framer} alt="" />
         ))}
       </span>
-      <div className="card-header comment-icons">
+      <div className="comment-icons">
         <Link to="/comments">
           <box-icon
             name="message-rounded-add"
@@ -162,10 +162,10 @@ function Post(props) {
           </div>
         )}
       </div>
-      <h6 className="card-footer d-flex justify-content-evenly">
+      <footer>
         <span>{element.created.substring(0, 10)}</span>
         <span>{element.author.username}</span>
-      </h6>
+      </footer>
     </div>
   );
 }

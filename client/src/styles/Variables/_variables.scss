@@ -1,12 +1,23 @@
-$main-color: rgb(77, 132, 132);
-$nav-color: rgb(154, 239, 188);
-$text-color:rgb(13, 19, 13);
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@600&display=swap');
+$fonts:( mutka: 'Mukta',
+sf: sans-serif);
+$main-color: rgb(77,
+132,
+132);
+$nav-color: rgb(35,
+74,
+20);
+$text-color:rgb(13,
+19,
+13);
 $bar-color:#000;
-@mixin center-items($format, $spacing) {
+@mixin center-items($format,
+$spacing,
+$align:center) {
     display: flex;
     flex-direction: $format;
     justify-content: $spacing;
-    align-items: center;
+    align-items: $align;
 }
 
 @mixin position($position) {
@@ -27,13 +38,38 @@ $bar-color:#000;
     border: 1px solid #000;
 }
 
-@mixin bar-transitions($on:true, $deg:45deg) {
-    @if $on {
-        transform: rotate($deg);
-        transform: translateY($deg)
+@mixin keyframe($transX,
+$val) {
+    @keyframes smooth-show {
+        from {
+            transform: translateX($transX)
+        }
+        to {
+            transform: translateX($val)
+        }
     }
+}
+
+@mixin smooth-show($name) {
+    animation: $name .6s cubic-bezier(0.075, 0.82, 0.165, 1)
+}
+
+@mixin bar-transitions($on:true,
+$x-val:0em) {
+    @if $on {
+        transform: translateX($x-val);
+        @include smooth-show(smooth-show);
+    }
+    @include keyframe(0,
+    $x-val)
 }
 
 @mixin extender($value) {
     @extend #{$value};
+}
+
+@function get($name,
+$key) {
+    @return map-get($name,
+    $key)
 }

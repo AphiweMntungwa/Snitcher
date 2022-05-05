@@ -1,0 +1,38 @@
+@import "../Variables/variables";
+main {
+    min-height: 94vh;
+}
+
+.sidebar {
+    background-color: $nav-color;
+    flex-grow: 1;
+    ul {
+        height: 100%;
+        @include center-items(column, flex-start, start);
+        padding-left: unset;
+        li {
+            padding-inline: 2%;
+            margin-block: 1%;
+            width: 100%;
+            @include center-items(row, space-between);
+            a {
+                text-decoration: none;
+                color: $main-color;
+                font-family: get($fonts, mutka);
+                animation: show-up 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+            }
+            img {
+                width: 1.5em;
+                height: 1.5em;
+            }
+            @keyframes show-up {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

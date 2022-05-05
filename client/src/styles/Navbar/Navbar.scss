@@ -26,9 +26,9 @@
 
 .nav-on {
     &::before {
-        @include bar-transitions($on: true, $deg: 45deg);
+        @include bar-transitions($on: true, $x-val: .5em);
     }
     &::after {
-        @include bar-transitions($on: true, $deg: -45deg);
+        @include bar-transitions($on: true, $x-val: .5em);
     }
 }

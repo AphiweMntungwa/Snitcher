@@ -1,4 +1,8 @@
 @import '../Variables/variables';
-.list-item {
-    color: $main-color;
+.listUl {
+    padding-left: 0;
+    list-style-type: none;
+    .list-item {
+        color: $main-color;
+    }
 }

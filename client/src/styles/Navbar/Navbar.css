@@ -1,6 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@600&display=swap");
 .topbar {
   padding-block: 3%;
-  background-color: #9aefbc;
+  background-color: #234a14;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -63,16 +64,49 @@
 }
 
 .nav-on::before {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  -webkit-transform: translateY(45deg);
-          transform: translateY(45deg);
+  -webkit-transform: translateX(0.5em);
+          transform: translateX(0.5em);
+  -webkit-animation: smooth-show 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+          animation: smooth-show 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@-webkit-keyframes smooth-show {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(0.5em);
+            transform: translateX(0.5em);
+  }
+}
+
+@keyframes smooth-show {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(0.5em);
+            transform: translateX(0.5em);
+  }
 }
 
 .nav-on::after {
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-  -webkit-transform: translateY(-45deg);
-          transform: translateY(-45deg);
+  -webkit-transform: translateX(0.5em);
+          transform: translateX(0.5em);
+  -webkit-animation: smooth-show 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+          animation: smooth-show 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes smooth-show {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(0.5em);
+            transform: translateX(0.5em);
+  }
 }
 /*# sourceMappingURL=Navbar.css.map */
