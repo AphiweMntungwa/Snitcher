@@ -1,0 +1,39 @@
+$main-color: rgb(77, 132, 132);
+$nav-color: rgb(154, 239, 188);
+$text-color:rgb(13, 19, 13);
+$bar-color:#000;
+@mixin center-items($format, $spacing) {
+    display: flex;
+    flex-direction: $format;
+    justify-content: $spacing;
+    align-items: center;
+}
+
+@mixin position($position) {
+    position: $position;
+    top: 0;
+    align-self: flex-start;
+    width: 100%;
+}
+
+@mixin w($width) {
+    width: $width
+}
+
+@mixin bars {
+    display: block;
+    content: '';
+    @include w(1em);
+    border: 1px solid #000;
+}
+
+@mixin bar-transitions($on:true, $deg:45deg) {
+    @if $on {
+        transform: rotate($deg);
+        transform: translateY($deg)
+    }
+}
+
+@mixin extender($value) {
+    @extend #{$value};
+}

@@ -13,7 +13,7 @@ module.exports.registerUser = async(req, res, next) => {
     try {
         const { username, email, password } = req.body;
         if (username.length <= 2 || password.length <= 5) {
-            res.redirect("https://snitcher-server/register", { message: "password must be at least 5 characters long" });
+            res.redirect("/register", { message: "password must be at least 5 characters long" });
         } else {
             const newUser = new User({ username, email });
             const registeredUser = await User.register(newUser, password);
@@ -26,7 +26,7 @@ module.exports.registerUser = async(req, res, next) => {
                         if (err) {
                             console.log(err);
                         } else {
-                            res.redirect('/')
+                            res.redirect('http://localhost:3000')
                         }
                     });
                 }
@@ -45,7 +45,7 @@ module.exports.loggedIn = async(req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/')
+            res.redirect('http://localhost:3000')
         }
     })
 }

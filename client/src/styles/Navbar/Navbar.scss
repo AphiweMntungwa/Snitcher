@@ -1,0 +1,34 @@
+@import "../Variables/variables";
+.topbar {
+    padding-block: 3%;
+    background-color: $nav-color;
+    @include center-items(row, space-around);
+    @include position(sticky);
+}
+
+.nav-toggle {
+    width: fit-content;
+    @include center-items(column, space-evenly);
+    padding: 1%;
+    div {
+        @include w(1em);
+        height: 2px;
+        background-color: black;
+        margin-block: 0.2em;
+    }
+    &::before {
+        @include bars;
+    }
+    &::after {
+        @include bars;
+    }
+}
+
+.nav-on {
+    &::before {
+        @include bar-transitions($on: true, $deg: 45deg);
+    }
+    &::after {
+        @include bar-transitions($on: true, $deg: -45deg);
+    }
+}

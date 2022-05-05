@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,UAAU,CAAC;EACP,KAAK,ECFI,OAAiB;CDG7B",
+    "sources": [
+        "Posts.scss",
+        "../Variables/_variables.scss"
+    ],
+    "names": [],
+    "file": "Posts.css"
+}

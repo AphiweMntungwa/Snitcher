@@ -8,7 +8,7 @@ const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require('path');
 
-const campgroundRoutes = require("./routes/camproutes");
+const campgroundRoutes = require("./routes/postroutes");
 const commentRoutes = require("./routes/commentRoutes");
 const userRoutes = require("./routes/useroutes");
 const videoroutes = require("./routes/videoroutes")
@@ -18,8 +18,16 @@ const User = require("./models/user");
 const passport = require("passport");
 const Strategy = require("passport-local");
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
+const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL
 const session = require('express-session')
+const cors = require('cors')
+
+app.use(cors({
+    origin: "http://localhost:3000",
+    method: ["GET", "POST"],
+    responseHeader: ["Content-Type"],
+    maxAgeSeconds: 3600
+}))
 
 app.use(express.static(path.join(__dirname, 'build')))
 
@@ -49,9 +57,13 @@ store.on("error", function(e) {
     console.log('ERROR ON SESSION', e)
 })
 app.use(session({
-    store,
+    // store,
+    name: 'Inspector',
     secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
+    saveUninitialized: false,
+    resave: true,
     cookie: {
+        sameSite: 'none',
         expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
     }
 }))

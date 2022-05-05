@@ -1,0 +1,78 @@
+.topbar {
+  padding-block: 3%;
+  background-color: #9aefbc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  width: 100%;
+}
+
+.nav-toggle {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1%;
+}
+
+.nav-toggle div {
+  width: 1em;
+  height: 2px;
+  background-color: black;
+  margin-block: 0.2em;
+}
+
+.nav-toggle::before {
+  display: block;
+  content: '';
+  width: 1em;
+  border: 1px solid #000;
+}
+
+.nav-toggle::after {
+  display: block;
+  content: '';
+  width: 1em;
+  border: 1px solid #000;
+}
+
+.nav-on::before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transform: translateY(45deg);
+          transform: translateY(45deg);
+}
+
+.nav-on::after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  -webkit-transform: translateY(-45deg);
+          transform: translateY(-45deg);
+}
+/*# sourceMappingURL=Navbar.css.map */

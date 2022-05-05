@@ -11,7 +11,7 @@ const Register = () => {
         Sign Up
       </h1>
       <form
-        action='https://snitcher-server.herokuapp.com/Register'
+        action='http://localhost:8080/Register'
         className="reg-form"
         method="post"
       >

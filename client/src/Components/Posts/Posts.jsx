@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import styles from "./posts.module.css";
 import Post from "./Post";
 import Box from "../Box/Box";
 import axios from "axios";
+import { postThunk } from "../../app/Redux/posts/postActions";
+import { useSelector, useDispatch } from "react-redux";
 
 let arr = "";
 export let globe = arr;
 
 function Posts(props) {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.post.posts);
+  const loading = useSelector((state) => state.post.loading);
   const [items, setItem] = useState([]);
   const [newvote, callVote] = useState(false);
-
   arr = localStorage.getItem("array");
 
   const setId = (e) => {
@@ -26,7 +29,7 @@ function Posts(props) {
 
   const deletePost = (id) => {
     axios
-      .delete(`https://snitcher-server.herokuapp.com/index/${id}`)
+      .delete(`http://localhost:8080/index/${id}`)
       .then((res) => {
         setItem(res.data.list);
       })
@@ -34,41 +37,37 @@ function Posts(props) {
   };
 
   useEffect(() => {
-    axios('https://snitcher-server.herokuapp.com/index') 
-      .then((response) => {
-        const { list } = response.data;
-        const posts = [];
-        list.forEach((el, i) => {
-          posts.push(el);
-        });
-        setItem(posts);
-      })
-      .catch((e) => console.log("ERROR ON FETCH"));
+    dispatch(postThunk());
   }, [newvote]);
 
   const show = (
-    <Box boxClass={styles.postList}>
-      <ul className={styles.listUl}>
-        {(props.comment ? items.filter((el) => el._id === arr) : items).map(
-          (el) => (
-            <li className={styles.listItem} key={el._id}>
-              <Post
-                element={el}
-                setId={setId}
-                comment={props.comment}
-                deletePost={deletePost}
-                tube={props.tube}
-                tuber={props.tuber}
-                count={props.count}
-                setFrame={props.setFrame}
-                setItem={setItem}
-                newvote={newvote}
-                callVote={callVote}
-              />
-            </li>
-          )
-        )}
-      </ul>
+    <Box boxClass={`postList`}>
+      {loading ? (
+        <h1>Loading</h1>
+      ) : (
+        <ul className={`listUl`}>
+          {posts &&
+            (props.comment ? posts.filter((el) => el._id === arr) : posts).map(
+              (el) => (
+                <li className={`list-item`} key={el._id}>
+                  <Post
+                    element={el}
+                    setId={setId}
+                    comment={props.comment}
+                    deletePost={deletePost}
+                    tube={props.tube}
+                    tuber={props.tuber}
+                    count={props.count}
+                    setFrame={props.setFrame}
+                    setItem={setItem}
+                    newvote={newvote}
+                    callVote={callVote}
+                  />
+                </li>
+              )
+            )}
+        </ul>
+      )}
     </Box>
   );
 

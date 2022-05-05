@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./posts.module.css";
 import "./posts.css";
+import '../../styles/Posts/Posts.css'
 import { SessionContext } from "../../App";
 import { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
@@ -51,7 +52,7 @@ function Post(props) {
     arr = arr.map((e) => e.value);
     console.log(arr)
     axios
-      .patch(`https://snitcher-server.herokuapp.com/index/${id}`, {
+      .patch(`http://localhost:8080/index/${id}`, {
         body,
         arr,
       })

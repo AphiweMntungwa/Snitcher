@@ -19,7 +19,7 @@ function Comments() {
 
   useEffect(() => {
     axios
-      .get(`https://snitcher-server.herokuapp.com/index/${globe}/comments`)
+      .get(`http://localhost:8080/index/${globe}/comments`)
       .then((res) => {
         showComments(res.data.comments);
 
@@ -47,7 +47,7 @@ function Comments() {
   const postComment = (e) => {
     e.preventDefault();
     axios
-      .post(`https://snitcher-server.herokuapp.com/index/${globe}/comments`, {
+      .post(`http://localhost:8080/index/${globe}/comments`, {
         body: document.querySelector(".comment").value,
       })
       .then(() => {
@@ -58,7 +58,7 @@ function Comments() {
 
   const deleteComment = (id) => {
     axios
-      .delete(`https://snitcher-server.herokuapp.com/index/${globe}/comments/${id}`)
+      .delete(`http://localhost:8080/index/${globe}/comments/${id}`)
       .then(() => {
         deleteMe(!del);
       })
@@ -73,7 +73,7 @@ function Comments() {
         : { dislike: true };
 
     axios
-      .post(`https://snitcher-server.herokuapp.com/index/${id}/comments/vote`, { ...cname })
+      .post(`http://localhost:8080/index/${id}/comments/vote`, { ...cname })
       .then(() => {
         callVote(!newvote);
       })

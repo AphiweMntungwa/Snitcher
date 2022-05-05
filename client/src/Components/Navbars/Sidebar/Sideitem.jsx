@@ -8,7 +8,7 @@ const Sideitem = ({ liProp, classUL }) => {
         return (
           <li key={el.id}>
             <Link to={el.toLink}>
-              <i className={el.classIcon}></i>
+              {el.title}
             </Link>
           </li>
         );

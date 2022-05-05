@@ -11,7 +11,7 @@ function Chat() {
   const [users, callUsers] = useState([]);
   const session = useContext(SessionContext);
   useEffect(() => {
-    axios.get("https://snitcher-server.herokuapp.com/users").then((res) => {
+    axios.get("http://localhost:8080/users").then((res) => {
       const otherUsers = res.data.filter((el) => el._id != session.user[0]._id);
       callUsers(otherUsers);
     });

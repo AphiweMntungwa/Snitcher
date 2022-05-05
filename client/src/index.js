@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { store } from "./app/store";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
 
 import Posts from "./Components/Posts/Posts";
@@ -23,65 +25,79 @@ ReactDOM.render(
       <Route
         path="/"
         element={
-          <App>
-            <Posts />
-          </App>
+          <Provider store={store}>
+            <App>
+              <Posts />
+            </App>
+          </Provider>
         }
       />{" "}
       <Route
         path="/new"
         element={
-          <App>
+          <Provider store={store}> <App>
             <Floater linkTo="/">
               <Newpost />
             </Floater>{" "}
           </App>
+
+          </Provider>
         }
       />{" "}
       <Route
         path="/register"
         element={
-          <App>
+          <Provider store={store}> <App>
             <Floater linkTo="/">
               <Register />
             </Floater>{" "}
           </App>
+
+          </Provider>
         }
       />{" "}
       <Route
         path="/login"
         element={
-          <App>
+          <Provider store={store}><App>
             <Floater linkTo="/">
               <Login />
             </Floater>{" "}
           </App>
+          </Provider>
+
         }
       />{" "}
       <Route
         path="/comments"
         element={
-          <App>
+          <Provider store={store}><App>
             <Floater linkTo="/" classId="comment-class">
               <Comments />
             </Floater>{" "}
           </App>
+          </Provider>
+
         }
       />{" "}
       <Route
         path="/chat"
         element={
-          <App>
+          <Provider store={store}><App>
             <Chat />
           </App>
+          </Provider>
+
         }
       />{" "}
       <Route
         path="/chatbox"
         element={
-          <App>
+          <Provider store={store}><App>
             <Connect />
           </App>
+          </Provider>
+
         }
       />
     </Routes>

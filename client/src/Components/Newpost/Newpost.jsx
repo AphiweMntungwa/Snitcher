@@ -16,7 +16,7 @@ const Newpost = () => {
     }
     arr = arr.map((e) => e.value);
     axios
-      .post("https://snitcher-server.herokuapp.com/index", {
+      .post("http://localhost:8080/index", {
         text,
         arr,
       })

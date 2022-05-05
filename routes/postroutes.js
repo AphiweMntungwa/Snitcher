@@ -3,7 +3,7 @@ const router = express.Router();
 const wrapAsync = require("../Utils/wrapasync");
 const methodOverride = require("method-override");
 const { isLoggedIn, isOwner, validateSchema } = require("../middleware/logmiddleware");
-const { listItems, showItem, createItem, editItem, deleteItem, vote } = require("../controllers/campcontrollers");
+const { listItems, showItem, createItem, editItem, deleteItem, vote } = require("../controllers/postcontrols");
 
 
 router.use(express.urlencoded({ extended: true }));
