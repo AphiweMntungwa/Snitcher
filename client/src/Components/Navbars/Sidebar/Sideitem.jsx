@@ -6,7 +6,7 @@ const Sideitem = ({ liProp, classUL }) => {
     <ul className={classUL}>
       {liProp.map((el) => {
         return (
-          <li key={el.id}>
+          <li key={el.title}>
             <Link to={el.toLink}>{el.title}</Link>
             <img src={el.img} />
           </li>

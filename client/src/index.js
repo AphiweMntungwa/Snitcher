@@ -68,7 +68,7 @@ ReactDOM.render(
 
         }
       />{" "}
-      <Route
+      {/* <Route
         path="/comments"
         element={
           <Provider store={store}><App>
@@ -79,7 +79,7 @@ ReactDOM.render(
           </Provider>
 
         }
-      />{" "}
+      />{" "} */}
       <Route
         path="/chat"
         element={

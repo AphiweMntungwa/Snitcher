@@ -3,6 +3,7 @@ import Post from "./Post";
 import Box from "../Box/Box";
 import axios from "axios";
 import { postThunk } from "../../app/Redux/posts/postActions";
+import Loader from "../Utils/Loader";
 import { useSelector, useDispatch } from "react-redux";
 
 let arr = "";
@@ -10,8 +11,10 @@ export let globe = arr;
 
 function Posts(props) {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.post.posts);
+  const post = useSelector((state) => state.post.posts);
+  const posts = post ? [...post].reverse() : [];
   const loading = useSelector((state) => state.post.loading);
+  const error = useSelector((state) => state.post.error);
   const [items, setItem] = useState([]);
   const [newvote, callVote] = useState(false);
   arr = localStorage.getItem("array");
@@ -40,10 +43,12 @@ function Posts(props) {
     dispatch(postThunk());
   }, [newvote]);
 
+
   const show = (
     <Box boxClass={`postList`}>
+      {!loading && !posts.length ? <Loader error={error} errorMsg={error} /> : null}
       {loading ? (
-        <h1>Loading</h1>
+        <Loader />
       ) : (
         <ul className={`listUl`}>
           {posts &&

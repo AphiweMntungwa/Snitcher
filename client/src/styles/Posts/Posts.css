@@ -2,9 +2,117 @@
 .listUl {
   padding-left: 0;
   list-style-type: none;
+  -ms-flex-item-align: self-start;
+      -ms-grid-row-align: self-start;
+      align-self: self-start;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 100%;
 }
 
 .listUl .list-item {
   color: #4d8484;
+  width: 100%;
+  padding-inline: 1%;
+}
+
+.postList, .postList .loader {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.post {
+  margin-block: 6%;
+  -webkit-box-shadow: 0px 0px 5px #234a14;
+          box-shadow: 0px 0px 5px #234a14;
+  border-radius: 4px;
+  padding: 3%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
+}
+
+.post .header, .post .post-icons, .post .other-icons {
+  border-block: 1px dashed silver;
+  padding-block: 0.2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.post .header img, .post .post-icons img, .post .other-icons img, .post .post-icons box-icon, .post .other-icons box-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 3%;
+  border-radius: 10px;
+}
+
+.post .description {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1.5px;
+  color: #0d130d;
+}
+
+.post .post-icons box-icon, .post .other-icons box-icon {
+  margin-right: 2%;
+  width: 20px;
+  height: initial;
+}
+
+.post .other-icons {
+  width: initial;
+  height: 3em;
+  border-bottom: none;
+}
+
+.post .other-icons span {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.media img, .media .post .post-icons box-icon, .post .post-icons .media box-icon, .media .post .other-icons box-icon, .post .other-icons .media box-icon {
+  width: 2.5em;
+  margin: 2%;
+  border-radius: 8%;
+}
+
+.loader img, .loader .post .post-icons box-icon, .post .post-icons .loader box-icon, .loader .post .other-icons box-icon, .post .other-icons .loader box-icon {
+  max-width: 80%;
 }
 /*# sourceMappingURL=Posts.css.map */

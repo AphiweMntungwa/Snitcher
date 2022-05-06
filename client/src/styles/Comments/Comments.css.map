@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,QADI,CACJ,MAAM,CAAC;EACH,SAAS,EAAE,GAAG;EACd,MAAM,EAAE,GAAG;CACd;;AAGL,AAAA,aAAa,CAAC;EACV,eAAe,EAAE,IAAI;CACxB",
+    "sources": [
+        "Comments.scss"
+    ],
+    "names": [],
+    "file": "Comments.css"
+}

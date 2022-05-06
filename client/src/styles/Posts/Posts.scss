@@ -2,7 +2,69 @@
 .listUl {
     padding-left: 0;
     list-style-type: none;
+    align-self: self-start;
+    flex-grow: 1;
+    width: 100%;
     .list-item {
-        color: $main-color;
+        @include padd('pi-w-c-list-item', 100%, 1%)
     }
+}
+
+.postList {
+    flex-grow: 1;
+    @include center-items(column, center, center);
+    .loader {
+        @extend .postList
+    }
+}
+
+.post {
+    margin-block: 6%;
+    box-shadow: 0px 0px 5px $nav-color;
+    border-radius: 4px;
+    padding: 3%;
+    @include center-items(column, center, unset);
+    .header {
+        border-block: 1px dashed silver;
+        padding-block: 0.2em;
+        @include center-items(row, start, center);
+        img {
+            @include padd(true, 30px, 30px);
+            margin-right: 3%;
+            border-radius: 10px;
+        }
+    }
+    .description {
+        font-family: get($fonts, 'poppins'), get($fonts, 'sf');
+        letter-spacing: 1.5px;
+        color: $text-color;
+    }
+    .post-icons {
+        @extend .header;
+        box-icon {
+            @include extender('img');
+            margin-right: 2%;
+            @include padd(true, 20px, initial)
+        }
+    }
+    .other-icons {
+        @extend .post-icons;
+        @include padd(true, initial, 3em);
+        border-bottom: none;
+        span {
+            flex-grow: 1;
+        }
+    }
+}
+
+.media {
+    img {
+        width: 2.5em;
+        margin: 2%;
+        border-radius: 8%;
+    }
+}
+
+.loader img {
+    max-width: 80%;
 }

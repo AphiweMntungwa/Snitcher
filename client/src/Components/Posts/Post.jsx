@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 // import styles from "./posts.module.css";
 // import "./posts.css";
-import '../../styles/Posts/Posts.css'
+import "../../styles/Posts/Posts.css";
 import { SessionContext } from "../../App";
 import { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
+import Comments from "./Comments/Comments";
 
 function Post(props) {
   const {
@@ -21,6 +22,7 @@ function Post(props) {
     newvote,
   } = props;
 
+  const [commentShow, showComments] = useState(false)
   const session = useContext(SessionContext);
   const [ed, setEd] = useState(false);
 
@@ -50,7 +52,7 @@ function Post(props) {
       check.checked && arr.push(check);
     }
     arr = arr.map((e) => e.value);
-    console.log(arr)
+    console.log(arr);
     axios
       .patch(`http://localhost:8080/index/${id}`, {
         body,
@@ -85,9 +87,13 @@ function Post(props) {
       })
       .catch((e) => console.log(e));
   };
-
+  
   return (
-    <div>
+    <div className="post">
+      <div className="header">
+        <img src={element.author.photo.url} alt={element.author.username} />
+        <h6>{element.author.username}</h6>
+      </div>
       {ed ? (
         <>
           <textarea
@@ -102,69 +108,58 @@ function Post(props) {
       ) : (
         <p className=" description">{element.post}</p>
       )}
-      <span>
+      <div className="media">
         {element.media.map((el) => (
           <img key={el} src={el} onClick={framer} alt="" />
         ))}
-      </span>
-      <div className="comment-icons">
-        <Link to="/comments">
-          <box-icon
-            name="message-rounded-add"
-            id={element._id}
-            onClick={setId}
-            className="boxes"
-          ></box-icon>
-        </Link>
-        {session.loggedIn
-          ? element.author._id === session.user[0]._id && (
+      </div>
+      <footer>
+        <span>{element.created.substring(0, 10)}</span>
+        <div className="other-icons">
               <box-icon
                 name="trash"
                 onClick={() => deletePost(element._id)}
               ></box-icon>
-            )
-          : ""}
-        {session.loggedIn && comment
-          ? element.author._id === session.user[0]._id && (
               <box-icon
                 type="solid"
                 name="pencil"
                 className="comment-pencil"
                 onClick={() => {
-                  tube(!tuber);
                   setEd(!ed);
                 }}
               ></box-icon>
-            )
-          : null}
-        {session.loggedIn && (
-          <div className="votes">
+          <span className="votes">
             <box-icon
               type="solid"
-              onClick={vote}
+              // onClick={vote}
               name="up-arrow-square"
-              id={element._id}
-              ref={up}
-            ></box-icon>{" "}
-            <span className="likeSpan">
+              
+            ></box-icon>
+            {/* <span className="likeSpan">
               {element.likes.user && element.likes.user.length}
-            </span>
+            </span> */}
             <box-icon
               type="solid"
-              onClick={vote}
+              // onClick={vote}
               name="down-arrow-square"
               id={element._id}
-              ref={down}
+              // ref={down}
             ></box-icon>
-            <span className="likeSpan">
+            {/* <span className="likeSpan">
               {element.likes.user && element.dislikes.user.length}
-            </span>
-          </div>
-        )}
-      </div>
-      <footer>
-        <span>{element.created.substring(0, 10)}</span>
-        <span>{element.author.username}</span>
+            </span> */}
+          </span>
+        </div>
+        <div className="post-icons" onClick={()=> showComments(!commentShow)}>
+          <box-icon
+            name="message-rounded"
+            id={element._id}
+            onClick={setId}
+            className="boxes"
+          ></box-icon>
+          <h6>Comments</h6>
+        </div>
+        {commentShow ? <Comments comments={element.comments} /> : null}
       </footer>
     </div>
   );

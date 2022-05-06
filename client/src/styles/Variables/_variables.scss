@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@600&display=swap');
 $fonts:( mutka: 'Mukta',
-sf: sans-serif);
+sf: sans-serif,
+poppins:'Poppins');
 $main-color: rgb(77,
 132,
 132);
@@ -72,4 +73,18 @@ $x-val:0em) {
 $key) {
     @return map-get($name,
     $key)
+}
+
+@mixin padd($val1:false,
+$val2:false,
+$val3:false) {
+    @if $val1=='pi-w-c-list-item' {
+        color: $main-color;
+        width: $val2;
+        padding-inline: $val3;
+    }
+    @else {
+        width: $val2;
+        height: $val3;
+    }
 }
