@@ -5,6 +5,7 @@ import "../../styles/Posts/Posts.css";
 import { SessionContext } from "../../App";
 import { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
 import Comments from "./Comments/Comments";
 
 function Post(props) {
@@ -22,7 +23,7 @@ function Post(props) {
     newvote,
   } = props;
 
-  const [commentShow, showComments] = useState(false)
+  const [commentShow, showComments] = useState(false);
   const session = useContext(SessionContext);
   const [ed, setEd] = useState(false);
 
@@ -87,7 +88,7 @@ function Post(props) {
       })
       .catch((e) => console.log(e));
   };
-  
+
   return (
     <div className="post">
       <div className="header">
@@ -101,9 +102,22 @@ function Post(props) {
             defaultValue={element.post}
             className="form-control"
           ></textarea>
-          <button className="btn" onClick={() => editor(element._id)}>
-            edit <span style={{ color: "red" }}>{count}</span>
-          </button>
+          <div>
+            <Button
+              variant="outline-success"
+              onClick={() => editor(element._id)}
+            >
+              edit <span style={{ color: "red" }}>{count}</span>
+            </Button>
+            <Button
+              variant="outline-danger"
+              onClick={() => {
+                setEd(!ed);
+              }}
+            >
+              cancel <span style={{ color: "red" }}>{count}</span>
+            </Button>
+          </div>
         </>
       ) : (
         <p className=" description">{element.post}</p>
@@ -116,24 +130,23 @@ function Post(props) {
       <footer>
         <span>{element.created.substring(0, 10)}</span>
         <div className="other-icons">
-              <box-icon
-                name="trash"
-                onClick={() => deletePost(element._id)}
-              ></box-icon>
-              <box-icon
-                type="solid"
-                name="pencil"
-                className="comment-pencil"
-                onClick={() => {
-                  setEd(!ed);
-                }}
-              ></box-icon>
+          <box-icon
+            name="trash"
+            onClick={() => deletePost(element._id)}
+          ></box-icon>
+          <box-icon
+            type="solid"
+            name="pencil"
+            className="comment-pencil"
+            onClick={() => {
+              setEd(!ed);
+            }}
+          ></box-icon>
           <span className="votes">
             <box-icon
               type="solid"
               // onClick={vote}
               name="up-arrow-square"
-              
             ></box-icon>
             {/* <span className="likeSpan">
               {element.likes.user && element.likes.user.length}
@@ -150,7 +163,7 @@ function Post(props) {
             </span> */}
           </span>
         </div>
-        <div className="post-icons" onClick={()=> showComments(!commentShow)}>
+        <div className="post-icons" onClick={() => showComments(!commentShow)}>
           <box-icon
             name="message-rounded"
             id={element._id}

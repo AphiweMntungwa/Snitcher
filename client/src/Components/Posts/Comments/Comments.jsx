@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import Button from "react-bootstrap/Button";
-import '../../../styles/Comments/Comments.css'
+import "../../../styles/Comments/Comments.css";
 // import "./comment.css";
 import Youtube from "../../Newpost/Youtube";
 
 function Comments({ comments }) {
+  console.log(comments)
   return (
     <div>
       {false ? null : (
@@ -13,7 +14,8 @@ function Comments({ comments }) {
             <textarea
               name="comment"
               className="form-control comment"
-              placeholder="leave a comment"
+              placeholder="Leave a comment"
+              rows="2"
             ></textarea>
             <div className="buttons">
               <Button variant="outline-success">Send</Button>
@@ -33,29 +35,33 @@ function Comments({ comments }) {
             {comments &&
               comments.map((el) => (
                 <li key={el._id}>
-                  <span className="comText">{el.body}</span>
-                  <span className="like-system">
-                    <box-icon
-                      type="solid"
-                      // onClick={vote}
-                      name="up-arrow-square"
-                      id={el._id}
-                      className="voteroll"
-                    ></box-icon>
-                    <span className="likeSpan">
-                      {el.likes.user && el.likes.user.length}
+                  <div className="like-comments">
+                    <span className="comText">{el.body}</span>
+                    <span className="like-system">
+                       <span className="likeSpan">
+                        <sup></sup>{el.likes.user && el.likes.user.length}
+                      </span>
+                      <box-icon
+                        type="solid"
+                        // onClick={vote}
+                        name="up-arrow-square"
+                        id={el._id}
+                        className="voteroll"
+                      ></box-icon>
+                     
+                      <span className="likeSpan">
+                        <sup></sup>{el.likes.user && el.dislikes.user.length}
+                      </span>
+                      <box-icon
+                        type="solid"
+                        // onClick={vote}
+                        name="down-arrow-square"
+                        id={el._id}
+                        className="voteroll"
+                      ></box-icon>
+                      
                     </span>
-                    <box-icon
-                      type="solid"
-                      // onClick={vote}
-                      name="down-arrow-square"
-                      id={el._id}
-                      className="voteroll"
-                    ></box-icon>
-                    <span className="likeSpan">
-                      {el.likes.user && el.dislikes.user.length}
-                    </span>
-                  </span>
+                  </div>
                   <div style={{ width: "100%" }}>
                     <i style={{ color: "orangered", fontSize: ".6em" }}>
                       - {el.author.username}

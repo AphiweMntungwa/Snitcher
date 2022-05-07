@@ -1,9 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@600&display=swap");
 .buttons button {
-  font-size: 50%;
+  font-size: .7em;
   margin: .2%;
+  padding: 0.1em 0.6em;
 }
 
-.comment-list {
+.comment-list, .comment-list li {
   list-style-type: none;
+  padding-left: 2%;
+}
+
+.comment-list .like-comments {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  font-size: .9em;
+}
+
+.comment-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  -webkit-box-shadow: 0 0px 0.1em #0d130d;
+          box-shadow: 0 0px 0.1em #0d130d;
+  background-color: rgba(96, 94, 94, 0.08);
+  margin-block: 2%;
+}
+
+.comment-list li span box-icon {
+  width: 18px;
+  padding-top: 15%;
+}
+
+.comment-content textarea {
+  border-top: none;
+  font-size: .7em;
+}
+
+.post-icons h6:hover {
+  -webkit-text-decoration: underline #4d8484;
+          text-decoration: underline #4d8484;
+  cursor: pointer;
 }
 /*# sourceMappingURL=Comments.css.map */

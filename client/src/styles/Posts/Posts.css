@@ -17,6 +17,11 @@
   padding-inline: 1%;
 }
 
+.listUl .list-item:first-of-type .post {
+  -webkit-box-shadow: 0px 1px 1px #234a14;
+          box-shadow: 0px 1px 1px #234a14;
+}
+
 .postList, .postList .loader {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -104,6 +109,13 @@
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+}
+
+.post button {
+  font-size: .7em;
+  margin: .3%;
+  max-width: 50px;
+  padding: 0.1em 0.6em;
 }
 
 .media img, .media .post .post-icons box-icon, .post .post-icons .media box-icon, .media .post .other-icons box-icon, .post .other-icons .media box-icon {

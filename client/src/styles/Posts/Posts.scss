@@ -6,7 +6,12 @@
     flex-grow: 1;
     width: 100%;
     .list-item {
-        @include padd('pi-w-c-list-item', 100%, 1%)
+        @include padd('pi-w-c-list-item', 100%, 1%);
+        &:first-of-type {
+            .post {
+                box-shadow: 0px 1px 1px $nav-color;
+            }
+        }
     }
 }
 
@@ -54,6 +59,12 @@
         span {
             flex-grow: 1;
         }
+    }
+    button {
+        font-size: .7em;
+        margin: .3%;
+        max-width: 50px;
+        padding: 0.1em 0.6em;
     }
 }
 
