@@ -14,8 +14,6 @@ function Post(props) {
     setId,
     comment,
     deletePost,
-    tube,
-    tuber,
     count,
     setItem,
     setFrame,

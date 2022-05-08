@@ -40,6 +40,7 @@ function Posts(props) {
   };
 
   useEffect(() => {
+    
     dispatch(postThunk());
   }, [newvote]);
 

@@ -15,7 +15,7 @@ import Register from "./Components/User/Register/Register";
 import Login from "./Components/User/Login/Login";
 import Comments from "./Components/Posts/Comments/Comments";
 import Chat from "./Components/Chat/Chat";
-import Connect from "./Components/Chat/Connect"
+import Connect from "./Components/Chat/Connect";
 
 const history = createBrowserHistory();
 
@@ -31,41 +31,27 @@ ReactDOM.render(
             </App>
           </Provider>
         }
-      />{" "}
+      />
       <Route
         path="/new"
         element={
-          <Provider store={store}> <App>
-            <Floater linkTo="/">
-              <Newpost />
-            </Floater>{" "}
-          </App>
-
+          <Provider store={store}>
+            <App>
+              <Floater linkTo="/">
+                <Newpost />
+              </Floater>{" "}
+            </App>
           </Provider>
         }
       />{" "}
       <Route
-        path="/register"
+        path="/auth"
         element={
-          <Provider store={store}> <App>
-            <Floater linkTo="/">
-              <Register />
-            </Floater>{" "}
-          </App>
-
-          </Provider>
-        }
-      />{" "}
-      <Route
-        path="/login"
-        element={
-          <Provider store={store}><App>
-            <Floater linkTo="/">
+          <Provider store={store}>
+            <App>
               <Login />
-            </Floater>{" "}
-          </App>
+            </App>
           </Provider>
-
         }
       />{" "}
       {/* <Route
@@ -83,21 +69,21 @@ ReactDOM.render(
       <Route
         path="/chat"
         element={
-          <Provider store={store}><App>
-            <Chat />
-          </App>
+          <Provider store={store}>
+            <App>
+              <Chat />
+            </App>
           </Provider>
-
         }
       />{" "}
       <Route
         path="/chatbox"
         element={
-          <Provider store={store}><App>
-            <Connect />
-          </App>
+          <Provider store={store}>
+            <App>
+              <Connect />
+            </App>
           </Provider>
-
         }
       />
     </Routes>

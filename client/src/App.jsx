@@ -15,6 +15,7 @@ function App({ children }) {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session.userSession);
   const toggler = useSelector((state) => state.topbar.toggler);
+  console.log(session)
 
   //getting login information
   useEffect(() => {

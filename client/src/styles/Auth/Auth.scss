@@ -1,0 +1,35 @@
+@import '../Variables/variables';
+.auth {
+    flex-grow: 1;
+    @include center-items(row, center, start);
+    margin-top: 35%;
+    form {
+        box-shadow: 0 0 1px black;
+        border-radius: 5px;
+        padding: 15%;
+    }
+    input,
+    label {
+        font-size: .8em;
+    }
+    button {
+        @include buttons(.5%);
+        margin-top: .5em;
+        padding-block: .4em;
+        &:last-of-type {
+            border: none;
+        }
+    }
+    footer {
+        @extend label;
+        a {
+            text-decoration: none;
+        }
+    }
+}
+
+.registry {
+    button {
+        padding-inline: .8em;
+    }
+}

@@ -21,6 +21,12 @@ $align:center) {
     align-items: $align;
 }
 
+@mixin buttons($mar) {
+    font-size: .7em;
+    margin: $mar;
+    padding: 0.1em 0.6em;
+}
+
 @mixin position($position) {
     position: $position;
     top: 0;

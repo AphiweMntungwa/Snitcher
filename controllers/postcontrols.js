@@ -1,7 +1,12 @@
 const Thought = require("../models/thoughts");
 
 module.exports.listItems = async(req, res) => {
-    const list = await Thought.find({}).populate({ path: 'author' });
+    const list = await Thought.find({}).populate([{ path: 'author' }, {
+        path: 'comments',
+        populate: {
+            path: "author"
+        }
+    }]);
     res.json({ list });
 }
 

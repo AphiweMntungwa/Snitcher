@@ -61,10 +61,8 @@
         }
     }
     button {
-        font-size: .7em;
-        margin: .3%;
+        @include buttons(.3%);
         max-width: 50px;
-        padding: 0.1em 0.6em;
     }
 }
 

@@ -15,20 +15,12 @@ const videoroutes = require("./routes/videoroutes")
 const messageRoutes = require("./routes/messageroutes")
 
 const User = require("./models/user");
-const passport = require("passport");
-const Strategy = require("passport-local");
 
 const dbUrl = 'mongodb://localhost:27017/YelpCamp' || process.env.DB_URL
-const session = require('express-session')
+const session = require('express-session');
 const cors = require('cors')
 
-app.use(cors({
-    origin: "http://localhost:3000",
-    method: ["GET", "POST"],
-    responseHeader: ["Content-Type"],
-    maxAgeSeconds: 3600
-}))
-
+app.use(cors())
 app.use(express.static(path.join(__dirname, 'build')))
 
 app.get('/', (req, res) => {
@@ -57,27 +49,19 @@ store.on("error", function(e) {
     console.log('ERROR ON SESSION', e)
 })
 app.use(session({
-    // store,
-    name: 'Inspector',
-    secret: process.env.CLOUDINARY_SECRET || 'iamintrouble',
+    name: 'inspector',
+    resave: false,
     saveUninitialized: false,
-    resave: true,
+    secret: 'countdownisbelowone',
     cookie: {
-        sameSite: 'none',
-        expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+        maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
     }
-}))
-
+}));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(mongoSanitize());
 
-app.use(passport.initialize())
-app.use(passport.session());
-passport.use(new Strategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 app.use("/", userRoutes);
 app.use("/index", campgroundRoutes);

@@ -29,9 +29,14 @@ main {
 }
 
 .sidebar ul li {
+  width: 100%;
+}
+
+.sidebar ul li a {
   padding-inline: 2%;
   margin-block: 1%;
   width: 100%;
+  color: #4d8484;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -45,17 +50,16 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  text-decoration: none;
 }
 
-.sidebar ul li a {
-  text-decoration: none;
-  color: #4d8484;
+.sidebar ul li a span {
   font-family: "Mukta";
   -webkit-animation: show-up 2s cubic-bezier(0.075, 0.82, 0.165, 1);
           animation: show-up 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.sidebar ul li img {
+.sidebar ul li a img {
   width: 1.5em;
   height: 1.5em;
 }
