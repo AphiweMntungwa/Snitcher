@@ -44,10 +44,10 @@ module.exports.showItem = async(req, res, next) => {
 module.exports.createItem = async(req, res, next) => {
     const { text, arr } = req.body;
     const newPost = new Thought({ post: text, media: arr });
-    newPost.author = req.user._id;
+    newPost.author = req.session.user._id;
     await newPost.save().then(() => {
         res.send({ createdPost: true })
-    }).catch(() => res.send({ createdPost: false }))
+    }).catch(() => res.status(400).send({ createdPost: false }))
 }
 
 module.exports.editItem = async(req, res, next) => {

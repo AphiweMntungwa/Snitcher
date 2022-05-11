@@ -15,7 +15,7 @@ module.exports.registerUser = async(req, res, next) => {
     const { username, email, password } = req.body;
     const hash = await bcrypt.hash(password, 12);
     const exists = await User.findOne({ email });
-    if (exists) { return res.send({ signed: false, message: 'user exists' }) }
+    if (exists) { return res.status(400).send('email exists') }
     const user = new User({
         username,
         email,
@@ -27,20 +27,37 @@ module.exports.registerUser = async(req, res, next) => {
     }
     user.save().then(() => {
         req.session.user = user;
-        res.send(user)
-    }).catch(e => console.log(e));
+        req.session.save(function(err) {
+            // session saved
+            if (err) {
+                return res.status(500).send(err.message)
+            }
+            res.send(user)
+        })
+    }).catch(e => res.status(400).send(e.message));
 };
 
 module.exports.isUser = async(req, res) => {
-    const user = await User.find({ username: req.body.username });
-    req.session.user = user;
-    req.session.save(err => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    user ? bcrypt.compare(password, user.password, function(err, response) {
         if (err) {
-            console.log(err);
-        } else {
-            res.redirect('http://localhost:3000')
+            return res.status(405).send(err.message)
         }
-    })
+        if (response) {
+            req.session.user = user;
+            req.session.save(function(err) {
+                // session saved
+                if (err) {
+                    return res.status(500).send(err.message)
+                }
+                res.send({ loggedIn: true })
+            })
+
+        } else {
+            return res.status(400).json({ success: false, message: 'incorrect username or password' });
+        }
+    }) : res.status(400).json({ success: false, message: 'incorrect username or password' });
 }
 
 module.exports.isLogged = async(req, res) => {
@@ -57,10 +74,14 @@ module.exports.users = async(req, res) => {
 }
 
 module.exports.logOut = (req, res) => {
-    try {
-        req.session.user = undefined;
-        res.send({ message: 'logged you out' })
-    } catch (e) {
-        res.send({ message: 'something went wrong' })
+    if (req.session.user) {
+        req.session.destroy(err => {
+            if (err) {
+                res.status(400).send(err.message)
+            } else {
+                res.send({ loggedIn: false })
+            }
+        });
     }
+    res.end();
 }

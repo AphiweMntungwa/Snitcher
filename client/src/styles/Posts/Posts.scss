@@ -1,4 +1,4 @@
-@import '../Variables/variables';
+@import "../Variables/variables";
 .listUl {
     padding-left: 0;
     list-style-type: none;
@@ -6,7 +6,7 @@
     flex-grow: 1;
     width: 100%;
     .list-item {
-        @include padd('pi-w-c-list-item', 100%, 1%);
+        @include padd("pi-w-c-list-item", 100%, 1%);
         &:first-of-type {
             .post {
                 box-shadow: 0px 1px 1px $nav-color;
@@ -19,7 +19,7 @@
     flex-grow: 1;
     @include center-items(column, center, center);
     .loader {
-        @extend .postList
+        @extend .postList;
     }
 }
 
@@ -40,16 +40,18 @@
         }
     }
     .description {
-        font-family: get($fonts, 'poppins'), get($fonts, 'sf');
+        font-family: get($fonts, "poppins"), get($fonts, "sf");
         letter-spacing: 1.5px;
         color: $text-color;
     }
     .post-icons {
         @extend .header;
         box-icon {
-            @include extender('img');
+            @include extender("img");
             margin-right: 2%;
-            @include padd(true, 20px, initial)
+            @include padd(true, 20px, initial);
+            opacity: 0.5;
+            pointer-events: none;
         }
     }
     .other-icons {
@@ -60,8 +62,20 @@
             flex-grow: 1;
         }
     }
+    .isUser {
+        box-icon {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+    .isNot {
+        box-icon {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
     button {
-        @include buttons(.3%);
+        @include buttons(0.3%);
         max-width: 50px;
     }
 }

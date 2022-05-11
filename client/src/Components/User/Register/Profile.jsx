@@ -1,18 +1,19 @@
 import axios from "axios";
-import React, { useRef } from "react";
-import { Button } from "react-bootstrap";
+import React, { useRef, useState } from "react";
+import { Button, Alert } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { showNext } from "../../../app/Redux/Auth/showActions";
-import {useNavigate} from 'react-router-dom'
-
+import { postThunk } from "../../../app/Redux/posts/postActions";
+import { sessionThunk } from "../../../app/Redux/session/sessionActions";
+import { useNavigate } from "react-router-dom";
 
 function Profile({ locSt }) {
   const dispatch = useDispatch();
   const input1 = useRef(null);
   const input2 = useRef(null);
   const input3 = useRef(null);
-  const authForm = useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
 
   const handleAuth = () => {
     function inp(n) {
@@ -32,7 +33,7 @@ function Profile({ locSt }) {
     Object.keys(data).forEach((element) => {
       dat.append(element, data[element]);
     });
-    
+
     axios({
       url: "http://localhost:8080/register",
       method: "POST",
@@ -40,14 +41,23 @@ function Profile({ locSt }) {
     })
       .then((res) => {
         console.log(res.data);
-        navigate('/')
+        dispatch(sessionThunk());
+        dispatch(postThunk());
+        navigate("/");
       })
       .catch((e) => {
+        setShow(true);
         console.log(e);
       });
   };
   return (
-    <form ref={authForm}>
+    <form>
+      <Alert show={show} variant="success" className="header-div">
+        Email Exists
+        <Button onClick={() => setShow(false)} variant="outline-success">
+          close
+        </Button>
+      </Alert>
       <h1
         className="login-header"
         style={{ textAlign: "center", paddingBottom: "8px" }}

@@ -40,9 +40,8 @@ function Posts(props) {
   };
 
   useEffect(() => {
-    
     dispatch(postThunk());
-  }, [newvote]);
+  }, [newvote, items]);
 
 
   const show = (
@@ -52,7 +51,7 @@ function Posts(props) {
         <Loader />
       ) : (
         <ul className={`listUl`}>
-          {posts &&
+          {posts.length>0 &&
             (props.comment ? posts.filter((el) => el._id === arr) : posts).map(
               (el) => (
                 <li className={`list-item`} key={el._id}>

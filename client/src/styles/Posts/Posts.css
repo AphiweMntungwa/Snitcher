@@ -97,6 +97,8 @@
   margin-right: 2%;
   width: 20px;
   height: initial;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .post .other-icons {
@@ -109,6 +111,16 @@
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+}
+
+.post .isUser box-icon {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.post .isNot box-icon {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .post button {

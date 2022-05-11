@@ -49,9 +49,10 @@ store.on("error", function(e) {
     console.log('ERROR ON SESSION', e)
 })
 app.use(session({
+    store,
     name: 'inspector',
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     secret: 'countdownisbelowone',
     cookie: {
         maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,

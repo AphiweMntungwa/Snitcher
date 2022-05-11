@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 import "../../styles/Posts/Posts.css";
 import { SessionContext } from "../../App";
 import { useContext, useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
+import { Button, Alert } from "react-bootstrap";
 import Comments from "./Comments/Comments";
+import { Tooltip } from "react-tippy";
+import { sessionThunk } from "../../app/Redux/session/sessionActions";
+import "react-tippy/dist/tippy.css";
 
 function Post(props) {
   const {
@@ -22,25 +26,30 @@ function Post(props) {
   } = props;
 
   const [commentShow, showComments] = useState(false);
-  const session = useContext(SessionContext);
+  const [isUser, checkUser] = useState("");
+  const [alerter, setAlert] = useState(false);
+  const [show, setShow] = useState(false);
+  const [owner, checkOwner] = useState("");
+  const session = useSelector((state) => state.session.userSession);
   const [ed, setEd] = useState(false);
+  const dispatch = useDispatch();
 
   const up = useRef(null);
   const down = useRef(null);
 
   useEffect(() => {
-    if (session.user) {
-      if (element.likes.user.includes(session.user[0]._id)) {
-        up.current.style.fill = "wheat";
-        down.current.style.fill = "unset";
-      } else if (element.dislikes.user.includes(session.user[0]._id)) {
-        down.current.style.fill = "wheat";
-        up.current.style.fill = "unset";
-      } else {
-        up.current.style.fill = "unset";
-        down.current.style.fill = "unset";
-      }
-    }
+    // if (session.user) {
+    //   if (element.likes.user.includes(session.user[0]._id)) {
+    //     up.current.style.fill = "wheat";
+    //     down.current.style.fill = "unset";
+    //   } else if (element && element.dislikes.user.includes(session.user[0]._id)) {
+    //     down.current.style.fill = "wheat";
+    //     up.current.style.fill = "unset";
+    //   } else {
+    //     up.current.style.fill = "unset";
+    //     down.current.style.fill = "unset";
+    //   }
+    // }
   }, []);
 
   const editor = (id) => {
@@ -51,7 +60,6 @@ function Post(props) {
       check.checked && arr.push(check);
     }
     arr = arr.map((e) => e.value);
-    console.log(arr);
     axios
       .patch(`http://localhost:8080/index/${id}`, {
         body,
@@ -87,8 +95,27 @@ function Post(props) {
       .catch((e) => console.log(e));
   };
 
+  useEffect(() => {
+    dispatch(sessionThunk());
+    if (session.user) {
+      if (session.user._id === element.author._id) {
+        checkUser("isUser");
+      } else {
+        checkOwner("isNot");
+      }
+    }
+  }, []);
+
   return (
     <div className="post">
+      {alerter ? (
+        <Alert show={show} variant="success" className="header-div">
+          <p style={{ fontSize: ".7em" }}>{alerter}</p>
+          <Button onClick={() => setShow(false)} variant="outline-success">
+            close
+          </Button>
+        </Alert>
+      ) : null}
       <div className="header">
         <img src={element.author.photo.url} alt={element.author.username} />
         <h6>{element.author.username}</h6>
@@ -127,20 +154,48 @@ function Post(props) {
       </div>
       <footer>
         <span>{element.created.substring(0, 10)}</span>
-        <div className="other-icons">
-          <box-icon
-            name="trash"
-            onClick={() => deletePost(element._id)}
-          ></box-icon>
+        <div
+          className={`${"other-icons"} ${isUser}`}
+          onClick={() => {
+            if (!session.user) {
+              setAlert("You Must Be Signed In.");
+              setShow(true);
+            }
+          }}
+        >
+          <Tooltip
+            html={
+              <>
+                {session.user && session.user._id === element.author._id ? (
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => deletePost(element._id)}
+                    style={{ fontSize: ".8em", padding: ".1em .2em" }}
+                  >
+                    Are You Sure?
+                  </Button>
+                ) : (
+                  <h6>Not Allowed</h6>
+                )}
+              </>
+            }
+            position="top"
+            trigger="mouseenter"
+            arrow={true}
+            interactive={true}
+            distance={5}
+          >
+            <box-icon name="trash" style={{ marginRight: ".2em" }}></box-icon>
+          </Tooltip>
+
           <box-icon
             type="solid"
             name="pencil"
-            className="comment-pencil"
             onClick={() => {
               setEd(!ed);
             }}
           ></box-icon>
-          <span className="votes">
+          <span className={`${owner} votes`}>
             <box-icon
               type="solid"
               // onClick={vote}

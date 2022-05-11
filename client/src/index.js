@@ -16,6 +16,7 @@ import Login from "./Components/User/Login/Login";
 import Comments from "./Components/Posts/Comments/Comments";
 import Chat from "./Components/Chat/Chat";
 import Connect from "./Components/Chat/Connect";
+import Logout from "./Components/User/Logout/Logout";
 
 const history = createBrowserHistory();
 
@@ -28,19 +29,17 @@ ReactDOM.render(
           <Provider store={store}>
             <App>
               <Posts />
-            </App>
+            </App>{" "}
           </Provider>
         }
-      />
+      />{" "}
       <Route
         path="/new"
         element={
           <Provider store={store}>
             <App>
-              <Floater linkTo="/">
-                <Newpost />
-              </Floater>{" "}
-            </App>
+              <Newpost />
+            </App>{" "}
           </Provider>
         }
       />{" "}
@@ -50,29 +49,27 @@ ReactDOM.render(
           <Provider store={store}>
             <App>
               <Login />
+            </App>{" "}
+          </Provider>
+        }
+      />
+      <Route
+        path="/logout"
+        element={
+          <Provider store={store}>
+            <App>
+              <Logout />
             </App>
           </Provider>
         }
-      />{" "}
-      {/* <Route
-        path="/comments"
-        element={
-          <Provider store={store}><App>
-            <Floater linkTo="/" classId="comment-class">
-              <Comments />
-            </Floater>{" "}
-          </App>
-          </Provider>
-
-        }
-      />{" "} */}
+      />
       <Route
         path="/chat"
         element={
           <Provider store={store}>
             <App>
               <Chat />
-            </App>
+            </App>{" "}
           </Provider>
         }
       />{" "}
@@ -82,11 +79,11 @@ ReactDOM.render(
           <Provider store={store}>
             <App>
               <Connect />
-            </App>
+            </App>{" "}
           </Provider>
         }
-      />
-    </Routes>
+      />{" "}
+    </Routes>{" "}
   </Router>,
   document.getElementById("root")
 );

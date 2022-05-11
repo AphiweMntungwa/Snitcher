@@ -1,0 +1,55 @@
+@import '../Variables/variables';
+.new-post {
+    @include center-items(column, start, center);
+    flex-grow: 1;
+    .create-box {
+        width: 100%;
+        padding-inline: 1%;
+        textarea,
+        div {
+            @extend .create-box;
+        }
+    }
+    .post-loader {
+        .loader {
+            @include center-items(column, center, center)
+        }
+        img {
+            @include padd(true, 4em, 3em);
+        }
+    }
+}
+
+.youtube-card {
+    margin-top: 2%;
+    @include center-items(column, start, center);
+    width: 100%;
+    div {
+        @include center-items(column, center, center);
+        border: 1px solid $main-color;
+        width: 98%;
+        &:first-of-type {
+            padding-block: 1%;
+        }
+    }
+    .youtube-list {
+        list-style-type: none;
+        padding-left: 0%;
+        padding: 1%;
+        li {
+            @include center-items(row, space-between, center);
+            input {
+                justify-self: end;
+            }
+            label {
+                @include center-items(row, center, center);
+                h6 {
+                    font-size: .8em;
+                }
+                img {
+                    @include padd(true, 50px, 40px);
+                }
+            }
+        }
+    }
+}

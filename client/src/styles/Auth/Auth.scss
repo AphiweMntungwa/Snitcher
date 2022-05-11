@@ -2,7 +2,22 @@
 .auth {
     flex-grow: 1;
     @include center-items(row, center, start);
+    flex-wrap: wrap;
     margin-top: 35%;
+    .alert {
+        padding-block: 0.1em;
+        width: 85%;
+        font-size: .7em;
+        @include center-items(row, space-between, center);
+        p {
+            margin-bottom: unset;
+        }
+        button {
+            &:last-of-type {
+                border: 1px solid #198754;
+            }
+        }
+    }
     form {
         box-shadow: 0 0 1px black;
         border-radius: 5px;
@@ -32,4 +47,8 @@
     button {
         padding-inline: .8em;
     }
+}
+
+.logout {
+    padding: 4%;
 }

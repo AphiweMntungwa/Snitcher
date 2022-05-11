@@ -2,44 +2,67 @@ import React, { useEffect, useState } from "react";
 import Box from "../Box/Box";
 import Result from "./Result";
 import axios from "axios";
+import Loader from "../Utils/Loader";
 
-export default function Youtube({fetchMe}) {
+export default function Youtube({ fetchMe }) {
   const [searchParam, setParam] = useState("");
   const [data, setData] = useState([]);
   const [obj, setObj] = useState([]);
+  const [find, onSearch] = useState(false);
+  const [loading, load] = useState(false);
 
   useEffect(() => {
     setData(obj);
   }, [obj]);
 
-  const setSearch = async () => {
-    try {
-      const response = await axios.post('http://localhost:8080/search', { searchParam });
-      let res = response.data.items
-        ? response.data.items
-        : ["somethin's wrong"];
-      setObj(res);
-    } catch (e) {
-      console.log(`something went wrong :${e}`);
-    }
-  };
+  function setSearch(e) {
+    load(true);
+    axios
+      .post("http://localhost:8080/search", {
+        searchParam,
+      })
+      .then((res) => {
+        load(false);
+        setObj(res.data.items);
+      })
+      .catch((e) => {
+        load(e.message);
+      });
+  }
 
   return (
-    <Box boxClass="card youtube-card">
-      <span className="card-header">
-        <input
-        className="youtube-search-field"
-          type="search"
-          value={searchParam}
-          onChange={(e) => setParam(e.target.value)}
-        />
-        <button onClick={() => setSearch()}>
-          <i className="fas fa-search"></i>
-        </button>
-      </span>
-      <Box boxClass="youtube-search">
-        <Result list={data} fetchMe={fetchMe} />
-      </Box>
-    </Box>
+    <div className="youtube-card">
+      <div>
+        <h4 onClick={() => onSearch(!find)}>Search videos</h4>
+        {find && (
+          <section>
+            <input
+              className="youtube-search-field"
+              type="search"
+              value={searchParam}
+              onChange={(e) => setParam(e.target.value)}
+            />
+            <span onClick={() => setSearch()}> &#128269; </span>
+          </section>
+        )}
+      </div>
+
+      {typeof loading === "string" && (
+        <Loader error={loading} errorMsg={loading} />
+      )}
+      {loading === true ? (
+        <Loader />
+      ) : find ? (
+        typeof loading === "boolean" && (
+          <>
+            {data.length > 0 && (
+              <div className="youtube-search">
+                <Result list={data} fetchMe={fetchMe} />
+              </div>
+            )}
+          </>
+        )
+      ) : null}
+    </div>
   );
 }

@@ -1,11 +1,20 @@
 import Box from "../Box/Box";
 import axios from "axios";
-import "./newpost.css";
+import { Button } from "react-bootstrap";
+// import "./newpost.css";
+import "../../styles/Newpost/Newpost.css";
+import { postThunk } from "../../app/Redux/posts/postActions";
 import Youtube from "./Youtube";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Loader from "../Utils/Loader";
+import { useDispatch } from "react-redux";
 
 const Newpost = () => {
   const [count, setCount] = useState(0);
+  const [loading, load] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const sendPost = () => {
     let arr = [];
@@ -15,30 +24,51 @@ const Newpost = () => {
       check.checked && arr.push(check);
     }
     arr = arr.map((e) => e.value);
+    load(true);
     axios
       .post("http://localhost:8080/index", {
         text,
         arr,
       })
-      .then((res) => console.table(res))
-      .catch((e) => console.log(e));
+      .then((res) => {
+        console.log(res.data);
+        load(false);
+        navigate("/");
+      })
+      .catch((e) => {
+        if (e.message.includes("401")) {
+          load("You Must Be Signed In");
+        } else if (e.message.includes("400")) {
+          load("empty field?");
+        } else {
+          load(e.message);
+        }
+      });
   };
 
   return (
     <Box boxClass="new-post">
-      <Box boxClass="card create-box">
-        <textarea
-          className="card-body form-control"
-          placeholder="Post..."
-        ></textarea>
+      <h1>New Post </h1>
+      {typeof loading === "string" && (
+        <div className="post-loader">
+          <Loader error={loading} errorMsg={loading} />
+        </div>
+      )}
+      {loading === true && (
+        <div className="post-loader">
+          <Loader />
+        </div>
+      )}
+      <div className="create-box">
+        <textarea placeholder="say something..."></textarea>
         <div>
-          <button className="btn post-button" onClick={() => sendPost()}>
+          <Button variant="outline-primary" onClick={() => sendPost()}>
             Post
-          </button>
+          </Button>
           <i className="fab fa-youtube"></i>
           <span className="resNum">+{count}</span>
         </div>
-      </Box>
+      </div>
       <Youtube fetchMe={setCount} />
     </Box>
   );

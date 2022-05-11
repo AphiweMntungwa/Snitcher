@@ -23,7 +23,7 @@ router.post("/", wrapAsync(async(req, res) => {
         .then(response => {
             res.json(response.data)
         })
-        .catch(e => res.send(`request error ${e}`));
+        .catch(e => res.status(502).send(e.message));
 }))
 
 router.delete("/:id/delete", wrapAsync(async(req, res) => {

@@ -20,7 +20,7 @@ function App({ children }) {
   //getting login information
   useEffect(() => {
     dispatch(sessionThunk());
-  }, []);
+  }, [toggler]);
 
   return (
     <div className="App">
