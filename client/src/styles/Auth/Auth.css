@@ -84,4 +84,8 @@
 .logout {
   padding: 4%;
 }
+
+.star-form input::after {
+  content: '*';
+}
 /*# sourceMappingURL=Auth.css.map */

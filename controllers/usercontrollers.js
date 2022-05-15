@@ -11,7 +11,6 @@ module.exports.profilePhoto = async(req, res) => {
 }
 
 module.exports.registerUser = async(req, res, next) => {
-    console.log(req.body)
     const { username, email, password } = req.body;
     const hash = await bcrypt.hash(password, 12);
     const exists = await User.findOne({ email });
@@ -28,7 +27,6 @@ module.exports.registerUser = async(req, res, next) => {
     user.save().then(() => {
         req.session.user = user;
         req.session.save(function(err) {
-            // session saved
             if (err) {
                 return res.status(500).send(err.message)
             }

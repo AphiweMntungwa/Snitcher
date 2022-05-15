@@ -6,7 +6,7 @@ module.exports.writeComment = async(req, res) => {
     const { id } = req.params;
     const { body } = req.body;
     const post = await Thought.findById(id);
-    let comment = new Comment({ body, author: req.user._id });
+    let comment = new Comment({ body, author: req.session.user._id });
     post.comments.push(comment);
     await post.save();
     await comment.save().then(async() => {
@@ -29,15 +29,16 @@ module.exports.getComment = async(req, res) => {
 module.exports.vote = async(req, res) => {
     const { id } = req.params;
     const { like = false, dislike = false } = req.body;
+    const userSession = req.session.user;
     const comment = await Comment.findById(id);
     const { likes, dislikes } = comment;
     if (like) {
-        !(likes.user.includes(req.user._id)) && likes.user.push(req.user._id)
-        dislikes.user = dislikes.user.filter(el => el != req.user._id);
+        !(likes.user.includes(userSession._id)) && likes.user.push(userSession._id)
+        dislikes.user = dislikes.user.filter(el => el != userSession._id);
         await comment.save().then(() => res.send({ liked: true }));
     } else if (dislike) {
-        !(dislikes.user.includes(req.user._id)) && dislikes.user.push(req.user._id)
-        likes.user = likes.user.filter(el => el != req.user._id);
+        !(dislikes.user.includes(userSession._id)) && dislikes.user.push(userSession._id)
+        likes.user = likes.user.filter(el => el != userSession._id);
         await comment.save().then(() => res.send({ disliked: true }))
     }
 }
@@ -48,6 +49,6 @@ module.exports.deleteComment = async(req, res) => {
     await Comment.findByIdAndDelete(commentId).then(() => {
         res.json({ deleted: true });
     }).catch((e) => {
-        res.json({ error: e, customMessage: "could not delete" })
+        res.status(401).send({ error: e, customMessage: "could not delete" })
     })
 }

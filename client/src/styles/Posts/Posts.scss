@@ -82,7 +82,8 @@
 
 .media {
     img {
-        width: 2.5em;
+        width: 2.3em;
+        border: 1px dashed goldenrod;
         margin: 2%;
         border-radius: 8%;
     }
@@ -90,4 +91,14 @@
 
 .loader img {
     max-width: 80%;
+}
+
+iframe {
+    width: 100%;
+}
+
+.lk {
+    +box-icon {
+        fill: blue;
+    }
 }

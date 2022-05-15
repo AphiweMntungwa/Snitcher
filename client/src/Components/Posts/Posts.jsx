@@ -41,7 +41,7 @@ function Posts(props) {
 
   useEffect(() => {
     dispatch(postThunk());
-  }, [newvote, items]);
+  }, [items]);
 
 
   const show = (
@@ -63,7 +63,6 @@ function Posts(props) {
                     tube={props.tube}
                     tuber={props.tuber}
                     count={props.count}
-                    setFrame={props.setFrame}
                     setItem={setItem}
                     newvote={newvote}
                     callVote={callVote}

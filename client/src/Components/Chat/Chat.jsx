@@ -1,24 +1,43 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import "./chat.css";
+// import "./chat.css";
+import "../../styles/Chat/Chat.css";
 import { SessionContext } from "../../App";
+import Connect from "./Connect";
+import { useSelector } from "react-redux";
+import { Alert, Button } from "react-bootstrap";
+import Loader from "../Utils/Loader";
 
 let arr = "";
 export let receiver = arr;
 
 function Chat() {
   const [users, callUsers] = useState([]);
-  const session = useContext(SessionContext);
+  const [loading, load] = useState(false);
+  const [messageShow, showMessages] = useState(false);
+  const [show, setShow] = useState(false);
+  const [otherUser, setOtherUSer] = useState("");
+
+  const session = useSelector((state) => state.session.userSession);
   useEffect(() => {
-    axios.get("http://localhost:8080/users").then((res) => {
-      const otherUsers = res.data.filter((el) => el._id != session.user[0]._id);
-      callUsers(otherUsers);
-    });
+    load(true);
+    axios
+      .get("http://localhost:8080/users")
+      .then((res) => {
+        load(false);
+        const otherUsers = session.user
+          ? res.data.filter((el) => el._id != session.user._id)
+          : res.data;
+        callUsers(otherUsers);
+      })
+      .catch((e) => load(e.message));
   }, []);
 
   const setId = (e) => {
+    session.user ? showMessages(true) : setShow(true);
     arr = e.target.id;
+    setOtherUSer(arr);
     if (typeof Storage !== "undefined") {
       localStorage.setItem("array", arr);
     } else {
@@ -29,44 +48,68 @@ function Chat() {
   };
 
   return (
-    <div className="chatbox">
-      <span
-        style={{
-          display: "flex",
-          width: "500px",
-          justifyContent: "space-evenly",
-        }}
-      >
-        <h3>Chatbox </h3>
-        <span className="userSpan" style={{ color: "orange" }}>
-          {session.user[0].username}
-          {session.user[0].photo && <img
-            src={session.user[0].photo.url.replace(
-              "/upload",
-              "/upload/w_100/h_100"
-            )}
-            alt=""
-          />}
-        </span>
-      </span>
-
-      <ul className="user-list">
-        {users.length &&
-          users.map((el) => (
-            <Link to="/chatbox" key={el._id} id={el._id}>
-              <li id={el._id} onClick={setId}>
-                {el.photo && (
-                  <img
-                    src={el.photo.url.replace("/upload", "/upload/w_100/h_100")}
-                    alt=""
-                  />
+    <>
+      {!messageShow ? (
+        <div className="chat">
+          <h3>
+            Users
+            <box-icon
+              type="solid"
+              animation="fade-down"
+              name="down-arrow-circle"
+            ></box-icon>
+          </h3>
+          {loading && <Loader />}
+          {session.user && (
+            <div className="userSpan">
+              <img
+                src={session.user.photo.url.replace(
+                  "/upload",
+                  "/upload/w_100/h_100"
                 )}
-                {el.username}
-              </li>
-            </Link>
-          ))}
-      </ul>
-    </div>
+                alt=""
+              />
+              You
+            </div>
+          )}
+
+          <Alert
+            show={show}
+            variant="success"
+            style={{ fontSize: ".8em", width: "90%", padding: "4%" }}
+          >
+            You must be signed in to start a chat.
+            <Button
+              onClick={() => setShow(false)}
+              style={{ fontSize: ".6em", marginTop: "4%", padding: "1% 3%" }}
+              variant="outline-success"
+            >
+              close
+            </Button>
+          </Alert>
+
+          <ul className="user-list">
+            {users.length > 0 &&
+              users.map((el) => (
+                <li id={el._id} onClick={setId} key={el._id}>
+                  {el.photo && (
+                    <img
+                      src={el.photo.url.replace(
+                        "/upload",
+                        "/upload/w_100/h_100"
+                      )}
+                      alt=""
+                    />
+                  )}
+                  {el.username}
+                </li>
+              ))}
+          </ul>
+        </div>
+      ) : (
+        <Connect users={users} otherUser={otherUser} showMessages={showMessages} />
+      )}
+    </>
   );
 }
 

@@ -33,8 +33,8 @@ module.exports.validateReview = (req, res, next) => {
 module.exports.isCommentOwner = async(req, res, next) => {
     const { commentId: id } = req.params;
     const foundReview = await Comment.findById(id);
-    if (!foundReview.author.equals(req.user._id)) {
-        return res.json({ errorMessage: "You are not allowed" });
+    if (!foundReview.author.equals(req.session.user._id)) {
+        return res.send(401).json({ errorMessage: "You are not allowed" });
     }
     next();
 }

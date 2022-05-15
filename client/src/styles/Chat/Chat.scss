@@ -1,0 +1,101 @@
+@import "../Variables/variables";
+.chat {
+    flex-grow: 1;
+    margin-top: 2%;
+    @include center-items(column, start, center);
+    .loader {
+        @include center-items(column, center, center);
+    }
+    .user-list {
+        padding-left: 0%;
+        list-style-type: none;
+        width: 90%;
+        li {
+            @include center-items(row, start, center);
+            padding: 2%;
+            border: 1px solid rgba(255, 68, 0, 0.174);
+            background-color: rgba(255, 68, 0, 0.05);
+            font-size: 0.8em;
+            margin-bottom: 1%;
+        }
+        img {
+            @include padd(true, 30px, 30px);
+            margin-right: 4%;
+            border-radius: 40%;
+        }
+    }
+    .userSpan {
+        @extend .chat;
+        flex-grow: unset;
+        margin-bottom: 3%;
+        img {
+            @include padd(true, 30px, 30px);
+            margin-right: 4%;
+            border-radius: 40%;
+        }
+    }
+}
+
+.chatSpace {
+    flex-grow: 1;
+    padding-inline: 2%;
+    ul {
+        list-style-type: none;
+        padding-left: 0%;
+        max-height: 68%;
+        overflow-y: auto;
+        li {
+            border: 1px solid #ff450038;
+            background-color: #ff450024;
+            font-size: 0.8em;
+            margin-bottom: 1.2%;
+            margin: 0 0 1.2% 20%;
+            padding: 2%;
+        }
+    }
+    .messages {
+        .mine {
+            background-color: #020f3236;
+            border: 1px solid #002dff38;
+            margin: initial 20% 1.2% unset;
+        }
+        h6 {
+            font-size: .8em;
+            color: $nav-color;
+        }
+    }
+    .message-form {
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        input {
+            width: 96%;
+            border: none;
+            padding: 2%;
+            margin-inline: 2%;
+            font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif
+        }
+        .message-pointer {
+            @include center-items(row, space-between, center);
+            padding: 3%;
+        }
+        background-color: white;
+        button {
+            border: none;
+            background-color: none;
+        }
+    }
+}
+
+.members {
+    font-size: 0.7em;
+    @include center-items(row, start, end);
+    margin-bottom: 4%;
+    background-color: white;
+    img {
+        @include padd(true, 40px, 40px);
+        border-radius: 50%;
+        padding: 1%;
+    }
+}

@@ -9,6 +9,9 @@ module.exports.getMessage = async(req, res) => {
 module.exports.writeMessage = async(req, res) => {
     const { sender, receiver } = req.params;
     const { text } = req.body;
+    if (!text) {
+        return res.status(400).send('no message found');
+    }
     const newMessage = new Message({ message: { text, sender }, members: [sender, receiver] });
     await newMessage.save().then(
         res.send(newMessage)

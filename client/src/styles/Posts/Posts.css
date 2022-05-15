@@ -131,12 +131,21 @@
 }
 
 .media img, .media .post .post-icons box-icon, .post .post-icons .media box-icon, .media .post .other-icons box-icon, .post .other-icons .media box-icon {
-  width: 2.5em;
+  width: 2.3em;
+  border: 1px dashed goldenrod;
   margin: 2%;
   border-radius: 8%;
 }
 
 .loader img, .loader .post .post-icons box-icon, .post .post-icons .loader box-icon, .loader .post .other-icons box-icon, .post .other-icons .loader box-icon {
   max-width: 80%;
+}
+
+iframe {
+  width: 100%;
+}
+
+.lk + box-icon {
+  fill: blue;
 }
 /*# sourceMappingURL=Posts.css.map */

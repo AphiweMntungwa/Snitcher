@@ -10,7 +10,7 @@ const Sideitem = ({ liProp, classUL }) => {
   const profile = session.loggedIn
     ? {
         title: session.user.username,
-        toLink: "",
+        toLink: "/profile",
         img: session.user.photo.url,
       }
     : {};
@@ -20,7 +20,7 @@ const Sideitem = ({ liProp, classUL }) => {
   return (
     <ul className={classUL}>
       {session.user && (
-        <li key={profile.title}>
+        <li key={profile.title} onClick={() => dispatch(toggleBurger(false))}>
           <Link to={profile.toLink}>
             <span> {profile.title}</span>
             <img src={profile.img} />

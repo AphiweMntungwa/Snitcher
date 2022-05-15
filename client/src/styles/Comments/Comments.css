@@ -28,6 +28,10 @@
   font-size: .9em;
 }
 
+.comment-list .like-comments .like-system {
+  min-width: 4em;
+}
+
 .comment-list li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -62,5 +66,35 @@
   -webkit-text-decoration: underline #4d8484;
           text-decoration: underline #4d8484;
   cursor: pointer;
+}
+
+.comment-owner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 1%;
+  width: 100%;
+  height: 2em;
+  font-size: .6em;
+}
+
+.comment-owner i {
+  color: #234a14;
+  font-weight: bold;
+}
+
+.comment-owner span {
+  color: orangered;
+  text-decoration: underline;
 }
 /*# sourceMappingURL=Comments.css.map */

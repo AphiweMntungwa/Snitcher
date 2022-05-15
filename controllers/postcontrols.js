@@ -1,5 +1,14 @@
 const Thought = require("../models/thoughts");
 
+module.exports.getPost = async(req, res) => {
+    const { id } = req.params;
+    const post = await Thought.findById(id);
+    if (!post) {
+        return res.status(404).send('post not found')
+    };
+    res.send(post)
+}
+
 module.exports.listItems = async(req, res) => {
     const list = await Thought.find({}).populate([{ path: 'author' }, {
         path: 'comments',
@@ -15,13 +24,14 @@ module.exports.vote = async(req, res) => {
     const { like = false, dislike = false } = req.body;
     const post = await Thought.findById(id);
     const { likes, dislikes } = post;
+    const userSession = req.session.user;
     if (like) {
-        !(likes.user.includes(req.user._id)) && likes.user.push(req.user._id)
-        dislikes.user = dislikes.user.filter(el => el != req.user._id);
+        !(likes.user.includes(userSession._id)) && likes.user.push(userSession._id)
+        dislikes.user = dislikes.user.filter(el => el != userSession._id);
         await post.save().then(() => res.send({ liked: true }));
     } else if (dislike) {
-        !(dislikes.user.includes(req.user._id)) && dislikes.user.push(req.user._id)
-        likes.user = likes.user.filter(el => el != req.user._id);
+        !(dislikes.user.includes(userSession._id)) && dislikes.user.push(userSession._id)
+        likes.user = likes.user.filter(el => el != userSession._id);
         await post.save().then(() => res.send({ disliked: true }))
     }
 }

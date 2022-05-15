@@ -15,7 +15,7 @@ import Register from "./Components/User/Register/Register";
 import Login from "./Components/User/Login/Login";
 import Comments from "./Components/Posts/Comments/Comments";
 import Chat from "./Components/Chat/Chat";
-import Connect from "./Components/Chat/Connect";
+import Profile from "./Components/User/Profile/Profile";
 import Logout from "./Components/User/Logout/Logout";
 
 const history = createBrowserHistory();
@@ -69,17 +69,17 @@ ReactDOM.render(
           <Provider store={store}>
             <App>
               <Chat />
-            </App>{" "}
+            </App>
           </Provider>
         }
       />{" "}
       <Route
-        path="/chatbox"
+        path="/profile"
         element={
           <Provider store={store}>
             <App>
-              <Connect />
-            </App>{" "}
+              <Profile />
+            </App>
           </Provider>
         }
       />{" "}

@@ -52,3 +52,11 @@
 .logout {
     padding: 4%;
 }
+
+.star-form {
+    input {
+        &::after {
+            content: '*'
+        }
+    }
+}

@@ -21,13 +21,11 @@ const sideList = [
 
 const Sidebar = () => {
 
-  const session = useContext(SessionContext);
+  // const session = useContext(SessionContext);
   // if (session.user) {
   //   sideList[2].toLink = "/chat";
-  //   sideList[1].toLink = "/new";
   // } else {
   //   sideList[2].toLink = "/auth";
-  //   sideList[1].toLink = "/auth";
   // }
                                                                                              
   return (

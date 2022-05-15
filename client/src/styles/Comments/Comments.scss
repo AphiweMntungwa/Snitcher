@@ -12,6 +12,9 @@
         @include center-items(row, space-between, center);
         width: 100%;
         font-size: .9em;
+        .like-system {
+            min-width: 4em;
+        }
     }
     li {
         @include center-items(column, center, start);
@@ -41,5 +44,20 @@
             text-decoration: underline $main-color;
             cursor: pointer;
         }
+    }
+}
+
+.comment-owner {
+    @include center-items(row, space-between, center);
+    padding-right: 1%;
+    @include padd(true, 100%, 2em);
+    font-size: .6em;
+    i {
+        color: $nav-color;
+        font-weight: bold;
+    }
+    span {
+        color: orangered;
+        text-decoration: underline;
     }
 }

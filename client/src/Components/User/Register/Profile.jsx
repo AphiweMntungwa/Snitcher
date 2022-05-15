@@ -6,6 +6,7 @@ import { showNext } from "../../../app/Redux/Auth/showActions";
 import { postThunk } from "../../../app/Redux/posts/postActions";
 import { sessionThunk } from "../../../app/Redux/session/sessionActions";
 import { useNavigate } from "react-router-dom";
+import profileImage from "../../../Assets/profile-placeholder.png";
 
 function Profile({ locSt }) {
   const dispatch = useDispatch();
@@ -20,38 +21,37 @@ function Profile({ locSt }) {
       return n.current.value;
     }
     let data = new Object();
-    if (inp(input1) && inp(input2) && inp(input3)) {
+    if (inp(input2) && inp(input3)) {
       data = {
         username: `${locSt("firstName")} ${locSt("lastName")}`,
         profileImage: input1.current.files[0],
         email: inp(input2),
         password: inp(input3),
       };
-    }
 
-    let dat = new FormData();
-    Object.keys(data).forEach((element) => {
-      dat.append(element, data[element]);
-    });
-
-    axios({
-      url: "http://localhost:8080/register",
-      method: "POST",
-      data: dat,
-    })
-      .then((res) => {
-        console.log(res.data);
-        dispatch(sessionThunk());
-        dispatch(postThunk());
-        navigate("/");
-      })
-      .catch((e) => {
-        setShow(true);
-        console.log(e);
+      let dat = new FormData();
+      Object.keys(data).forEach((element) => {
+        dat.append(element, data[element]);
       });
+
+      input1.current.files.length &&
+        axios({
+          url: "http://localhost:8080/register",
+          method: "POST",
+          data: dat,
+        })
+          .then((res) => {
+            dispatch(sessionThunk());
+            dispatch(postThunk());
+            navigate("/");
+          })
+          .catch((e) => {
+            setShow(true);
+          });
+    }
   };
   return (
-    <form>
+    <form className="star-form">
       <Alert show={show} variant="success" className="header-div">
         Email Exists
         <Button onClick={() => setShow(false)} variant="outline-success">
@@ -64,7 +64,7 @@ function Profile({ locSt }) {
       >
         Finish Creating Account
       </h1>
-      <input type="file" name="profileImage" ref={input1} />
+      <input type="file" name="profileImage" ref={input1} required />
       <label htmlFor="email">email:</label>
       <input
         type="email"

@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@600&display=swap");
+.chat, .chat .userSpan {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  margin-top: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chat .loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.chat .user-list {
+  padding-left: 0%;
+  list-style-type: none;
+  width: 90%;
+}
+
+.chat .user-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 2%;
+  border: 1px solid rgba(255, 68, 0, 0.174);
+  background-color: rgba(255, 68, 0, 0.05);
+  font-size: 0.8em;
+  margin-bottom: 1%;
+}
+
+.chat .user-list img {
+  width: 30px;
+  height: 30px;
+  margin-right: 4%;
+  border-radius: 40%;
+}
+
+.chat .userSpan {
+  -webkit-box-flex: unset;
+      -ms-flex-positive: unset;
+          flex-grow: unset;
+  margin-bottom: 3%;
+}
+
+.chat .userSpan img {
+  width: 30px;
+  height: 30px;
+  margin-right: 4%;
+  border-radius: 40%;
+}
+
+.chatSpace {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding-inline: 2%;
+}
+
+.chatSpace ul {
+  list-style-type: none;
+  padding-left: 0%;
+  max-height: 68%;
+  overflow-y: auto;
+}
+
+.chatSpace ul li {
+  border: 1px solid #ff450038;
+  background-color: #ff450024;
+  font-size: 0.8em;
+  margin-bottom: 1.2%;
+  margin: 0 0 1.2% 20%;
+  padding: 2%;
+}
+
+.chatSpace .messages .mine {
+  background-color: #020f3236;
+  border: 1px solid #002dff38;
+  margin: initial 20% 1.2% unset;
+}
+
+.chatSpace .messages h6 {
+  font-size: .8em;
+  color: #234a14;
+}
+
+.chatSpace .message-form {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: white;
+}
+
+.chatSpace .message-form input {
+  width: 96%;
+  border: none;
+  padding: 2%;
+  margin-inline: 2%;
+  font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.chatSpace .message-form .message-pointer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 3%;
+}
+
+.chatSpace .message-form button {
+  border: none;
+  background-color: none;
+}
+
+.members {
+  font-size: 0.7em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+  margin-bottom: 4%;
+  background-color: white;
+}
+
+.members img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 1%;
+}
+/*# sourceMappingURL=Chat.css.map */
