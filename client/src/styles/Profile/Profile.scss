@@ -1,0 +1,18 @@
+@import '../Variables/variables';
+.profile {
+    margin-top: 2%;
+    flex-grow: 1;
+    padding-inline: 2%;
+    @include center-items(column, start, center);
+    .prof-img {
+        @include center-items(column, center, center);
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    }
+    section {
+        @extend .profile;
+    }
+}

@@ -7,7 +7,6 @@ import Comments from "./Comments/Comments";
 import { Tooltip } from "react-tippy";
 import { sessionThunk } from "../../app/Redux/session/sessionActions";
 import "react-tippy/dist/tippy.css";
-import { postThunk } from "../../app/Redux/posts/postActions";
 
 function Post(props) {
   const { element, setId, deletePost, count, setItem } = props;
@@ -130,14 +129,14 @@ function Post(props) {
         })
         .then(() => {
           refresh(!newFetch);
-          setText('')
+          setText("");
         })
         .catch((e) => console.log(e));
   };
 
   return (
     <div className="post">
-      <Alert show={showB} variant="success"  style={{ padding: "0.3rem" }}>
+      <Alert show={showB} variant="success" style={{ padding: "0.3rem" }}>
         {frame.length != 0 && (
           <div>
             <iframe
@@ -163,7 +162,10 @@ function Post(props) {
         </Alert>
       ) : null}
       <div className="header">
-        <img src={element.author.photo.url} alt={element.author.username} />
+        <img
+          src={element.author.photo.url.replace("/upload", "/upload/w_90/h_90")}
+          alt={element.author.username}
+        />
         <h6>{element.author.username}</h6>
       </div>
       {ed ? (

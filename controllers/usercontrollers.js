@@ -7,7 +7,7 @@ module.exports.profilePhoto = async(req, res) => {
     const findUser = await User.findById(id);
     const { url, filename } = req.file;
     findUser.photo = { url, filename }
-    findUser.save().then(() => res.send(findUser)).catch(e => console.log(e))
+    findUser.save().then(() => res.send(findUser)).catch(e => res.status(500).send(e))
 }
 
 module.exports.registerUser = async(req, res, next) => {

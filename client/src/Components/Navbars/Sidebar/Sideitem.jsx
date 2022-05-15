@@ -23,7 +23,7 @@ const Sideitem = ({ liProp, classUL }) => {
         <li key={profile.title} onClick={() => dispatch(toggleBurger(false))}>
           <Link to={profile.toLink}>
             <span> {profile.title}</span>
-            <img src={profile.img} />
+            <img src={profile.img.replace("/upload", "/upload/w_90/h_90")} />
           </Link>
         </li>
       )}
@@ -32,7 +32,7 @@ const Sideitem = ({ liProp, classUL }) => {
           <li key={el.title} onClick={() => dispatch(toggleBurger(false))}>
             <Link to={el.toLink}>
               <span> {el.title}</span>
-              <img src={el.img} />
+              <img src={el.img.replace("/upload", "/upload/w_90/h_90")} />
             </Link>
           </li>
         );

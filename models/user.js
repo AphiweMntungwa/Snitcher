@@ -13,6 +13,7 @@ const userSchema = new Schema({
         unique: true
     },
     photo: photoSchema,
+    description: String,
     messages: [{
         type: Schema.Types.ObjectId,
         ref: 'Message'
