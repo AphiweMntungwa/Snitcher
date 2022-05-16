@@ -91,7 +91,7 @@ function Chat() {
           <ul className="user-list">
             {users.length > 0 &&
               users.map((el) => (
-                <li id={el._id} onClick={setId} key={el._id}>
+                <li id={el._id} key={el._id}>
                   {el.photo && (
                     <img
                       src={el.photo.url.replace(
@@ -101,13 +101,21 @@ function Chat() {
                       alt=""
                     />
                   )}
-                  {el.username}
+                  <span> {el.username}</span>
+                  <div className="icons">
+                    <box-icon name="message-rounded" onClick={setId}></box-icon>
+                    <box-icon name="show-alt"></box-icon>
+                  </div>
                 </li>
               ))}
           </ul>
         </div>
       ) : (
-        <Connect users={users} otherUser={otherUser} showMessages={showMessages} />
+        <Connect
+          users={users}
+          otherUser={otherUser}
+          showMessages={showMessages}
+        />
       )}
     </>
   );

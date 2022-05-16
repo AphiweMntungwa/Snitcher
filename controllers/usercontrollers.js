@@ -11,6 +11,7 @@ module.exports.describeUser = async(req, res) => {
     const findUser = await User.findById(id);
     findUser.description = description;
     findUser.save().then(() => {
+        req.session.user = findUser;
         res.send({ described: true });
     }).catch(e => res.status(500).send(e))
 }

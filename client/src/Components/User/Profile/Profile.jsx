@@ -41,7 +41,10 @@ function Profile({ user }) {
     const url = `http://localhost:8080/profile/${id}`;
     axios
       .patch(url, { description: desc })
-      .then(() => dispatch(sessionThunk()))
+      .then(() => {
+        setNew(!newDP);
+        editDescription(false);
+      })
       .catch((e) => console.log(e.message));
   };
 
@@ -73,7 +76,7 @@ function Profile({ user }) {
           interactive={true}
           distance={4}
         >
-          <h6>Change Your Profile Image.</h6>
+          <h6 style={{textDecoration:'underline'}}>Change Your Profile Image.</h6>
         </Tooltip>
       </div>
       <section>
@@ -84,10 +87,13 @@ function Profile({ user }) {
           <>
             <textarea
               className="form-control"
-              value={session.user.description}
+              defaultValue={session.user.description}
               onChange={(e) => describe(e.target.value)}
             ></textarea>
-            <Button style={{ padding: "1% 3%" }} onClick={handleDescribe}>
+            <Button
+              style={{ padding: "1% 3%", marginTop: "1%" }}
+              onClick={handleDescribe}
+            >
               Describe
             </Button>
           </>
