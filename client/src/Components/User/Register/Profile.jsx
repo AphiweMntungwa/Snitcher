@@ -6,7 +6,6 @@ import { showNext } from "../../../app/Redux/Auth/showActions";
 import { postThunk } from "../../../app/Redux/posts/postActions";
 import { sessionThunk } from "../../../app/Redux/session/sessionActions";
 import { useNavigate } from "react-router-dom";
-import profileImage from "../../../Assets/profile-placeholder.png";
 
 function Profile({ locSt }) {
   const dispatch = useDispatch();
@@ -24,7 +23,7 @@ function Profile({ locSt }) {
     if (inp(input2) && inp(input3)) {
       data = {
         username: `${locSt("firstName")} ${locSt("lastName")}`,
-        profileImage: input1.current.files[0],
+        profileImg: input1.current.files[0],
         email: inp(input2),
         password: inp(input3),
       };
@@ -33,7 +32,6 @@ function Profile({ locSt }) {
       Object.keys(data).forEach((element) => {
         dat.append(element, data[element]);
       });
-
       input1.current.files.length &&
         axios({
           url: "http://localhost:8080/register",

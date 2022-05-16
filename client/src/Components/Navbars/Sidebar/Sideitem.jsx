@@ -1,29 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toggleBurger } from "../../../app/Redux/topbar/topbarActions";
+import { sessionThunk } from "../../../app/Redux/session/sessionActions";
 
 const Sideitem = ({ liProp, classUL }) => {
+  const [prof, setProf] = useState({});
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session.userSession);
 
-  const profile = session.loggedIn
-    ? {
+  useEffect(() => {
+    dispatch(sessionThunk())
+    if (session.user) {
+      setProf({
         title: session.user.username,
         toLink: "/profile",
         img: session.user.photo.url,
-      }
-    : {};
+      });
+    }
+  }, []);
 
   let short = `https://img.icons8.com/`;
 
   return (
     <ul className={classUL}>
-      {session.user && (
-        <li key={profile.title} onClick={() => dispatch(toggleBurger(false))}>
-          <Link to={profile.toLink}>
-            <span> {profile.title}</span>
-            <img src={profile.img.replace("/upload", "/upload/w_90/h_90")} />
+      {Object.keys(prof).length>0 && (
+        <li key={prof.title} onClick={() => dispatch(toggleBurger(false))}>
+          <Link to={prof.toLink}>
+            <span> {prof.title}</span>
+            <img src={prof.img.replace("/upload", "/upload/w_90/h_90")} />
           </Link>
         </li>
       )}

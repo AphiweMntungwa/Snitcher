@@ -2,12 +2,28 @@ const User = require("../models/user");
 const bcrypt = require('bcrypt');
 
 
-module.exports.profilePhoto = async(req, res) => {
+module.exports.describeUser = async(req, res) => {
+    const { id } = req.params;
+    const { description } = req.body;
+    if (!description) {
+        res.status(400).send('Empty Fields');
+    }
+    const findUser = await User.findById(id);
+    findUser.description = description;
+    findUser.save().then(() => {
+        res.send({ described: true });
+    }).catch(e => res.status(500).send(e))
+}
+
+module.exports.changeProfile = async(req, res) => {
     const { id } = req.params;
     const findUser = await User.findById(id);
-    const { url, filename } = req.file;
-    findUser.photo = { url, filename }
-    findUser.save().then(() => res.send(findUser)).catch(e => res.status(500).send(e))
+    const { path, filename } = req.file ? req.file : { path: false, filename: false };
+    findUser.photo = { url: path, filename }
+    findUser.save().then(() => {
+        req.session.user = findUser;
+        res.send({ changedProfile: true })
+    }).catch(e => res.status(500).send(e))
 }
 
 module.exports.registerUser = async(req, res, next) => {
