@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import errorImage from "../../Assets/error.png";
 
-export default function Result({ list, fetchMe }) {
-  const [num, setNum] = useState(0);
-  useEffect(() => {
-    fetchMe(num);
-  }, [num]);
-  const check = (e) => {
-    e.target.checked ? setNum(num + 1) : setNum(num - 1);
-  };
+export default function Result({ list, check }) {
+
+  // useEffect(() => {
+  //   fetchMe(num);
+  // }, [num]);
+
 
   return (
     <ul className="youtube-list">

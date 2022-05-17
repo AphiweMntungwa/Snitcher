@@ -4,7 +4,7 @@ import Result from "./Result";
 import axios from "axios";
 import Loader from "../Utils/Loader";
 
-export default function Youtube({ fetchMe }) {
+export default function Youtube({check}) {
   const [searchParam, setParam] = useState("");
   const [data, setData] = useState([]);
   const [obj, setObj] = useState([]);
@@ -57,7 +57,7 @@ export default function Youtube({ fetchMe }) {
           <>
             {data.length > 0 && (
               <div className="youtube-search">
-                <Result list={data} fetchMe={fetchMe} />
+                <Result list={data} check={check} />
               </div>
             )}
           </>

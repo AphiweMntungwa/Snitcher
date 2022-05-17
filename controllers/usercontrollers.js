@@ -32,6 +32,9 @@ module.exports.registerUser = async(req, res, next) => {
     const hash = await bcrypt.hash(password, 12);
     const exists = await User.findOne({ email });
     if (exists) { return res.status(400).send('email exists') }
+    if (password.length < 6) {
+        res.status(400).send('password is too short.');
+    }
     const user = new User({
         username,
         email,

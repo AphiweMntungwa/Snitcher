@@ -11,24 +11,28 @@ import Loader from "../Utils/Loader";
 import { useDispatch } from "react-redux";
 
 const Newpost = () => {
-  const [count, setCount] = useState(0);
   const [loading, load] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [num, setNum] = useState(0);
+  const [checkers, keepCheck] = useState([]);
+
+  const check = (e) => {
+    if (e.target.checked) {
+      keepCheck([...checkers, e.target.value])
+      setNum(num + 1);
+    } else {
+      setNum(num - 1);
+    }
+  };
 
   const sendPost = () => {
-    let arr = [];
     const text = document.querySelector("textarea").value;
-    const checks = document.querySelectorAll("input[type=checkbox]");
-    for (const check of checks) {
-      check.checked && arr.push(check);
-    }
-    arr = arr.map((e) => e.value);
     load(true);
     axios
       .post("http://localhost:8080/index", {
         text,
-        arr,
+        checkers,
       })
       .then((res) => {
         console.log(res.data);
@@ -66,10 +70,10 @@ const Newpost = () => {
             Post
           </Button>
           <i className="fab fa-youtube"></i>
-          <span className="resNum">+{count}</span>
+          <span className="resNum">+{num}</span>
         </div>
       </div>
-      <Youtube fetchMe={setCount} />
+      <Youtube check={check} />
     </Box>
   );
 };

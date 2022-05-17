@@ -15,4 +15,10 @@
     section {
         @extend .profile;
     }
+    h5 {
+        border-bottom: 1px solid;
+        width: 100%;
+        @include center-items(row, space-between, center);
+        padding: 1%;
+    }
 }

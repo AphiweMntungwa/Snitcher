@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Alert } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { showNext } from "../../../app/Redux/Auth/showActions";
@@ -14,8 +14,22 @@ function Profile({ locSt }) {
   const input3 = useRef(null);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
+  const [key, setKey] = useState(false);
+  const [alert, setAlert] = useState(false);
+
+  const handleKey = (e) => {
+    setKey(e.target.value);
+  };
+
+  useEffect(() => {
+    let keyL = key.length;
+    keyL < 6 && keyL > 0 ? setAlert(true) : setAlert(false);
+  }, [key]);
 
   const handleAuth = () => {
+    if (!alert) {
+      return null;
+    }
     function inp(n) {
       return n.current.value;
     }
@@ -81,9 +95,14 @@ function Profile({ locSt }) {
         id="password"
         placeholder="password"
         ref={input3}
+        onChange={handleKey}
         required
       />
-
+      {alert && (
+        <blockquote style={{ fontSize: ".7em", color: "orangered" }}>
+          Password must be a minimum of 6 characters.
+        </blockquote>
+      )}
       <Button variant="outline-primary" onClick={handleAuth}>
         Submit
       </Button>

@@ -8,6 +8,7 @@ import Connect from "./Connect";
 import { useSelector } from "react-redux";
 import { Alert, Button } from "react-bootstrap";
 import Loader from "../Utils/Loader";
+import Profile from "../User/Profile/Profile";
 
 let arr = "";
 export let receiver = arr;
@@ -18,6 +19,7 @@ function Chat() {
   const [messageShow, showMessages] = useState(false);
   const [show, setShow] = useState(false);
   const [otherUser, setOtherUSer] = useState("");
+  const [profile, viewProfile] = useState(false);
 
   const session = useSelector((state) => state.session.userSession);
   useEffect(() => {
@@ -91,7 +93,7 @@ function Chat() {
           <ul className="user-list">
             {users.length > 0 &&
               users.map((el) => (
-                <li id={el._id} key={el._id}>
+                <li key={el._id}>
                   {el.photo && (
                     <img
                       src={el.photo.url.replace(
@@ -103,19 +105,44 @@ function Chat() {
                   )}
                   <span> {el.username}</span>
                   <div className="icons">
-                    <box-icon name="message-rounded" onClick={setId}></box-icon>
-                    <box-icon name="show-alt"></box-icon>
+                    <box-icon
+                      name="show-alt"
+                      id={el._id}
+                      onClick={(e) => {
+                        const temp = users.filter((e) => e._id === el._id);
+                        setOtherUSer(temp[0]);
+                        showMessages(true);
+                        viewProfile(true);
+                      }}
+                    ></box-icon>
+                    <box-icon
+                      name="message-rounded"
+                      id={el._id}
+                      onClick={setId}
+                    ></box-icon>
                   </div>
                 </li>
               ))}
           </ul>
         </div>
       ) : (
-        <Connect
-          users={users}
-          otherUser={otherUser}
-          showMessages={showMessages}
-        />
+        <>
+          {profile ? (
+            <Profile
+              setId={setId}
+              otherUser={{ user: otherUser }}
+              viewProfile={viewProfile}
+              showMessages={showMessages}
+              setShow={setShow}
+            />
+          ) : (
+            <Connect
+              users={users}
+              otherUser={otherUser}
+              showMessages={showMessages}
+            />
+          )}
+        </>
       )}
     </>
   );

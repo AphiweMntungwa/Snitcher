@@ -52,8 +52,8 @@ module.exports.showItem = async(req, res, next) => {
 }
 
 module.exports.createItem = async(req, res, next) => {
-    const { text, arr } = req.body;
-    const newPost = new Thought({ post: text, media: arr });
+    const { text, checkers } = req.body;
+    const newPost = new Thought({ post: text, media: checkers });
     newPost.author = req.session.user._id;
     await newPost.save().then(() => {
         res.send({ createdPost: true })

@@ -1,7 +1,5 @@
 const Thought = require("../models/thoughts");
 const Comment = require("../models/comments");
-const AppError = require("../Utils/apperror");
-const { reviewSchema } = require("../schemas.js");
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (req.session.user) {
@@ -18,16 +16,6 @@ module.exports.isOwner = async(req, res, next) => {
         return res.status(401).send({ isOwner: false });
     }
     next();
-}
-
-module.exports.validateReview = (req, res, next) => {
-    const { error } = reviewSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new AppError(msg, 400);
-    } else {
-        next();
-    }
 }
 
 module.exports.isCommentOwner = async(req, res, next) => {
