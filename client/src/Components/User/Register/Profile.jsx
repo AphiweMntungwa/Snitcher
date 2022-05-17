@@ -27,7 +27,7 @@ function Profile({ locSt }) {
   }, [key]);
 
   const handleAuth = () => {
-    if (!alert) {
+    if (alert) {
       return null;
     }
     function inp(n) {
@@ -58,14 +58,14 @@ function Profile({ locSt }) {
             navigate("/");
           })
           .catch((e) => {
-            setShow(true);
+            setShow(e.message);
           });
     }
   };
   return (
     <form className="star-form">
       <Alert show={show} variant="success" className="header-div">
-        Email Exists
+        {show}
         <Button onClick={() => setShow(false)} variant="outline-success">
           close
         </Button>

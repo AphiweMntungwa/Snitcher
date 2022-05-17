@@ -1,4 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Mukta:wght@600&display=swap");
+#large-app .listUl {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#large-app .listUl .list-item {
+  width: 48%;
+}
+
 .listUl {
   padding-left: 0;
   list-style-type: none;

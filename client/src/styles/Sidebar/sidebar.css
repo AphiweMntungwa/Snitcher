@@ -3,6 +3,21 @@ main {
   min-height: 94vh;
 }
 
+#large-app .sidebar {
+  background-color: #4d8484;
+}
+
+#large-app .sidebar ul li {
+  margin-bottom: 15%;
+  padding-block: 8%;
+  -webkit-box-shadow: -6px 5px 4px;
+          box-shadow: -6px 5px 4px;
+}
+
+#large-app .sidebar ul li a {
+  color: #234a14;
+}
+
 .sidebar {
   background-color: #234a14;
   -webkit-box-flex: 1;

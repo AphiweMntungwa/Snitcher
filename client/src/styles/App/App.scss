@@ -1,0 +1,28 @@
+@import '../Variables/variables';
+.App {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+#large-app {
+    @include center-items(row, center, start);
+    .sidebar {
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        width: 20%;
+    }
+    main {
+        flex-grow: 3;
+        width: 80%;
+    }
+}
+
+main {
+    display: flex;
+}
+
+.sidebar-ul {
+    list-style-type: none;
+}

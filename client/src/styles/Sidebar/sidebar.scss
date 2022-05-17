@@ -3,6 +3,22 @@ main {
     min-height: 94vh;
 }
 
+#large-app {
+    .sidebar {
+        background-color: $main-color;
+        ul {
+            li {
+                margin-bottom: 15%;
+                padding-block: 8%;
+                box-shadow: -6px 5px 4px;
+                a {
+                    color: $nav-color;
+                }
+            }
+        }
+    }
+}
+
 .sidebar {
     background-color: $nav-color;
     flex-grow: 1;

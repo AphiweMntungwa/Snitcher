@@ -1,4 +1,10 @@
-@import '../Variables/variables';
+@import "../Variables/variables";
+#large-app {
+    .auth {
+        margin-top: 7%;
+    }
+}
+
 .auth {
     flex-grow: 1;
     @include center-items(row, center, start);
@@ -7,7 +13,7 @@
     .alert {
         padding-block: 0.1em;
         width: 85%;
-        font-size: .7em;
+        font-size: 0.7em;
         @include center-items(row, space-between, center);
         p {
             margin-bottom: unset;
@@ -25,12 +31,12 @@
     }
     input,
     label {
-        font-size: .8em;
+        font-size: 0.8em;
     }
     button {
-        @include buttons(.5%);
-        margin-top: .5em;
-        padding-block: .4em;
+        @include buttons(0.5%);
+        margin-top: 0.5em;
+        padding-block: 0.4em;
         &:last-of-type {
             border: none;
         }
@@ -45,7 +51,7 @@
 
 .registry {
     button {
-        padding-inline: .8em;
+        padding-inline: 0.8em;
     }
 }
 
@@ -56,7 +62,7 @@
 .star-form {
     input {
         &::after {
-            content: '*'
+            content: "*";
         }
     }
 }

@@ -5,13 +5,15 @@ import sessionReducer from './Redux/session/sessionReducer'
 import postReducer from './Redux/posts/postReducer'
 import topbarReducer from './Redux/topbar/topbarReducer';
 import showReducer from './Redux/Auth/showReducer';
+import windowReducer from './Redux/window/windowReducer';
 
 export const store = configureStore({
     reducer: {
         session: sessionReducer,
         post: postReducer,
         topbar: topbarReducer,
-        auth: showReducer
+        auth: showReducer,
+        window: windowReducer
     },
     devTools: { logger, thunk }
 })
