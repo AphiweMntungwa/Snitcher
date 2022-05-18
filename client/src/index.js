@@ -8,12 +8,8 @@ import { Provider } from "react-redux";
 import { createBrowserHistory } from "history";
 
 import Posts from "./Components/Posts/Posts";
-import Details from "./Components/Details/Details";
 import Newpost from "./Components/Newpost/Newpost";
-import Floater from "./Components/Floater/Floater";
-import Register from "./Components/User/Register/Register";
 import Login from "./Components/User/Login/Login";
-import Comments from "./Components/Posts/Comments/Comments";
 import Chat from "./Components/Chat/Chat";
 import Profile from "./Components/User/Profile/Profile";
 import Logout from "./Components/User/Logout/Logout";
@@ -52,24 +48,24 @@ ReactDOM.render(
             </App>{" "}
           </Provider>
         }
-      />
+      />{" "}
       <Route
         path="/logout"
         element={
           <Provider store={store}>
             <App>
               <Logout />
-            </App>
+            </App>{" "}
           </Provider>
         }
-      />
+      />{" "}
       <Route
         path="/chat"
         element={
           <Provider store={store}>
             <App>
               <Chat />
-            </App>
+            </App>{" "}
           </Provider>
         }
       />{" "}
@@ -79,7 +75,7 @@ ReactDOM.render(
           <Provider store={store}>
             <App>
               <Profile />
-            </App>
+            </App>{" "}
           </Provider>
         }
       />{" "}

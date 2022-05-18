@@ -1,6 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./chat.css";
-// import { SessionContext } from "../../App";
 import { receiver } from "./Chat";
 import axios from "axios";
 import { useSelector } from "react-redux";

@@ -1,9 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-// import "./chat.css";
 import "../../styles/Chat/Chat.css";
-import { SessionContext } from "../../App";
 import Connect from "./Connect";
 import { useSelector } from "react-redux";
 import { Alert, Button } from "react-bootstrap";
