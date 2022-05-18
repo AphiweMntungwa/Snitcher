@@ -7,6 +7,7 @@ const app = express();
 const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require('path');
+const mongoose = require("mongoose");
 
 const campgroundRoutes = require("./routes/postroutes");
 const commentRoutes = require("./routes/commentRoutes");
