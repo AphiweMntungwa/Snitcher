@@ -1,8 +1,14 @@
+console.log(1)
+
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
+console.log(2)
+
 const express = require("express");
 const mongoose = require("mongoose");
+console.log(3)
+
 const app = express();
 const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
