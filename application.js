@@ -7,6 +7,7 @@ const app = express();
 const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require('path');
+console.log('metro')
 
 const campgroundRoutes = require("./routes/postroutes");
 const commentRoutes = require("./routes/commentRoutes");
@@ -16,7 +17,7 @@ const messageRoutes = require("./routes/messageroutes")
 
 const User = require("./models/user");
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp' 
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
 const session = require('express-session');
 const cors = require('cors')
 
