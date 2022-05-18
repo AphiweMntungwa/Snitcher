@@ -36,7 +36,7 @@ const Login = () => {
     data = { email: inp(email), password: inp(password) };
 
     axios({
-      url: "http://localhost:8080/login",
+      url: "https://snitcherapp.herokuapp.com/login",
       method: "POST",
       data,
     })

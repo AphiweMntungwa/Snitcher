@@ -23,7 +23,7 @@ export const fetchSessionError = error => {
 export const sessionThunk = () => {
     return (dispatch) => {
         dispatch(fetchSessionReq());
-        axios.get("http://localhost:8080/login")
+        axios.get("https://snitcherapp.herokuapp.com/login")
             .then((response) => {
                 dispatch(fetchSessionSuccess(response.data));
             })

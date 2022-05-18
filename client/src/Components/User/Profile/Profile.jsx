@@ -25,7 +25,7 @@ function Profile({ otherUser, setId, viewProfile, setShow, showMessages }) {
     if (profimg.current.files.length && session.user) {
       data.append("profileImage", profimg.current.files[0]);
       const id = session.user._id;
-      const url = `http://localhost:8080/profile/${id}`;
+      const url = `https://snitcherapp.herokuapp.com/profile/${id}`;
       axios({
         url,
         method: "POST",
@@ -42,7 +42,7 @@ function Profile({ otherUser, setId, viewProfile, setShow, showMessages }) {
 
   const handleDescribe = () => {
     const id = session.user._id;
-    const url = `http://localhost:8080/profile/${id}`;
+    const url = `https://snitcherapp.herokuapp.com/profile/${id}`;
     axios
       .patch(url, { description: desc })
       .then(() => {
@@ -53,7 +53,7 @@ function Profile({ otherUser, setId, viewProfile, setShow, showMessages }) {
   };
 
   const deleteAccount = () => {
-    const url = `http://localhost:8080/profile/${session.user._id}`;
+    const url = `https://snitcherapp.herokuapp.com/profile/${session.user._id}`;
     axios
       .delete(url)
       .then(() => navigate("/"))

@@ -22,7 +22,7 @@ export const fetchPostsError = error => {
 export const postThunk = () => {
     return (dispatch) => {
         dispatch(fetchPostsReq());
-        axios.get('http://localhost:8080/index')
+        axios.get('https://snitcherapp.herokuapp.com/index')
             .then((response) => {
                 const { list } = response.data;
                 const posts = [];

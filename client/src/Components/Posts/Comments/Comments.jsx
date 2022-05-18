@@ -59,7 +59,7 @@ function Comments({ sendComment, commentRef, element, newFetch }) {
   useEffect(() => {
     load(true);
     axios
-      .get(`http://localhost:8080/index/${element._id}/comments`)
+      .get(`https://snitcherapp.herokuapp.com/index/${element._id}/comments`)
       .then((res) => {
         load(false);
         let comments = [...res.data.comments].reverse();
@@ -71,7 +71,7 @@ function Comments({ sendComment, commentRef, element, newFetch }) {
   const deleteComment = (commentId) => {
     axios
       .delete(
-        `http://localhost:8080/index/${element._id}/comments/${commentId}`
+        `https://snitcherapp.herokuapp.com/index/${element._id}/comments/${commentId}`
       )
       .then((res) => {
         deleter(!deleted);
@@ -87,7 +87,7 @@ function Comments({ sendComment, commentRef, element, newFetch }) {
         : { dislike: true };
 
     axios
-      .post(`http://localhost:8080/index/${id}/comments/vote`, {
+      .post(`https://snitcherapp.herokuapp.com/index/${id}/comments/vote`, {
         ...cname,
       })
       .then((res) => {

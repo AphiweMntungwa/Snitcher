@@ -32,7 +32,7 @@ function Posts(props) {
 
   const deletePost = (id) => {
     axios
-      .delete(`http://localhost:8080/index/${id}`)
+      .delete(`https://snitcherapp.herokuapp.com/index/${id}`)
       .then((res) => {
         setItem(res.data.list);
       })

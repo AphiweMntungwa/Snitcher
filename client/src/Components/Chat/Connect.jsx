@@ -15,7 +15,7 @@ function Connect({ users, otherUser, showMessages }) {
   const session = useSelector((state) => state.session.userSession);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/messages/${session.user._id}/${receiver}`)
+      .get(`https://snitcherapp.herokuapp.com/messages/${session.user._id}/${receiver}`)
       .then((res) => {
         const arr = [];
         res.data.messages.forEach((el) => {
@@ -37,7 +37,7 @@ function Connect({ users, otherUser, showMessages }) {
     const message = document.querySelector(".message").value;
 
     axios
-      .post(`http://localhost:8080/messages/${session.user._id}/${receiver}`, {
+      .post(`https://snitcherapp.herokuapp.com/messages/${session.user._id}/${receiver}`, {
         text: message,
       })
       .then(() => {

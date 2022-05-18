@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Box from "../Box/Box";
 import Result from "./Result";
 import axios from "axios";
 import Loader from "../Utils/Loader";
@@ -18,7 +17,7 @@ export default function Youtube({check}) {
   function setSearch(e) {
     load(true);
     axios
-      .post("http://localhost:8080/search", {
+      .post("https://snitcherapp.herokuapp.com/search", {
         searchParam,
       })
       .then((res) => {

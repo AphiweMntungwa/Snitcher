@@ -12,7 +12,7 @@ function Logout() {
 
   const logOut = () => {
     axios
-      .get("http://localhost:8080/logout")
+      .get("https://snitcherapp.herokuapp.com/logout")
       .then(() => {
         setRes(true);
       })

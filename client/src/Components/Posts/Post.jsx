@@ -58,7 +58,7 @@ function Post(props) {
     }
     arr = arr.map((e) => e.value);
     axios
-      .patch(`http://localhost:8080/index/${id}`, {
+      .patch(`https://snitcherapp.herokuapp.com/index/${id}`, {
         body,
         arr,
       })
@@ -76,10 +76,10 @@ function Post(props) {
         : { dislike: true };
 
     axios
-      .post(`http://localhost:8080/index/${element._id}/vote`, { ...cname })
+      .post(`https://snitcherapp.herokuapp.com/index/${element._id}/vote`, { ...cname })
       .then((res) => {
         axios
-          .get(`http://localhost:8080/index/${element._id}`)
+          .get(`https://snitcherapp.herokuapp.com/index/${element._id}`)
           .then((response) => {
             console.log(response);
             setOnePost(response.data);
@@ -124,7 +124,7 @@ function Post(props) {
     }
     commentRef.current.value &&
       axios
-        .post(`http://localhost:8080/index/${element._id}/comments`, {
+        .post(`https://snitcherapp.herokuapp.com/index/${element._id}/comments`, {
           body: commentRef.current.value,
         })
         .then(() => {

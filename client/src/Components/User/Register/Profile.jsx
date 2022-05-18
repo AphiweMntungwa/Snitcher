@@ -48,7 +48,7 @@ function Profile({ locSt }) {
       });
       input1.current.files.length &&
         axios({
-          url: "http://localhost:8080/register",
+          url: "https://snitcherapp.herokuapp.com/register",
           method: "POST",
           data: dat,
         })

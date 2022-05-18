@@ -30,7 +30,7 @@ const Newpost = () => {
     const text = document.querySelector("textarea").value;
     load(true);
     axios
-      .post("http://localhost:8080/index", {
+      .post("https://snitcherapp.herokuapp.com/index", {
         text,
         checkers,
       })

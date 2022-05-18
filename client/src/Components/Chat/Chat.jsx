@@ -25,7 +25,7 @@ function Chat() {
   useEffect(() => {
     load(true);
     axios
-      .get("http://localhost:8080/users")
+      .get("https://snitcherapp.herokuapp.com/users")
       .then((res) => {
         load(false);
         const otherUsers = session.user
