@@ -7,10 +7,11 @@ console.log(2)
 
 const express = require("express");
 console.log(23)
-const mongoose = require("mongoose");
 console.log(3)
-
 const app = express();
+const mongoose = require("mongoose");
+console.log(4)
+
 const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require('path');
