@@ -5,32 +5,25 @@ import { toggleBurger } from "../../../app/Redux/topbar/topbarActions";
 import { sessionThunk } from "../../../app/Redux/session/sessionActions";
 
 const Sideitem = ({ liProp, classUL }) => {
-  const [prof, setProf] = useState({});
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session.userSession);
 
   useEffect(() => {
-    dispatch(sessionThunk())
-    if (session.user) {
-      setProf({
-        title: session.user.username,
-        toLink: "/profile",
-        img: session.user.photo.url,
-      });
-    }
+    dispatch(sessionThunk());
   }, []);
 
   let short = `https://img.icons8.com/`;
-
   return (
     <ul className={classUL}>
-      {Object.keys(prof).length>0 && (
-        <li key={prof.title} onClick={() => dispatch(toggleBurger(false))}>
-          <Link to={prof.toLink}>
-            <span> {prof.title}</span>
-            <img src={prof.img.replace("/upload", "/upload/w_90/h_90")} />
+      {session.user ? (
+        <li key={session.user._id} onClick={() => dispatch(toggleBurger(false))}>
+          <Link to="/profile">
+            <span> {session.user.username} </span>
+            <img src={session.user.photo.url.replace("/upload", "/upload/w_90/h_90")} />
           </Link>
         </li>
+      ) : (
+        null
       )}
       {liProp.map((el) => {
         return (

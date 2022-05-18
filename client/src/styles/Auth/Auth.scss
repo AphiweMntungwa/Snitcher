@@ -2,6 +2,9 @@
 #large-app {
     .auth {
         margin-top: 7%;
+        form {
+            padding: 15% 10%;
+        }
     }
 }
 
@@ -32,6 +35,7 @@
     input,
     label {
         font-size: 0.8em;
+        display: block;
     }
     button {
         @include buttons(0.5%);

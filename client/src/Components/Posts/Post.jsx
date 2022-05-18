@@ -240,12 +240,13 @@ function Post(props) {
             interactive={true}
             distance={5}
           >
-            <box-icon name="trash" style={{ marginRight: ".2em" }}></box-icon>
+            <box-icon name="trash" animation="tada-hover" style={{ marginRight: ".2em" }}></box-icon>
           </Tooltip>
 
           <box-icon
             type="solid"
             name="pencil"
+            animation="tada-hover"
             onClick={() => {
               setEd(!ed);
             }}
@@ -257,6 +258,7 @@ function Post(props) {
               onClick={vote}
               name="up-arrow-square"
               ref={up}
+              animation="tada-hover"
             ></box-icon>
             <span className="likeSpan">{dislikes}</span>
 
@@ -265,6 +267,7 @@ function Post(props) {
               onClick={vote}
               name="down-arrow-square"
               ref={down}
+              animation="tada-hover"
             ></box-icon>
           </span>
         </div>

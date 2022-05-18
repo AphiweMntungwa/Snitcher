@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Mukta:wght@600&display=swap");
+#large-app .new-post {
+  padding: 5% 16%;
+}
+
 .new-post {
   display: -webkit-box;
   display: -ms-flexbox;

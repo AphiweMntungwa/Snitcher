@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import Sideitem from "./Sideitem";
-// import "./sidebar.css";
 import "../../../styles/Sidebar/sidebar.css";
-import { SessionContext } from "../../../App";
 
 let short = `https://img.icons8.com/`;
 const sideList = [
@@ -20,13 +18,6 @@ const sideList = [
 ];
 
 const Sidebar = () => {
-
-  // const session = useContext(SessionContext);
-  // if (session.user) {
-  //   sideList[2].toLink = "/chat";
-  // } else {
-  //   sideList[2].toLink = "/auth";
-  // }
                                                                                              
   return (
     <div className="sidebar">

@@ -22,7 +22,6 @@ function App({ children }) {
   };
 
   useEffect(() => {
-    console.log(size);
     window.innerWidth > 750
       ? dispatch(largeWindowSize(true))
       : dispatch(smallWindowSize());

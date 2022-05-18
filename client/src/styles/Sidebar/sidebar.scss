@@ -36,6 +36,7 @@ main {
                 @include center-items(row, space-between);
                 text-decoration: none;
                 span {
+                    max-width: 80%;
                     font-family: get($fonts, mutka);
                     animation: show-up 2s cubic-bezier(0.075, 0.82, 0.165, 1);
                 }

@@ -1,4 +1,10 @@
 @import '../Variables/variables';
+#large-app {
+    .new-post {
+        padding: 5% 16%
+    }
+}
+
 .new-post {
     @include center-items(column, start, center);
     flex-grow: 1;

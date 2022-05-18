@@ -3,6 +3,10 @@
   margin-top: 7%;
 }
 
+#large-app .auth form {
+  padding: 15% 10%;
+}
+
 .auth {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -63,6 +67,7 @@
 .auth label,
 .auth footer {
   font-size: 0.8em;
+  display: block;
 }
 
 .auth button {

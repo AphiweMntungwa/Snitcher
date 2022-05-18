@@ -1,4 +1,5 @@
 const Thought = require("../models/thoughts");
+const User = require('../models/user')
 
 module.exports.getPost = async(req, res) => {
     const { id } = req.params;
@@ -54,7 +55,10 @@ module.exports.showItem = async(req, res, next) => {
 module.exports.createItem = async(req, res, next) => {
     const { text, checkers } = req.body;
     const newPost = new Thought({ post: text, media: checkers });
+    const owner = await User.findById(req.session.user._id);
     newPost.author = req.session.user._id;
+    owner.posts.push(newPost);
+    owner.save();
     await newPost.save().then(() => {
         res.send({ createdPost: true })
     }).catch(() => res.status(400).send({ createdPost: false }))

@@ -7,12 +7,15 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { sessionThunk } from "../../../app/Redux/session/sessionActions";
+import { useNavigate } from "react-router-dom";
 
 function Profile({ otherUser, setId, viewProfile, setShow, showMessages }) {
   const dispatch = useDispatch();
   const [description, editDescription] = useState(false);
   const [desc, describe] = useState("");
   const [newDP, setNew] = useState(false);
+  const navigate = useNavigate();
+
   const profimg = useRef(null);
   let sess = useSelector((state) => state.session.userSession);
   let session = otherUser ? otherUser : sess;
@@ -47,6 +50,14 @@ function Profile({ otherUser, setId, viewProfile, setShow, showMessages }) {
         editDescription(false);
       })
       .catch((e) => console.log(e.message));
+  };
+
+  const deleteAccount = () => {
+    const url = `http://localhost:8080/profile/${session.user._id}`;
+    axios
+      .delete(url)
+      .then(() => navigate("/"))
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -129,6 +140,28 @@ function Profile({ otherUser, setId, viewProfile, setShow, showMessages }) {
           <p>{session.user.description}</p>
         )}
       </section>
+      {!otherUser && (
+        <Tooltip
+          html={
+            <Button
+              variant="outline-danger"
+              onClick={deleteAccount}
+              style={{ fontSize: ".8em", padding: ".1em .2em" }}
+            >
+              Are You Sure?
+            </Button>
+          }
+          position="bottom"
+          trigger="mouseenter"
+          arrow={true}
+          interactive={true}
+          distance={6}
+        >
+          <h6 style={{ textDecoration: "red underline", color: "red" }}>
+            Delete Your Account Permanently!
+          </h6>
+        </Tooltip>
+      )}
     </div>
   );
 }

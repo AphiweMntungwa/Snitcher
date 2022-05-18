@@ -1,3 +1,4 @@
+const { cloudinary } = require('../cloudstorage/main')
 const User = require("../models/user");
 const bcrypt = require('bcrypt');
 
@@ -20,6 +21,7 @@ module.exports.changeProfile = async(req, res) => {
     const { id } = req.params;
     const findUser = await User.findById(id);
     const { path, filename } = req.file ? req.file : { path: false, filename: false };
+    await cloudinary.uploader.destroy(findUser.photo.filename);
     findUser.photo = { url: path, filename }
     findUser.save().then(() => {
         req.session.user = findUser;
@@ -65,7 +67,6 @@ module.exports.isUser = async(req, res) => {
         if (response) {
             req.session.user = user;
             req.session.save(function(err) {
-                // session saved
                 if (err) {
                     return res.status(500).send(err.message)
                 }
@@ -102,4 +103,13 @@ module.exports.logOut = (req, res) => {
         });
     }
     res.end();
+}
+
+module.exports.deleteUser = async(req, res) => {
+    const { id } = req.params;
+    const findUser = await User.findById(id);
+    await cloudinary.uploader.destroy(findUser.photo.filename);
+    req.session.user = null;
+    await User.findOneAndDelete({ _id: id });
+    res.send({ deleted: true })
 }

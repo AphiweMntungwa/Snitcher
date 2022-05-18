@@ -40,6 +40,21 @@
     }
 }
 
+#large-app {
+    .chatSpace {
+        .message-form {
+            left: unset;
+            right: 0px;
+            width: 80%;
+        }
+        ul {
+            li {
+                padding: 1%;
+            }
+        }
+    }
+}
+
 .chatSpace {
     flex-grow: 1;
     padding-inline: 2%;
