@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 console.log(2)
 
 const express = require("express");
+console.log(23)
 const mongoose = require("mongoose");
 console.log(3)
 
