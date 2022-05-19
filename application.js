@@ -14,7 +14,9 @@ console.log(3)
 console.log(4)
 
 console.log(5)
-const mongoose = require('mongoose');
+
+const mongoose = require('mongoose') || 'notyhing';
+console.log(mongoose)
 console.log('6 a')
 const User = require("./models/user");
 
