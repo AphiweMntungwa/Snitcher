@@ -2,10 +2,10 @@
 //     require("dotenv").config();
 // }
 // console.log(1)
-// const express = require("express");
+const express = require("express");
 // console.log(2)
 
-// const app = express();
+const app = express();
 // const AppError = require("./Utils/apperror");
 // const mongoSanitize = require("express-mongo-sanitize");
 // const path = require('path');
