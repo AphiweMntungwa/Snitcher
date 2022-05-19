@@ -19,19 +19,25 @@ const User = require("./models/user");
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
 const session = require('express-session');
 const cors = require('cors')
-
+console.log(1)
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'build')))
+console.log(2)
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
+console.log(3)
 
 const port = process.env.PORT || 8080
 app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
+console.log(4)
+
 const mongoose = require('mongoose');
+console.log(5)
+
 
 const MongoStore = require("connect-mongo")(session);
 mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
