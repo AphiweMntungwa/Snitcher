@@ -53,16 +53,16 @@ const MongoStore = require("connect-mongo")(session);
 //         console.log("Oh nooo error!", err);
 //     });
 
-const store = new MongoStore({
-    url: dbUrl,
-    secret: process.env.SECRET || 'iamintrouble',
-    touchAfter: 24 * 3600
-})
-store.on("error", function(e) {
-    console.log('ERROR ON SESSION', e)
-})
+// const store = new MongoStore({
+//     url: dbUrl,
+//     secret: process.env.SECRET || 'iamintrouble',
+//     touchAfter: 24 * 3600
+// })
+// store.on("error", function(e) {
+//     console.log('ERROR ON SESSION', e)
+// })
 app.use(session({
-    store,
+    // store,
     name: 'inspector',
     resave: false,
     saveUninitialized: true,
