@@ -30,6 +30,7 @@ module.exports.changeProfile = async(req, res) => {
 }
 
 module.exports.registerUser = async(req, res, next) => {
+    console.log(12)
     const { username, email, password } = req.body;
     const hash = await bcrypt.hash(password, 12);
     const exists = await User.findOne({ email });
