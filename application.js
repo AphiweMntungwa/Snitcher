@@ -1,13 +1,13 @@
-// if (process.env.NODE_ENV !== "production") {
-//     require("dotenv").config();
-// }
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
 // console.log(1)
 const express = require("express");
 // console.log(2)
 
 const app = express();
-// const AppError = require("./Utils/apperror");
-// const mongoSanitize = require("express-mongo-sanitize");
+const AppError = require("./Utils/apperror");
+const mongoSanitize = require("express-mongo-sanitize");
 const path = require('path');
 // console.log(3)
 
@@ -24,9 +24,9 @@ const path = require('path');
 
 // console.log(6)
 
-// const session = require('express-session');
-// const cors = require('cors')
-// app.use(cors())
+const session = require('express-session');
+const cors = require('cors')
+app.use(cors())
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
@@ -83,11 +83,11 @@ app.listen(port, () => {
 // app.use("/search", videoroutes);
 // app.use("/messages", messageRoutes);
 
-// app.all("*", (req, res, next) => {
-//     next(new AppError("Page Not Found!", 404));
-// });
+app.all("*", (req, res, next) => {
+    next(new AppError("Page Not Found!", 404));
+});
 
-// app.use((err, req, res, next) => {
-//     const { message = "something went wrong", status = 500 } = err;
-//     res.status(status).render("error", { message });
-// });
+app.use((err, req, res, next) => {
+    const { message = "something went wrong", status = 500 } = err;
+    res.status(status).render("error", { message });
+});
