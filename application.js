@@ -20,13 +20,13 @@ console.log('6 a')
 
 
 
-const dbUrl = '' //process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
+// const dbUrl = '' //process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
 
-const campgroundRoutes = require("./routes/postroutes");
-const commentRoutes = require("./routes/commentRoutes");
-const userRoutes = require("./routes/useroutes");
-const videoroutes = require("./routes/videoroutes")
-const messageRoutes = require("./routes/messageroutes")
+// const campgroundRoutes = require("./routes/postroutes");
+// const commentRoutes = require("./routes/commentRoutes");
+// const userRoutes = require("./routes/useroutes");
+// const videoroutes = require("./routes/videoroutes")
+// const messageRoutes = require("./routes/messageroutes")
 console.log(6)
 
 const session = require('express-session');
