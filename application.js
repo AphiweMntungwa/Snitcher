@@ -11,11 +11,6 @@ const mongoSanitize = require("express-mongo-sanitize");
 const path = require('path');
 console.log(3)
 
-const campgroundRoutes = require("./routes/postroutes");
-const commentRoutes = require("./routes/commentRoutes");
-const userRoutes = require("./routes/useroutes");
-const videoroutes = require("./routes/videoroutes")
-const messageRoutes = require("./routes/messageroutes")
 console.log(4)
 
 const User = require("./models/user");
@@ -23,6 +18,12 @@ const mongoose = require('mongoose');
 console.log(5)
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
+
+const campgroundRoutes = require("./routes/postroutes");
+const commentRoutes = require("./routes/commentRoutes");
+const userRoutes = require("./routes/useroutes");
+const videoroutes = require("./routes/videoroutes")
+const messageRoutes = require("./routes/messageroutes")
 console.log(6)
 
 const session = require('express-session');
