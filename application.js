@@ -8,6 +8,7 @@ const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require('path');
 console.log(5)
+console.log(require("mongoose"));
 const mongoose = require("mongoose");
 console.log(6)
 
