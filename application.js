@@ -13,10 +13,12 @@ console.log(3)
 
 console.log(4)
 
-const User = require("./models/user");
 console.log(5)
 const mongoose = require('mongoose');
 console.log('6 a')
+const User = require("./models/user");
+
+
 
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
