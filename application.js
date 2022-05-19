@@ -46,12 +46,12 @@ app.listen(port, () => {
 
 
 const MongoStore = require("connect-mongo")(session);
-mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log("connection successful");
-    }).catch((err) => {
-        console.log("Oh nooo error!", err);
-    });
+// mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => {
+//         console.log("connection successful");
+//     }).catch((err) => {
+//         console.log("Oh nooo error!", err);
+//     });
 
 const store = new MongoStore({
     url: dbUrl,
