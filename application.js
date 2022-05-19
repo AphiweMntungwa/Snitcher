@@ -1,43 +1,44 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
-
+console.log(1)
 const express = require("express");
+console.log(2)
+
 const app = express();
 const AppError = require("./Utils/apperror");
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require('path');
+console.log(3)
 
 const campgroundRoutes = require("./routes/postroutes");
 const commentRoutes = require("./routes/commentRoutes");
 const userRoutes = require("./routes/useroutes");
 const videoroutes = require("./routes/videoroutes")
 const messageRoutes = require("./routes/messageroutes")
+console.log(4)
 
 const User = require("./models/user");
+const mongoose = require('mongoose');
+console.log(5)
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/YelpCamp'
+console.log(6)
+
 const session = require('express-session');
 const cors = require('cors')
-console.log(1)
 app.use(cors())
-app.use(express.static(path.join(__dirname, 'build')))
-console.log(2)
-const mongoose = require('mongoose');
-
-console.log(4)
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
-console.log(3)
 
 const port = process.env.PORT || 8080
 app.listen(port, () => {
     console.log("the app is conscious on port", port);
 })
 
-console.log(5)
 
 
 const MongoStore = require("connect-mongo")(session);
