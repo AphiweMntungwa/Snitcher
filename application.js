@@ -53,7 +53,6 @@ app.use(session({
     saveUninitialized: true,
     secret: 'countdownisbelowone',
     cookie: {
-        sameSite: "strict",
         maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
     }
 }));
