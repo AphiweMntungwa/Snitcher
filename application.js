@@ -54,9 +54,9 @@ app.use(session({
     saveUninitialized: true,
     resave: false,
     cookie: {
-        httpOnly: false,
+        sameSite: 'None',
+        secure: true,
         maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
-        secure: false
     }
 }))
 
