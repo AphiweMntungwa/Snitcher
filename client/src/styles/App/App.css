@@ -12,6 +12,10 @@
           flex-direction: column;
 }
 
+.alert button {
+  display: block;
+}
+
 #large-app {
   display: -webkit-box;
   display: -ms-flexbox;

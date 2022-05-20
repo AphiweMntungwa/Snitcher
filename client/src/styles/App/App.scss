@@ -5,6 +5,12 @@
     flex-direction: column;
 }
 
+.alert {
+    button {
+        display: block
+    }
+}
+
 #large-app {
     @include center-items(row, center, start);
     .sidebar {
