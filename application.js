@@ -52,9 +52,9 @@ app.use(session({
     name: 'bagade',
     secret: 'istherestillhope',
     saveUninitialized: true,
-    resave: false,
+    resave: true,
     cookie: {
-        sameSite: 'None',
+        sameSite: 'none',
         secure: true,
         maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
     }
