@@ -46,18 +46,13 @@ const store = new MongoStore({
 store.on("error", function(e) {
     console.log('ERROR ON SESSION', e)
 })
+
 app.use(session({
     store,
-    name: 'inspector',
-    resave: false,
-    saveUninitialized: true,
-    secret: 'countdownisbelowone',
     cookie: {
-        secure: true,
-        sameSite: false,
         maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
     }
-}));
+}))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
