@@ -8,7 +8,7 @@ const multer = require("multer");
 const upload = multer({ storage: cloudStore });
 
 
-router.route("/register").post(wrapAsync(registerUser));
+router.route("/register").post(upload.single('profileImg'), wrapAsync(registerUser));
 router.get("/users", wrapAsync(users))
 router.route("/profile/:id").post(upload.single('profileImage'), wrapAsync(changeProfile))
     .patch(wrapAsync(describeUser)).delete(wrapAsync(deleteUser));
