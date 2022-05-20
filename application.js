@@ -49,14 +49,7 @@ store.on("error", function(e) {
 
 app.use(session({
     store,
-    name: 'bagade',
-    secret: 'istherestillhope',
-    saveUninitialized: true,
-    resave: true,
-    cookie: {
-        sameSite: 'lax',
-        maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
-    }
+    cookie: {}
 }))
 
 app.use(express.urlencoded({ extended: true }));
